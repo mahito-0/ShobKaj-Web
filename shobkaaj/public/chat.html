@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chat - ShobKaaj</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar"></nav>
+  <main class="chat" id="app">
+    <aside class="conv-list" id="convList"></aside>
+    <section class="messages">
+      <div id="activeHeader" class="card" style="border-radius:0;border-left:none;border-right:none;" data-i18n="chat.select">Select a conversation</div>
+      <div class="typing" id="typing"></div>
+      <div class="msgs" id="msgs"></div>
+      <div class="msg-input">
+        <input id="msgInput" placeholder="Type a message..." />
+        <button class="btn" id="sendBtn" data-i18n="chat.send">Send</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/chat.js"></script>
+</body>
+</html>

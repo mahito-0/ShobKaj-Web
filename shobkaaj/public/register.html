@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>রেজিস্টার - ShobKaaj</title>
+  <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+  <nav class="navbar" id="navbar"></nav>
+  <main class="container">
+    <div class="card" style="max-width:680px;margin:32px auto;">
+      <h2>রেজিস্ট্রেশন</h2>
+      <form id="regForm">
+        <div class="form-row">
+          <div>
+            <label>নাম</label>
+            <input class="input" name="name" required />
+          </div>
+          <div>
+            <label>ইমেইল</label>
+            <input class="input" type="email" name="email" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>রোল</label>
+            <select class="input" name="role" required>
+              <option value="client">ক্লায়েন্ট</option>
+              <option value="worker">ওয়ার্কার</option>
+            </select>
+          </div>
+          <div>
+            <label>ফোন</label>
+            <input class="input" name="phone" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>NID (ঐচ্ছিক)</label>
+            <input class="input" name="nid" />
+          </div>
+          <div>
+            <label>পাসওয়ার্ড</label>
+            <input class="input" type="password" name="password" required />
+          </div>
+        </div>
+        <label>স্কিলস (কমা দিয়ে আলাদা করুন)</label>
+        <input class="input" name="skills" placeholder="plumbing, tuition, delivery"/>
+
+        <label>লোকেশন (অনুমতি দিন)</label>
+        <div class="form-actions">
+          <button type="button" class="btn outline" id="locBtn">লোকেশন নিন</button>
+          <span id="locLabel" class="badge">অজানা</span>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn" type="submit">রেজিস্টার</button>
+          <a href="/login.html">ইতিমধ্যে অ্যাকাউন্ট আছে?</a>
+        </div>
+        <div id="err" style="color:#dc2626;margin-top:8px;"></div>
+      </form>
+    </div>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    i18n.apply(document);
+    let locationData = null;
+    document.getElementById('locBtn').onclick = () => {
+      navigator.geolocation?.getCurrentPosition(
+        pos => {
+          locationData = { lat: pos.coords.latitude, lng: pos.coords.longitude, address: 'My Location' };
+          document.getElementById('locLabel').textContent = `Lat ${locationData.lat.toFixed(4)}, Lng ${locationData.lng.toFixed(4)}`;
+        },
+        err => alert('লোকেশন অনুমতি পাওয়া যায়নি')
+      );
+    };
+    document.getElementById('regForm').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const body = {
+        name: e.target.name.value.trim(),
+        email: e.target.email.value.trim(),
+        password: e.target.password.value,
+        role: e.target.role.value,
+        phone: e.target.phone.value.trim(),
+        nid: e.target.nid.value.trim(),
+        skills: e.target.skills.value.split(',').map(s => s.trim()).filter(Boolean),
+        location: locationData
+      };
+      const err = document.getElementById('err');
+      err.textContent = '';
+      try {
+        await $api('/api/register', { method:'POST', body });
+        window.location.href = '/dashboard.html';
+      } catch (ex) { err.textContent = ex.message; }
+    });
+  </script>
+</body>
+</html>

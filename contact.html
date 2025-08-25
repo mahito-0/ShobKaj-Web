@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="contact.headTitle">যোগাযোগ | ShobKaaj</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/script.js"></script>
+</head>
+<body data-page="contact">
+  <a class="skip-link" href="#main" data-i18n="global.skipToContent">মূল কনটেন্টে যান</a>
+
+  <header id="top" class="site-header">
+    <div class="container nav-row">
+      <a class="brand" href="index.html"><span class="logo-mark">◆</span><span class="brand-name" data-i18n="global.brand">ShobKaaj</span></a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" data-i18n-aria-label="global.menu.open"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+      <nav class="site-nav" id="siteNav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html" data-i18n="global.nav.home">হোম</a></li>
+          <li><a href="about.html" data-i18n="global.nav.about">সম্পর্কে</a></li>
+          <li><a href="services.html" data-i18n="global.nav.services">সার্ভিসেস</a></li>
+          <li><a href="projects.html" data-i18n="global.nav.projects">প্রজেক্টস</a></li>
+          <li><a href="contact.html" data-i18n="global.nav.contact">যোগাযোগ</a></li>
+        </ul>
+        <div class="nav-controls">
+          <button id="langToggle" class="btn btn-ghost" aria-label="Switch language">BN</button>
+          <button id="themeToggle" class="btn btn-ghost" aria-label="Toggle theme">
+            <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 4V2m0 20v-2M4 12H2m20 0h-2M5 5 3.5 3.5M20.5 20.5 19 19M5 19 3.5 20.5M20.5 3.5 19 5M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section hero small">
+      <div class="container">
+        <h1 data-i18n="contact.title">যোগাযোগ করুন</h1>
+        <p class="lead" data-i18n="contact.subtitle">মেসেজ দিন—আমরা শীঘ্রই উত্তর দেব।</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-grid">
+        <form id="contactForm" class="card form" novalidate>
+          <div id="formStatus" class="status" aria-live="polite"></div>
+
+          <div class="field">
+            <label for="name" data-i18n="contact.form.name">নাম</label>
+            <input type="text" id="name" name="name" required data-i18n-placeholder="contact.form.name" placeholder="নাম" />
+            <small class="error" data-error-for="name"></small>
+          </div>
+
+          <div class="field">
+            <label for="email" data-i18n="contact.form.email">ইমেইল</label>
+            <input type="email" id="email" name="email" required data-i18n-placeholder="contact.form.email" placeholder="ইমেইল" />
+            <small class="error" data-error-for="email"></small>
+          </div>
+
+          <div class="field">
+            <label for="phone" data-i18n="contact.form.phone">ফোন (ঐচ্ছিক)</label>
+            <input type="tel" id="phone" name="phone" data-i18n-placeholder="contact.form.phone" placeholder="ফোন (ঐচ্ছিক)" />
+            <small class="error" data-error-for="phone"></small>
+          </div>
+
+          <div class="field">
+            <label for="message" data-i18n="contact.form.message">বার্তা</label>
+            <textarea id="message" name="message" rows="5" required data-i18n-placeholder="contact.form.message" placeholder="বার্তা"></textarea>
+            <small class="error" data-error-for="message"></small>
+          </div>
+
+          <button type="submit" class="btn btn-primary" data-i18n="contact.form.submit">বার্তা পাঠান</button>
+        </form>
+
+        <aside class="card contact-info">
+          <h3 data-i18n="contact.info.heading">Contact Info</h3>
+          <p><strong data-i18n="contact.info.emailLabel">ইমেইল</strong>: <a href="mailto:hello@example.com">hello@example.com</a></p>
+          <p><strong data-i18n="contact.info.phoneLabel">ফোন</strong>: <a href="tel:+8801700000000">+880 1700-000000</a></p>
+          <div class="map-placeholder" role="img" aria-label="Map placeholder" data-i18n-aria-label="contact.map">
+            <span data-i18n="contact.map">ম্যাপ প্লেসহোল্ডার</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand small" href="index.html"><span class="logo-mark">◆</span><span data-i18n="global.brand">ShobKaaj</span></a>
+        <p class="muted" data-i18n="global.tagline">বাংলাদেশের স্থানীয় সেবা মার্কেটপ্লেস</p>
+      </div>
+      <div class="social" aria-label="Social links" data-i18n-aria-label="global.socialLabel">
+        <a class="social-btn" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.26c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.35-1.76-1.35-1.76-1.11-.76.09-.75.09-.75 1.23.09 1.88 1.27 1.88 1.27 1.09 1.87 2.86 1.33 3.56 1.02.11-.8.43-1.33.78-1.64-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.37 1.24-3.2-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0C18.01 5.4 19.02 5.72 19.02 5.72c.66 1.65.24 2.87.12 3.17.77.83 1.24 1.89 1.24 3.2 0 4.61-2.8 5.63-5.48 5.93.44.38.83 1.12.83 2.26v3.35c0 .32.22.69.82.58A12 12 0 0 0 12 .5Z"/></svg></a>
+        <a class="social-btn" href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.92c-.74.33-1.54.55-2.38.65a4.14 4.14 0 0 0 1.82-2.29 8.28 8.28 0 0 1-2.62 1 4.13 4.13 0 0 0-7.03 3.77A11.72 11.72 0 0 1 3.18 4.88a4.13 4.13 0 0 0 1.28 5.52 4.1 4.1 0 0 1-1.87-.52v.05a4.13 4.13 0 0 0 3.31 4.05c-.45.12-.93.18-1.42.07a4.13 4.13 0 0 0 3.86 2.87A8.29 8.29 0 0 1 2 19.55a11.7 11.7 0 0 0 6.34 1.86c7.6 0 11.76-6.3 11.76-11.76 0-.18 0-.36-.01-.54A8.4 8.4 0 0 0 22 5.92Z"/></svg></a>
+        <a class="social-btn" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5Zm.02 6.5H2v11h3V10Zm5 0H7v11h3v-6c0-1.66 1.34-3 3-3s2 .9 2 2v7h3v-7.5C18 10.57 16.43 9 14.5 9S11 10.57 11 12.5V10Z"/></svg></a>
+      </div>
+      <div class="copy muted">
+        <span>© <span id="year"></span> <span data-i18n="global.brand">ShobKaaj</span>. <span data-i18n="global.footerText">সর্বস্বত্ব সংরক্ষিত।</span></span>
+        <div class="built" data-i18n="global.builtWith">HTML, CSS ও JavaScript দিয়ে তৈরি।</div>
+        <a class="back-to-top" href="#top" data-i18n="global.backToTop">শীর্ষে ফিরুন</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

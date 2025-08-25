@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>লগইন - ShobKaaj</title>
+  <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+  <nav class="navbar" id="navbar"></nav>
+  <main class="container">
+    <div class="card" style="max-width:480px;margin:32px auto;">
+      <h2>লগইন</h2>
+      <form id="loginForm">
+        <label>ইমেইল</label>
+        <input class="input" type="email" name="email" required />
+        <label>পাসওয়ার্ড</label>
+        <input class="input" type="password" name="password" required />
+        <div class="form-actions">
+          <button class="btn" type="submit">লগইন</button>
+          <a href="/register.html">অ্যাকাউন্ট নেই? রেজিস্টার করুন</a>
+        </div>
+        <div id="err" style="color:#dc2626;margin-top:8px;"></div>
+      </form>
+    </div>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    i18n.apply(document);
+    document.getElementById('loginForm').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const email = e.target.email.value.trim();
+      const password = e.target.password.value;
+      const err = document.getElementById('err');
+      err.textContent = '';
+      try {
+        await $api('/api/login', { method:'POST', body: { email, password } });
+        window.location.href = '/dashboard.html';
+      } catch (ex) {
+        err.textContent = ex.message;
+      }
+    });
+  </script>
+</body>
+</html>

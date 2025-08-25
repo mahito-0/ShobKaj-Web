@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Workers - ShobKaaj</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar"></nav>
+  <main class="container">
+    <h2 data-i18n="workers.title">ওয়ার্কার খুঁজুন</h2>
+    <div class="card">
+      <div class="form-row">
+        <div>
+          <label data-i18n="workers.title">ওয়ার্কার খুঁজুন</label>
+          <input class="input" id="skill" data-i18n-placeholder="workers.placeholder" placeholder="স্কিল লিখুন (যেমন: plumbing, tuition)"/>
+        </div>
+        <div>
+          <label data-i18n="workers.radius">রেডিয়াস</label>
+          <input type="number" class="input" id="radius" value="25" min="1" max="200"/>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn outline" id="nearBtn" data-i18n="workers.findNear">কাছের ওয়ার্কার</button>
+        <input type="number" class="input" id="minRating" value="0" min="0" max="5" style="width:120px;" placeholder="Min ★"/>
+        <button class="btn" id="searchBtn" data-i18n="workers.search">সার্চ</button>
+      </div>
+    </div>
+    <div id="results" class="list" style="margin-top:16px;"></div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/workers.js"></script>
+  <script>i18n.apply(document);</script>
+</body>
+</html>

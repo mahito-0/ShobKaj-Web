@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ড্যাশবোর্ড - ShobKaaj</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar"></nav>
+  <main class="container" id="app">
+    <h2 data-i18n="nav.dashboard">ড্যাশবোর্ড</h2>
+    <div id="info" class="card"></div>
+    <div class="grid cards" id="actions"></div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    (async ()=>{
+      const me = await $auth.requireAuth();
+      if (!me) return;
+      i18n.apply(document);
+      const info = document.getElementById('info');
+      const avatar = me.avatar || '/img/avatar.png';
+      info.innerHTML = `
+        <div style="display:flex;gap:12px;align-items:center;">
+          <img class="avatar lg" src="${avatar}" onerror="this.src='/img/avatar.png'"/>
+          <div>
+            <div><strong>${me.name}</strong> (${me.role}) ${me.verified ? '<span class="badge">Verified</span>' : '<span class="badge">Unverified</span>'}</div>
+            <div>${me.email} • ${me.phone || 'No phone'}</div>
+            <div>Location: ${me?.location?.address || 'N/A'}</div>
+            <div>Rating: ${(me.rating||0).toFixed(1)} (${me.ratingCount || 0})</div>
+          </div>
+        </div>
+      `;
+      const actions = document.getElementById('actions');
+      if (me.role === 'client') {
+        actions.innerHTML = `
+          <div class="card"><h3>Post a Job</h3><p>Create a job with budget/timeline.</p><a class="btn" href="/post-job.html">Post Job</a></div>
+          <div class="card"><h3>My Jobs</h3><p>Manage applications and assignments.</p><a class="btn outline" href="/my-jobs.html">Open</a></div>
+          <div class="card"><h3>Find Workers</h3><p>Search by skill & distance.</p><a class="btn outline" href="/workers.html">Browse</a></div>
+          <div class="card"><h3>Chat</h3><p>Talk to workers.</p><a class="btn outline" href="/chat.html">Open Chat</a></div>
+        `;
+      } else if (me.role === 'worker') {
+        actions.innerHTML = `
+          <div class="card"><h3>Find Jobs</h3><p>See nearby open jobs.</p><a class="btn" href="/jobs.html">Browse Jobs</a></div>
+          <div class="card"><h3>My Jobs</h3><p>Assigned and applied jobs.</p><a class="btn outline" href="/my-jobs.html">Open</a></div>
+          <div class="card"><h3>Chat</h3><p>Talk to clients.</p><a class="btn outline" href="/chat.html">Open Chat</a></div>
+        `;
+      } else if (me.role === 'admin') {
+        actions.innerHTML = `<div class="card"><h3>Admin Panel</h3><p>Users, Jobs, Live Chat Monitor</p><a class="btn" href="/admin.html">Open Admin</a></div>`;
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jobs - ShobKaaj</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar"></nav>
+  <main class="container">
+    <h2 data-i18n="jobs.title">কাজের তালিকা</h2>
+    <div class="card">
+      <div class="form-row">
+        <div>
+          <label data-i18n="jobs.title">Jobs</label>
+          <input class="input" id="q" data-i18n-placeholder="jobs.search.placeholder" placeholder="Search keywords"/>
+        </div>
+        <div>
+          <label data-i18n="jobs.radius">রেডিয়াস (কিমি)</label>
+          <input class="input" id="radius" type="number" value="25" min="1" max="200"/>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn outline" id="nearBtn" data-i18n="jobs.near">কাছের কাজ দেখুন</button>
+        <button class="btn" id="searchBtn">Search</button>
+        <a href="/post-job.html" class="btn" id="postBtn" style="display:none;" data-i18n="jobs.post">কাজ পোস্ট করুন</a>
+      </div>
+    </div>
+    <div id="jobs" class="list" style="margin-top:16px;"></div>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/jobs.js"></script>
+</body>
+</html>
