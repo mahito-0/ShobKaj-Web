@@ -1,4 +1,5 @@
 let me = null, loc = null;
+
 function esc(s){ return (s??'').toString().replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
 
 async function loadJobs(params = {}) {

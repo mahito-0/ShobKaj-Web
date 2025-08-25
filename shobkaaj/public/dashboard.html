@@ -18,23 +18,18 @@
   <script src="/js/i18n.js"></script>
   <script src="/js/auth.js"></script>
   <script src="/js/main.js"></script>
+  <script src="/js/ui.js"></script>
   <script>
     (async ()=>{
       const me = await $auth.requireAuth();
       if (!me) return;
       i18n.apply(document);
       const info = document.getElementById('info');
-      const avatar = me.avatar || '/img/avatar.png';
       info.innerHTML = `
-        <div style="display:flex;gap:12px;align-items:center;">
-          <img class="avatar lg" src="${avatar}" onerror="this.src='/img/avatar.png'"/>
-          <div>
-            <div><strong>${me.name}</strong> (${me.role}) ${me.verified ? '<span class="badge">Verified</span>' : '<span class="badge">Unverified</span>'}</div>
-            <div>${me.email} • ${me.phone || 'No phone'}</div>
-            <div>Location: ${me?.location?.address || 'N/A'}</div>
-            <div>Rating: ${(me.rating||0).toFixed(1)} (${me.ratingCount || 0})</div>
-          </div>
-        </div>
+        <div><strong>${me.name}</strong> (${me.role}) ${me.verified ? '<span class="badge">Verified</span>' : '<span class="badge">Unverified</span>'}</div>
+        <div>${me.email} • ${me.phone || 'No phone'}</div>
+        <div>Location: ${me?.location?.address || 'N/A'}</div>
+        <div>Rating: ${(me.rating||0).toFixed(1)} (${me.ratingCount || 0})</div>
       `;
       const actions = document.getElementById('actions');
       if (me.role === 'client') {

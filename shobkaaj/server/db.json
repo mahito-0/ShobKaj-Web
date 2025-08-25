@@ -1,7 +1,72 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "u_admin",
+      "name": "Admin",
+      "email": "admin@shobkaaj.com",
+      "passwordHash": "$2a$10$dq4SOTbAUWQ9M5HqCIVVUOJFan0IB22uUJ0/RIilOaupzI3z2aiCW",
+      "role": "admin",
+      "phone": "",
+      "nid": "",
+      "verified": true,
+      "banned": false,
+      "skills": [],
+      "bio": "",
+      "rating": 0,
+      "ratingCount": 0,
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdAt": 1756162440231
+    },
+    {
+      "id": "b15d7197-730f-4d71-8a89-3ed2cd5fd5fb",
+      "name": "Syed Al Mahmud",
+      "email": "mahmud.agni@gmail.com",
+      "role": "client",
+      "phone": "01683886755",
+      "nid": "252456156156",
+      "passwordHash": "$2a$10$/fpfcfYeRCxuD8nPEdofKeqZyE78CzHQYesUKqBvnuqBpZiGGWCya",
+      "verified": false,
+      "banned": false,
+      "skills": [
+        "tutoring"
+      ],
+      "bio": "",
+      "rating": 0,
+      "ratingCount": 0,
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdAt": 1756162487168
+    },
+    {
+      "id": "6e98d030-e282-4030-b2a2-0eb8f3ae5467",
+      "name": "Syed Al Mahmud",
+      "email": "samratmatish@gmail.com",
+      "role": "worker",
+      "phone": "01683886755",
+      "nid": "252456156156",
+      "passwordHash": "$2a$10$qYsAAyJXP/rD5xT5OGSsu.uqUPvmqKaOvu.LpcbAudN2nR1Bq0Toy",
+      "verified": false,
+      "banned": false,
+      "skills": [],
+      "bio": "",
+      "rating": 0,
+      "ratingCount": 0,
+      "location": {
+        "lat": 23.823704984701028,
+        "lng": 90.42356820008561,
+        "address": "My Location"
+      },
+      "createdAt": 1756163776098
+    }
+  ],
   "jobs": [],
   "conversations": [],
-  "messages": [],
-  "pushSubs": []
+  "messages": []
 }

@@ -8,107 +8,25 @@ import { v4 as uuidv4 } from 'uuid';
 import { createServer } from 'http';
 import { Server as SocketIOServer } from 'socket.io';
 import cors from 'cors';
-import multer from 'multer';
-import nodemailer from 'nodemailer';
-import webpush from 'web-push';
-import dotenv from 'dotenv';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT = path.join(__dirname, '..');
-
-dotenv.config({ path: path.join(ROOT, '.env') });
-
-// Data paths (supports Docker volume at /app/data)
-const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
-if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-const DB_PATH = path.join(DATA_DIR, 'db.json');
-const VAPID_FILE = path.join(DATA_DIR, 'vapid.json');
+const DB_PATH = path.join(__dirname, 'db.json');
 
 const app = express();
 const httpServer = createServer(app);
 const io = new SocketIOServer(httpServer, { cors: { origin: true, credentials: true } });
 
-// JSON DB helpers
 function loadDB() {
   if (!fs.existsSync(DB_PATH)) {
-    fs.writeFileSync(DB_PATH, JSON.stringify({ users: [], jobs: [], conversations: [], messages: [], pushSubs: [] }, null, 2));
+    fs.writeFileSync(DB_PATH, JSON.stringify({ users: [], jobs: [], conversations: [], messages: [] }, null, 2));
   }
-  const obj = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
-  if (!obj.pushSubs) obj.pushSubs = [];
-  if (!obj.jobs) obj.jobs = [];
-  if (!obj.users) obj.users = [];
-  if (!obj.conversations) obj.conversations = [];
-  if (!obj.messages) obj.messages = [];
-  return obj;
+  return JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
 }
 let db = loadDB();
 function saveDB() { fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2)); }
 
-// Uploads
-const UPLOAD_DIR = path.join(ROOT, 'public', 'uploads');
-if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
-const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
-const extFromMime = (m) => ({ 'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp' }[m] || '.jpg');
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, UPLOAD_DIR),
-  filename: (req, file, cb) => cb(null, req.user.id + '_' + Date.now() + extFromMime(file.mimetype))
-});
-const upload = multer({
-  storage,
-  limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
-  fileFilter: (req, file, cb) => {
-    if (IMAGE_TYPES.includes(file.mimetype)) cb(null, true);
-    else cb(new Error('Only JPG/PNG/WEBP images allowed'));
-  }
-});
-
-// Email (nodemailer)
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'localhost',
-  port: Number(process.env.SMTP_PORT || 1025),
-  secure: String(process.env.SMTP_SECURE || 'false') === 'true',
-  auth: process.env.SMTP_USER ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS } : undefined
-});
-async function sendEmail(to, subject, html) {
-  if (!to) return;
-  try {
-    await transporter.sendMail({
-      from: process.env.FROM_EMAIL || 'no-reply@shobkaaj.local',
-      to, subject, html
-    });
-  } catch (e) { console.error('Email error:', e.message); }
-}
-
-// Web Push (VAPID)
-let vapidKeys = null;
-if (process.env.VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY) {
-  vapidKeys = { publicKey: process.env.VAPID_PUBLIC_KEY, privateKey: process.env.VAPID_PRIVATE_KEY };
-} else if (fs.existsSync(VAPID_FILE)) {
-  vapidKeys = JSON.parse(fs.readFileSync(VAPID_FILE, 'utf-8'));
-} else {
-  vapidKeys = webpush.generateVAPIDKeys();
-  fs.writeFileSync(VAPID_FILE, JSON.stringify(vapidKeys, null, 2));
-  console.log('Generated VAPID keys and saved to', VAPID_FILE);
-}
-webpush.setVapidDetails('mailto:admin@shobkaaj.com', vapidKeys.publicKey, vapidKeys.privateKey);
-
-// Helpers
-app.use(cors({ origin: true, credentials: true }));
-app.use(express.json());
-const sessionMiddleware = session({
-  secret: 'shobkaaj_secret_dev_only',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false }
-});
-app.use(sessionMiddleware);
-io.engine.use(sessionMiddleware);
-
-// Static
-app.use(express.static(path.join(ROOT, 'public')));
-
-// Seed admin
 const ADMIN_EMAIL = 'admin@shobkaaj.com';
 const ADMIN_PASS = 'Admin@123';
 function ensureAdmin() {
@@ -125,7 +43,6 @@ function ensureAdmin() {
       banned: false,
       skills: [],
       bio: '',
-      avatar: '',
       rating: 0,
       ratingCount: 0,
       location: { lat: 23.8103, lng: 90.4125, address: 'Dhaka, Bangladesh' },
@@ -137,6 +54,20 @@ function ensureAdmin() {
 }
 ensureAdmin();
 
+app.use(cors({ origin: true, credentials: true }));
+app.use(express.json());
+const sessionMiddleware = session({
+  secret: 'shobkaaj_secret_dev_only',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false }
+});
+app.use(sessionMiddleware);
+io.engine.use(sessionMiddleware);
+
+app.use(express.static(path.join(ROOT, 'public')));
+
+// Helpers
 function authRequired(req, res, next) {
   if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
   const user = db.users.find(u => u.id === req.session.userId);
@@ -159,32 +90,11 @@ function distanceKm(lat1, lon1, lat2, lon2) {
   const a = Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;
   return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
 }
-
 const onlineUsers = new Map(); // userId -> Set(socketId)
 function emitToUser(userId, event, payload) {
   const set = onlineUsers.get(userId);
   if (!set) return;
   set.forEach(sid => io.to(sid).emit(event, payload));
-}
-async function sendPushTo(userId, payload) {
-  const subs = db.pushSubs.filter(s => s.userId === userId);
-  for (const s of subs) {
-    try {
-      await webpush.sendNotification(s.subscription, JSON.stringify(payload));
-    } catch (e) {
-      if (e.statusCode === 410 || e.statusCode === 404) {
-        // subscription expired, remove
-        db.pushSubs = db.pushSubs.filter(x => x !== s);
-        saveDB();
-      } else {
-        console.error('Push error:', e.statusCode, e.body || e.message);
-      }
-    }
-  }
-}
-async function notifyUser(userId, payload) {
-  emitToUser(userId, 'notify', payload);
-  await sendPushTo(userId, payload);
 }
 
 // Auth
@@ -197,7 +107,7 @@ app.post('/api/register', (req, res) => {
   const newUser = {
     id, name, email, role, phone: phone || '', nid: nid || '',
     passwordHash: bcrypt.hashSync(password, 10),
-    verified: false, banned: false, skills, bio, avatar: '',
+    verified: false, banned: false, skills, bio,
     rating: 0, ratingCount: 0,
     location: location && typeof location.lat === 'number' && typeof location.lng === 'number'
       ? location : { lat: 23.8103, lng: 90.4125, address: 'Dhaka, Bangladesh' },
@@ -237,26 +147,6 @@ app.put('/api/me', authRequired, (req, res) => {
   }
   saveDB();
   res.json({ user: userSafe(req.user) });
-});
-app.post('/api/me/avatar', authRequired, upload.single('avatar'), (req, res) => {
-  const relPath = '/uploads/' + path.basename(req.file.path);
-  req.user.avatar = relPath;
-  saveDB();
-  res.json({ ok: true, avatar: relPath });
-});
-
-// Notifications API (Web Push)
-app.get('/api/notifications/public-key', authRequired, (req, res) => {
-  res.json({ key: vapidKeys.publicKey });
-});
-app.post('/api/notifications/subscribe', authRequired, (req, res) => {
-  const sub = req.body;
-  if (!sub || !sub.endpoint) return res.status(400).json({ error: 'Invalid subscription' });
-  // De-duplicate
-  const exists = db.pushSubs.find(s => s.userId === req.user.id && s.subscription?.endpoint === sub.endpoint);
-  if (!exists) db.pushSubs.push({ userId: req.user.id, subscription: sub, createdAt: Date.now() });
-  saveDB();
-  res.json({ ok: true });
 });
 
 // Jobs
@@ -326,7 +216,7 @@ app.post('/api/jobs', authRequired, roleRequired('client'), (req, res) => {
   saveDB();
   res.json({ job });
 });
-app.post('/api/jobs/:id/apply', authRequired, roleRequired('worker'), async (req, res) => {
+app.post('/api/jobs/:id/apply', authRequired, roleRequired('worker'), (req, res) => {
   const job = db.jobs.find(j => j.id === req.params.id);
   if (!job) return res.status(404).json({ error: 'Job not found' });
   if (job.createdBy === req.user.id) return res.status(400).json({ error: 'Cannot apply to your own job' });
@@ -336,13 +226,7 @@ app.post('/api/jobs/:id/apply', authRequired, roleRequired('worker'), async (req
   const appRec = { workerId: req.user.id, note, status: 'pending', createdAt: Date.now() };
   job.applications.push(appRec);
   saveDB();
-
-  const client = db.users.find(u => u.id === job.createdBy);
-  // Realtime + Push
-  await notifyUser(job.createdBy, { type: 'application', title: 'New application', body: `${req.user.name} applied to "${job.title}"`, url: '/my-jobs.html' });
-  // Email
-  await sendEmail(client?.email, `New application for "${job.title}"`, `<p>${req.user.name} applied to your job "${job.title}".</p><p>Note: ${note || '(none)'}.</p><p><a href="http://localhost:3000/my-jobs.html">Review applications</a></p>`);
-
+  emitToUser(job.createdBy, 'notify', { type: 'application', jobId: job.id, from: userSafe(req.user) });
   res.json({ ok: true, application: appRec });
 });
 app.get('/api/jobs/:id/applications', authRequired, roleRequired('client'), (req, res) => {
@@ -352,7 +236,7 @@ app.get('/api/jobs/:id/applications', authRequired, roleRequired('client'), (req
   const applications = (job.applications || []).map(a => ({ ...a, worker: userSafe(db.users.find(u => u.id === a.workerId)) }));
   res.json({ applications });
 });
-app.put('/api/jobs/:id/assign', authRequired, roleRequired('client'), async (req, res) => {
+app.put('/api/jobs/:id/assign', authRequired, roleRequired('client'), (req, res) => {
   const job = db.jobs.find(j => j.id === req.params.id);
   if (!job) return res.status(404).json({ error: 'Not found' });
   if (job.createdBy !== req.user.id) return res.status(403).json({ error: 'Forbidden' });
@@ -363,18 +247,11 @@ app.put('/api/jobs/:id/assign', authRequired, roleRequired('client'), async (req
   job.status = 'assigned';
   job.applications = (job.applications || []).map(a => ({ ...a, status: a.workerId === workerId ? 'accepted' : 'rejected' }));
   saveDB();
-
-  // Realtime + Push
-  await notifyUser(workerId, { type: 'assigned', title: 'Job assigned', body: `"${job.title}" assigned to you`, url: '/my-jobs.html' });
-  await notifyUser(job.createdBy, { type: 'assigned', title: 'Worker assigned', body: `Assigned ${worker.name} to "${job.title}"`, url: '/my-jobs.html' });
-  // Emails
-  await sendEmail(worker.email, `You were assigned: "${job.title}"`, `<p>You have been assigned to "${job.title}".</p><p><a href="http://localhost:3000/my-jobs.html">View job</a></p>`);
-  const client = db.users.find(u => u.id === job.createdBy);
-  await sendEmail(client?.email, `Worker assigned: "${job.title}"`, `<p>You assigned ${worker.name} to "${job.title}".</p><p><a href="http://localhost:3000/my-jobs.html">View job</a></p>`);
-
+  emitToUser(workerId, 'notify', { type: 'assigned', jobId: job.id });
+  emitToUser(job.createdBy, 'notify', { type: 'assigned', jobId: job.id });
   res.json({ job });
 });
-app.post('/api/jobs/:id/complete', authRequired, roleRequired('client'), async (req, res) => {
+app.post('/api/jobs/:id/complete', authRequired, roleRequired('client'), (req, res) => {
   const job = db.jobs.find(j => j.id === req.params.id);
   if (!job) return res.status(404).json({ error: 'Not found' });
   if (job.createdBy !== req.user.id) return res.status(403).json({ error: 'Forbidden' });
@@ -390,10 +267,7 @@ app.post('/api/jobs/:id/complete', authRequired, roleRequired('client'), async (
     worker.rating = ((worker.rating || 0) * (worker.ratingCount - 1) + rating) / worker.ratingCount;
   }
   saveDB();
-
-  await notifyUser(job.assignedTo, { type: 'completed', title: 'Job completed', body: `"${job.title}" marked completed. You received a ${rating}★`, url: '/my-jobs.html' });
-  await sendEmail(worker?.email, `Job completed: "${job.title}"`, `<p>Your job "${job.title}" was marked completed.</p><p>Rating: ${rating}★</p>`);
-
+  emitToUser(job.assignedTo, 'notify', { type: 'completed', jobId: job.id, rating });
   res.json({ job });
 });
 

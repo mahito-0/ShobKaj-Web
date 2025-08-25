@@ -1,4 +1,5 @@
 let me = null, socket = null, currentConv = null, messages = [];
+
 function fmt(ts){ const d=new Date(ts); return d.toLocaleString(); }
 function esc(s){ return (s??'').toString().replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
 
@@ -9,14 +10,13 @@ async function fetchJobTitle(jobId) {
 function renderConversations(list) {
   const el = document.getElementById('convList');
   el.innerHTML = `<div style="padding:12px;font-weight:600;" data-i18n="chat.conversations">${i18n.t('chat.conversations')}</div>`;
-  list.forEach(c => {
+  list.forEach(async c => {
     const last = c.lastMessage ? ` • ${esc(c.lastMessage.text.slice(0,30))}` : '';
     const otherName = esc(c.other?.name || 'User');
-    const avatar = c.other?.avatar || '/img/avatar.png';
-    const jobBadge = c.jobId ? ` <span class="badge">Job</span>` : '';
+    const jobTitle = c.jobId ? ` <span class="badge">Job</span>` : '';
     const div = document.createElement('div');
     div.className = 'conv' + (currentConv?.id===c.id ? ' active' : '');
-    div.innerHTML = `<img class="avatar" src="${avatar}" onerror="this.src='/img/avatar.png'"/><div><strong>${otherName}</strong>${jobBadge}<div class="small">${last}</div></div>`;
+    div.innerHTML = `<div><strong>${otherName}</strong>${jobTitle}<div style="color:#6b7280;font-size:12px;">${last}</div></div>`;
     div.onclick = () => openConversation(c);
     el.appendChild(div);
   });
@@ -26,7 +26,7 @@ function renderConversations(list) {
     <h4>Start new chat (User ID)</h4>
     <input class="input" id="otherId" placeholder="Enter other user's ID"/>
     <button class="btn" id="startBtn">${i18n.t('chat.send')}</button>
-    <div class="small">Ask your counterpart for their ID (Admin can see IDs).</div>
+    <div style="font-size:12px;color:#6b7280;margin-top:6px;">Ask your counterpart for their ID (Admin can see IDs).</div>
   `;
   el.appendChild(startDiv);
   document.getElementById('startBtn').onclick = async () => {
@@ -58,8 +58,7 @@ async function openConversation(conv) {
     const title = await fetchJobTitle(conv.jobId);
     head += ` • <span class="badge">Job: ${esc(title.slice(0,20))}</span>`;
   }
-  const avatar = conv.other?.avatar || '/img/avatar.png';
-  document.getElementById('activeHeader').innerHTML = `<span style="display:flex;align-items:center;gap:8px;"><img class="avatar" src="${avatar}" onerror="this.src='/img/avatar.png'"/> <strong>${head}</strong> <span class="badge">Conv: ${conv.id.slice(0,8)}</span></span>`;
+  document.getElementById('activeHeader').innerHTML = head + ` <span class="badge">Conv: ${conv.id.slice(0,8)}</span>`;
   const data = await $api(`/api/conversations/${conv.id}/messages`);
   messages = data.messages;
   renderMessages();

@@ -1,12 +1,15 @@
 let me=null;
+
 function esc(s){ return (s??'').toString().replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
 
 function ratingWidget(container) {
   let value = 5;
-  const wrap = document.createElement('div'); wrap.className = 'rating';
+  const wrap = document.createElement('div');
+  wrap.className = 'rating';
   for (let i=1; i<=5; i++) {
     const s = document.createElement('span');
-    s.textContent = '★'; s.className = 'star' + (i<=value ? ' active' : '');
+    s.textContent = '★';
+    s.className = 'star' + (i<=value ? ' active' : '');
     s.onclick = ()=>{ value = i; [...wrap.children].forEach((c, idx)=> c.classList.toggle('active', idx < value)); };
     wrap.appendChild(s);
   }

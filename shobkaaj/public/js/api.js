@@ -1,11 +1,10 @@
-async function api(path, { method = 'GET', body, formData } = {}) {
-  const options = {
+async function api(path, { method = 'GET', body } = {}) {
+  const res = await fetch(path, {
     method,
-    headers: formData ? undefined : { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
-    body: formData ? formData : (body ? JSON.stringify(body) : undefined)
-  };
-  const res = await fetch(path, options);
+    body: body ? JSON.stringify(body) : undefined
+  });
   if (!res.ok) {
     let data; try { data = await res.json(); } catch (e) {}
     throw new Error(data?.error || ('HTTP ' + res.status));

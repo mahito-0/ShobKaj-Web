@@ -12,8 +12,6 @@ let me = null;
   form.bio.value = me.bio || '';
   const locLabel = document.getElementById('locLabel');
   locLabel.textContent = me.location ? `Lat ${me.location.lat.toFixed(4)}, Lng ${me.location.lng.toFixed(4)}` : 'N/A';
-  const avatarImg = document.getElementById('avatarImg');
-  avatarImg.src = me.avatar || '/img/avatar.png';
 
   document.getElementById('locBtn').onclick = ()=>{
     navigator.geolocation?.getCurrentPosition(
@@ -45,19 +43,5 @@ let me = null;
       alert('Profile updated');
       window.location.reload();
     } catch(ex){ err.textContent = ex.message; }
-  });
-
-  // Avatar upload
-  const avatarInput = document.getElementById('avatarInput');
-  avatarInput.addEventListener('change', async ()=>{
-    const file = avatarInput.files[0];
-    if (!file) return;
-    const fd = new FormData();
-    fd.append('avatar', file);
-    try {
-      const res = await $api('/api/me/avatar', { method: 'POST', formData: fd });
-      document.getElementById('avatarImg').src = res.avatar || '/img/avatar.png';
-      alert('Profile picture updated.');
-    } catch (e) { alert(e.message); }
   });
 })();
