@@ -1,0 +1,3 @@
+/* My Jobs page */
+#clientJobs .applications .item { margin-top: 8px; }
+#workerAssigned .item, #workerApplied .item { align-items: flex-start; }

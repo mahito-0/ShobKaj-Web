@@ -1,0 +1,4 @@
+/* Home page specific */
+.hero .form-actions { gap: 12px; }
+.section .grid.cards .card p.small { margin: 6px 0 0; }
+.chips .chip:hover { background: #eef2f7; }

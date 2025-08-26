@@ -1,0 +1,3 @@
+/* Chat page */
+.chat { grid-template-columns: 300px 1fr; }
+#activeHeader { position: sticky; top: 0; z-index: 1; }

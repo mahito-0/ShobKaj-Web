@@ -4,33 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Profile - ShobKaaj</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/profile.css">
 </head>
 <body>
   <nav class="navbar" id="navbar"></nav>
   <main class="container">
     <div class="card" style="max-width:720px;margin:32px auto;">
       <h2 data-i18n="nav.profile">প্রোফাইল</h2>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <img id="avatarImg" class="avatar lg" src="/img/avatar.png" alt="avatar" onerror="this.src='/img/avatar.png'"/>
+        <div>
+          <input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp"/>
+          <div class="small">Max 2MB, PNG/JPG/WebP</div>
+        </div>
+      </div>
       <form id="profileForm">
         <div class="form-row">
-          <div>
-            <label>নাম</label>
-            <input class="input" name="name" required />
-          </div>
-          <div>
-            <label>ফোন</label>
-            <input class="input" name="phone" />
-          </div>
+          <div><label>নাম</label><input class="input" name="name" required /></div>
+          <div><label>ফোন</label><input class="input" name="phone" /></div>
         </div>
         <div class="form-row">
-          <div>
-            <label>NID</label>
-            <input class="input" name="nid" />
-          </div>
-          <div>
-            <label>স্কিলস</label>
-            <input class="input" name="skills" placeholder="plumbing, tuition, delivery"/>
-          </div>
+          <div><label>NID</label><input class="input" name="nid" /></div>
+          <div><label>স্কিলস</label><input class="input" name="skills" placeholder="plumbing, tuition, delivery"/></div>
         </div>
         <label>বায়ো</label>
         <textarea class="input" name="bio" rows="4"></textarea>
@@ -55,6 +51,5 @@
   <script src="/js/auth.js"></script>
   <script src="/js/main.js"></script>
   <script src="/js/profile.js"></script>
-  <script src="/js/ui.js"></script>
 </body>
 </html>

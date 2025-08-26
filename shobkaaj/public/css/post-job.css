@@ -1,0 +1,3 @@
+/* Post-job page */
+main .card { max-width: 680px; margin: 32px auto; }
+#locLabel.badge { min-width: 80px; text-align: center; }

@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Post Job - ShobKaaj</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/post-job.css">
 </head>
 <body>
   <nav class="navbar" id="navbar"></nav>
@@ -17,14 +18,8 @@
         <label>Description</label>
         <textarea class="input" name="description" rows="4" required></textarea>
         <div class="form-row">
-          <div>
-            <label>Budget (৳)</label>
-            <input class="input" type="number" name="budget" />
-          </div>
-          <div>
-            <label>Deadline</label>
-            <input class="input" type="date" name="deadline" />
-          </div>
+          <div><label>Budget (৳)</label><input class="input" type="number" name="budget" /></div>
+          <div><label>Deadline</label><input class="input" type="date" name="deadline" /></div>
         </div>
         <label>লোকেশন</label>
         <div class="form-actions">
@@ -43,7 +38,6 @@
   <script src="/js/i18n.js"></script>
   <script src="/js/auth.js"></script>
   <script src="/js/main.js"></script>
-  <script src="/js/ui.js"></script>
   <script>
     i18n.apply(document);
     let locationData = null;

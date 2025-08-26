@@ -1,18 +1,21 @@
 let me=null;
 let loc=null;
-
 function esc(s){ return (s??'').toString().replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
 
 function cardWorker(w) {
   const dist = (w.distanceKm != null) ? `${w.distanceKm.toFixed(1)} km` : '';
   const skills = (w.skills||[]).join(', ');
+  const avatar = w.avatar || '/img/avatar.png';
   const div = document.createElement('div');
   div.className = 'item';
   div.innerHTML = `
-    <div>
-      <div><strong>${esc(w.name)}</strong> <span class="badge">${(w.rating||0).toFixed(1)}★</span></div>
-      <div class="small">${esc(skills || 'No skills')}${dist ? ' • ' + dist : ''}</div>
-      <div class="small">${esc(w.location?.address || '')}</div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <img class="avatar" src="${avatar}" onerror="this.src='/img/avatar.png'"/>
+      <div>
+        <div><strong>${esc(w.name)}</strong> <span class="badge">${(w.rating||0).toFixed(1)}★</span></div>
+        <div class="small">${esc(skills || 'No skills')}${dist ? ' • ' + dist : ''}</div>
+        <div class="small">${esc(w.location?.address || '')}</div>
+      </div>
     </div>
     <div>
       <button class="btn" data-id="${w.id}" data-act="chat">${i18n.t('workers.startChat')}</button>

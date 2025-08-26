@@ -1,0 +1,4 @@
+/* Jobs page */
+main .card { margin-bottom: 16px; }
+#jobs .item .small { margin-top: 4px; }
+#jobs .item > div:last-child { display: flex; gap: 8px; align-items: center; }

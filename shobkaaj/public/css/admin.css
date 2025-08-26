@@ -1,0 +1,3 @@
+/* Admin page */
+#usersTbl, #jobsTbl { width: 100%; }
+#monitor { background: var(--surface); }

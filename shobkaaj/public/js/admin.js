@@ -1,5 +1,4 @@
 let me=null, socket=null;
-
 function row(html){ const tr=document.createElement('tr'); tr.innerHTML = html; return tr; }
 function esc(s){ return (s||'').toString().replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
 
