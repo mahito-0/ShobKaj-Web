@@ -1,3 +1,8 @@
 /* My Jobs page */
-#clientJobs .applications .item { margin-top: 8px; }
-#workerAssigned .item, #workerApplied .item { align-items: flex-start; }
+#clientJobs .applications .item{margin-top:8px}
+#workerAssigned .item,#workerApplied .item{align-items:flex-start}
+
+/* Rating widget */
+.rating{display:inline-flex;gap:4px;align-items:center;margin-bottom:8px}
+.rating .star{font-size:20px;color:#e5e7eb;cursor:pointer;user-select:none}
+.rating .star.active{color:#f59e0b}

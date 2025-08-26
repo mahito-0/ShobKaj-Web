@@ -1,4 +1,14 @@
 /* Jobs page */
-main .card { margin-bottom: 16px; }
-#jobs .item .small { margin-top: 4px; }
-#jobs .item > div:last-child { display: flex; gap: 8px; align-items: center; }
+main .card{margin-bottom:16px}
+.grid.cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+
+/* Job list items */
+#jobs .item{border:1px solid var(--border);background:var(--surface);border-radius:var(--radius);padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:var(--shadow-sm);transition:transform .08s,box-shadow .2s,border-color .2s}
+#jobs .item:hover{transform:translateY(-1px);box-shadow:var(--shadow-md);border-color:rgba(0,0,0,.08)}
+#jobs .item .small{margin-top:4px}
+#jobs .item>div:last-child{display:flex;gap:8px;align-items:center}
+
+/* Status badges (neutral) */
+.status-open{background:#eef2ff;border-color:#c7d2fe;color:#3730a3}
+.status-assigned{background:#fff7ed;border-color:#fde68a;color:#92400e}
+.status-completed{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}

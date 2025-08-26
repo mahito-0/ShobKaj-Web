@@ -1,4 +1,14 @@
-/* Home page specific */
-.hero .form-actions { gap: 12px; }
-.section .grid.cards .card p.small { margin: 6px 0 0; }
-.chips .chip:hover { background: #eef2f7; }
+/* Home page */
+.hero{padding:clamp(36px,8vw,72px) 16px;background:radial-gradient(900px 400px at -10% 0%,#626262 0%,transparent 60%),linear-gradient(135deg,#535353,#000000);border-bottom:1px solid var(--border)}
+.hero h1{margin:0 0 10px;font-size:clamp(28px,5vw,40px);color:var(--text)}
+.hero p{color:var(--muted);margin:0 0 18px;max-width:60ch}
+.section{padding:28px 16px}
+.section h2{margin:0 0 12px;font-size:22px}
+.lead{color:var(--muted);margin-bottom:16px}
+.grid.cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.section .grid.cards .card p.small{margin:6px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-block;padding:8px 12px;background:#f3f4f6;border:1px solid var(--border);border-radius:999px;font-size:13px;color:#374151}
+.chip:hover{background:#494a4a}
+details.card{cursor:pointer}
+details.card[open]{border-color:#cbd5e1}       

@@ -1,3 +1,7 @@
 /* Admin page */
-#usersTbl, #jobsTbl { width: 100%; }
-#monitor { background: var(--surface); }
+#usersTbl,#jobsTbl{width:100%}
+.table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:12px}
+.table th,.table td{border:1px solid var(--border);padding:12px;text-align:left}
+.table th{background:#f5f7fa;color:#0f172a;position:sticky;top:0;z-index:1}
+.table tbody tr:hover td{background:rgba(0,0,0,.03)}
+#monitor{background:var(--surface)}

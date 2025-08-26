@@ -12,7 +12,7 @@
       "banned": false,
       "skills": [],
       "bio": "",
-      "avatar": "",
+      "avatar": "/uploads/u_admin_1756248173659.png",
       "rating": 0,
       "ratingCount": 0,
       "location": {
@@ -21,10 +21,59 @@
         "address": "Dhaka, Bangladesh"
       },
       "createdAt": 1756246226548
+    },
+    {
+      "id": "182022ed-3d71-43c2-aa0e-1fb9d3ac459c",
+      "name": "Syed Al Mahmud",
+      "email": "23-50168-1@student.aiub.edu",
+      "role": "client",
+      "phone": "01683886755",
+      "nid": "252456156156",
+      "passwordHash": "$2a$10$M.QM6G1zClNsOWvFjoTtrO9m6ZhpU.wF3Ybb9Aq9f7eMsUgCqwmJy",
+      "verified": false,
+      "banned": false,
+      "skills": [
+        "tutoring"
+      ],
+      "bio": "",
+      "avatar": "/uploads/182022ed-3d71-43c2-aa0e-1fb9d3ac459c_1756248590350.jpg",
+      "rating": 0,
+      "ratingCount": 0,
+      "location": {
+        "lat": 23.7427,
+        "lng": 90.4248,
+        "address": "My Location"
+      },
+      "createdAt": 1756247860912
     }
   ],
   "jobs": [],
   "conversations": [],
   "messages": [],
-  "pushSubs": []
+  "pushSubs": [
+    {
+      "userId": "u_admin",
+      "subscription": {
+        "endpoint": "https://fcm.googleapis.com/fcm/send/fAOMiS8l1Qc:APA91bG_cGuIcxPWjUJ9lg93i1Sb5NgaKXd_LrkFCNnqREfyg_qNfz5pBzjqo35FUjEmXDNcql2FgJbL7IxBc_vA3xcgQXpYhDtCT2dhWW27cm_bfP182LyDLY0_pyrirQYqru0ZEtuM",
+        "expirationTime": null,
+        "keys": {
+          "p256dh": "BCbDsTK4cOo9Byk6k9Z79KFmCyjOlNxHXBTZw8Fh8C1oHrNUWfaxNbZThpQqHTt2HiL6yPrYrd1fpBazFiEYJRw",
+          "auth": "GaViJdfA2VZaT5xuKXtkyA"
+        }
+      },
+      "createdAt": 1756248151606
+    },
+    {
+      "userId": "182022ed-3d71-43c2-aa0e-1fb9d3ac459c",
+      "subscription": {
+        "endpoint": "https://fcm.googleapis.com/fcm/send/fAOMiS8l1Qc:APA91bG_cGuIcxPWjUJ9lg93i1Sb5NgaKXd_LrkFCNnqREfyg_qNfz5pBzjqo35FUjEmXDNcql2FgJbL7IxBc_vA3xcgQXpYhDtCT2dhWW27cm_bfP182LyDLY0_pyrirQYqru0ZEtuM",
+        "expirationTime": null,
+        "keys": {
+          "p256dh": "BCbDsTK4cOo9Byk6k9Z79KFmCyjOlNxHXBTZw8Fh8C1oHrNUWfaxNbZThpQqHTt2HiL6yPrYrd1fpBazFiEYJRw",
+          "auth": "GaViJdfA2VZaT5xuKXtkyA"
+        }
+      },
+      "createdAt": 1756248548464
+    }
+  ]
 }

@@ -1,3 +1,5 @@
 /* Workers page */
-#results .item .badge { margin-left: 6px; }
-#results .item > div:last-child { display: flex; gap: 8px; align-items: center; }
+#results .item{border:1px solid var(--border);background:var(--surface);border-radius:var(--radius);padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:var(--shadow-sm);transition:transform .08s,box-shadow .2s,border-color .2s}
+#results .item:hover{transform:translateY(-1px);box-shadow:var(--shadow-md);border-color:rgba(0,0,0,.08)}
+#results .item .badge{margin-left:6px}
+#results .item>div:last-child{display:flex;gap:8px;align-items:center}
