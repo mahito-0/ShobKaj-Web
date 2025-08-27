@@ -1,7 +1,10 @@
-/* Admin page */
-#usersTbl,#jobsTbl{width:100%}
-.table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:12px}
-.table th,.table td{border:1px solid var(--border);padding:12px;text-align:left}
-.table th{background:#f5f7fa;color:#0f172a;position:sticky;top:0;z-index:1}
-.table tbody tr:hover td{background:rgba(0,0,0,.03)}
-#monitor{background:var(--surface)}
+/* Admin — crisp tables + readable monitor */
+.table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:12px}
+.table th,.table td{border:1px solid var(--line); padding:12px; text-align:left}
+.table th{background:#f2f4f8; color:#0d1321; position:sticky; top:0; z-index:1}
+.table tbody tr:hover td{background:#f7f8fb}
+
+#monitor{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:12px;
+  max-height:320px; overflow:auto; box-shadow:var(--shadow-sm)
+}

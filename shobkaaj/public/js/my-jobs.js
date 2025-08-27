@@ -6,8 +6,8 @@ function ratingWidget(container) {
   const wrap = document.createElement('div'); wrap.className = 'rating';
   for (let i=1; i<=5; i++) {
     const s = document.createElement('span');
-    s.textContent = '★'; s.style.fontSize='20px'; s.style.color = i<=value ? '#f59e0b' : '#e5e7eb';
-    s.onclick = ()=>{ value = i; [...wrap.children].forEach((c, idx)=> c.style.color = idx < value ? '#f59e0b' : '#e5e7eb'); };
+    s.textContent = '★'; s.className = 'star' + (i<=value ? ' active' : '');
+    s.onclick = ()=>{ value = i; [...wrap.children].forEach((c, idx)=> c.classList.toggle('active', idx < value)); };
     wrap.appendChild(s);
   }
   container.appendChild(wrap);
@@ -24,7 +24,7 @@ async function loadClientView() {
   const { myJobs } = await $api('/api/jobs/mine');
   const wrap = document.getElementById('clientJobs');
   wrap.innerHTML = '';
-  if (!myJobs.length) { wrap.innerHTML = '<div class="card">No jobs posted yet.</div>'; return; }
+  if (!myJobs.length) { wrap.innerHTML = `<div class="card">${i18n.t('myJobs.noPosted')}</div>`; return; }
   myJobs.forEach(j=>{
     const el = document.createElement('div');
     el.className = 'card';
@@ -53,10 +53,10 @@ async function loadClientView() {
     if (act === 'viewApps') {
       const box = document.getElementById(`apps_${jobId}`);
       if (box.getAttribute('data-loaded')==='1') { box.innerHTML=''; box.setAttribute('data-loaded','0'); return; }
-      box.innerHTML = '<div class="small">Loading...</div>';
+      box.innerHTML = `<div class="small">${i18n.t('common.loading')}</div>`;
       try {
         const { applications } = await $api(`/api/jobs/${jobId}/applications`);
-        if (!applications.length) { box.innerHTML = '<div class="small">No applications yet.</div>'; return; }
+        if (!applications.length) { box.innerHTML = `<div class="small">${i18n.t('myJobs.noApplications')}</div>`; return; }
         box.innerHTML = '';
         applications.forEach(a=>{
           const d = document.createElement('div');
@@ -78,10 +78,10 @@ async function loadClientView() {
 
     if (act === 'assign') {
       const workerId = btn.getAttribute('data-worker');
-      if (!confirm('Assign this worker?')) return;
+      if (!confirm(i18n.t('myJobs.assignConfirm'))) return;
       try {
         await $api(`/api/jobs/${jobId}/assign`, { method:'PUT', body:{ workerId } });
-        alert('Assigned!');
+        alert(i18n.t('myJobs.assigned'));
         await loadClientView();
       } catch(ex){ alert(ex.message); }
     }
@@ -95,13 +95,13 @@ async function loadClientView() {
       const ratingWrap = document.createElement('div');
       const r = ratingWidget(ratingWrap);
       const txt = document.createElement('textarea');
-      txt.className = 'input'; txt.placeholder = 'Write a short review (optional)';
+      txt.className = 'input'; txt.placeholder = i18n.t('myJobs.reviewPlaceholder');
       const submit = document.createElement('button');
       submit.className = 'btn success'; submit.textContent = i18n.t('myJobs.complete');
       submit.onclick = async ()=>{
         try {
           await $api(`/api/jobs/${jobId}/complete`, { method:'POST', body:{ rating: r.value, comment: txt.value.trim() } });
-          alert('Job completed and worker rated.'); await loadClientView();
+          alert(i18n.t('myJobs.completed')); await loadClientView();
         } catch(ex){ alert(ex.message); }
       };
       box.appendChild(ratingWrap);
@@ -118,7 +118,7 @@ async function loadWorkerView() {
   assigned.innerHTML = '';
   applied.innerHTML = '';
 
-  if (!assignedJobs.length) assigned.innerHTML = '<div class="card">No jobs assigned yet.</div>';
+  if (!assignedJobs.length) assigned.innerHTML = `<div class="card">${i18n.t('common.noData')}</div>`;
   assignedJobs.forEach(j=>{
     const el = document.createElement('div');
     el.className = 'item';
@@ -134,7 +134,7 @@ async function loadWorkerView() {
     assigned.appendChild(el);
   });
 
-  if (!appliedJobs.length) applied.innerHTML = '<div class="card">No applications yet.</div>';
+  if (!appliedJobs.length) applied.innerHTML = `<div class="card">${i18n.t('myJobs.noApplications')}</div>`;
   appliedJobs.forEach(j=>{
     const el = document.createElement('div');
     el.className = 'item';

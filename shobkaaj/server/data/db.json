@@ -45,6 +45,28 @@
         "address": "My Location"
       },
       "createdAt": 1756247860912
+    },
+    {
+      "id": "2b28b0b2-a99a-46b8-beee-a7c81ed31b45",
+      "name": "Syed Al Mahmud",
+      "email": "samratmatish@gmail.com",
+      "role": "worker",
+      "phone": "01683886755",
+      "nid": "252456156156",
+      "passwordHash": "$2a$10$s.NaH2SyyIi9m3jDOe91h.JvH4Cm7PPZzNy5aCYtLZRdEj1n2f3hi",
+      "verified": false,
+      "banned": false,
+      "skills": [],
+      "bio": "",
+      "avatar": "/uploads/2b28b0b2-a99a-46b8-beee-a7c81ed31b45_1756324645449.webp",
+      "rating": 0,
+      "ratingCount": 0,
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdAt": 1756322662311
     }
   ],
   "jobs": [],

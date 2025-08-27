@@ -1,14 +1,38 @@
-/* Home page */
-.hero{padding:clamp(36px,8vw,72px) 16px;background:radial-gradient(900px 400px at -10% 0%,#626262 0%,transparent 60%),linear-gradient(135deg,#535353,#000000);border-bottom:1px solid var(--border)}
-.hero h1{margin:0 0 10px;font-size:clamp(28px,5vw,40px);color:var(--text)}
-.hero p{color:var(--muted);margin:0 0 18px;max-width:60ch}
-.section{padding:28px 16px}
-.section h2{margin:0 0 12px;font-size:22px}
-.lead{color:var(--muted);margin-bottom:16px}
-.grid.cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-.section .grid.cards .card p.small{margin:6px 0 0}
-.chips{display:flex;flex-wrap:wrap;gap:10px}
-.chip{display:inline-block;padding:8px 12px;background:#f3f4f6;border:1px solid var(--border);border-radius:999px;font-size:13px;color:#374151}
-.chip:hover{background:#494a4a}
-details.card{cursor:pointer}
-details.card[open]{border-color:#cbd5e1}       
+/* Home — refined colors + centered hero + clean sections */
+.hero{
+  padding:clamp(48px,9vw,96px) 16px;
+  background:
+    radial-gradient(1300px 480px at -12% -10%, #eef2f7 0%, transparent 60%),
+    linear-gradient(135deg, #fafbfc, #ffffff);
+  border-bottom:1px solid var(--line);
+}
+.hero .container{display:grid; gap:16px}
+.hero p{color:var(--muted); margin:0 0 18px; max-width:64ch}
+.hero .form-actions{gap:12px}
+
+.section{padding:32px 16px}
+.grid.cards{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.grid.cards .card{min-height:120px; display:flex; flex-direction:column; justify-content:center; transition:box-shadow .25s, transform .1s, border-color .2s}
+.grid.cards .card:hover{box-shadow:var(--shadow-md); transform:translateY(-2px); border-color:#dbe2ea}
+
+/* Steps */
+.section ol{counter-reset:step; list-style:none; padding-left:0; margin:0}
+.section ol li{counter-increment:step; margin:10px 0; padding-left:38px; position:relative; line-height:1.6}
+.section ol li::before{
+  content:counter(step); position:absolute; left:0; top:2px;
+  width:26px; height:26px; border-radius:999px; background:#e8ecf2; color:#0d1321;
+  display:grid; place-items:center; font-weight:700; font-size:12px;
+}
+
+/* Category chips */
+.chips{display:flex; flex-wrap:wrap; gap:10px}
+.chip{display:inline-block; padding:8px 12px; background:#f2f3f7; border:1px solid var(--line); border-radius:999px; font-size:13px; color:#333742; transition:transform .06s, box-shadow .2s, background .2s}
+.chip:hover{background:#eceef3; transform:translateY(-1px); box-shadow:var(--shadow-sm)}
+
+/* CTA band */
+.cta{
+  background:linear-gradient(180deg,#f9fafb,#ffffff);
+  border:1px solid var(--line); border-radius:var(--radius-lg); padding:20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+}
+.cta p{margin:6px 0 0; color:var(--muted)}

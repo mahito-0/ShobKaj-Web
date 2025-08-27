@@ -27,7 +27,7 @@ function cardWorker(w) {
 async function searchWorkers() {
   const skill = document.getElementById('skill').value.trim();
   const radius = document.getElementById('radius').value;
-  const minRating = document.getElementById('minRating').value;
+  const minRating = document.getElementById('minRating')?.value;
   const params = new URLSearchParams();
   if (skill) params.set('skill', skill);
   if (loc) { params.set('lat', loc.lat); params.set('lng', loc.lng); }
@@ -36,7 +36,7 @@ async function searchWorkers() {
   const { workers } = await $api('/api/workers?' + params.toString());
   const wrap = document.getElementById('results');
   wrap.innerHTML = '';
-  if (!workers.length) { wrap.innerHTML = '<div class="card">No workers found</div>'; return; }
+  if (!workers.length) { wrap.innerHTML = `<div class="card">${i18n.t('workers.noWorkers')}</div>`; return; }
   workers.forEach(w => wrap.appendChild(cardWorker(w)));
 }
 
@@ -49,7 +49,7 @@ async function searchWorkers() {
   document.getElementById('nearBtn').onclick = ()=>{
     navigator.geolocation?.getCurrentPosition(
       pos => { loc = { lat: pos.coords.latitude, lng: pos.coords.longitude }; searchWorkers(); },
-      err => alert('Location permission denied')
+      err => alert(i18n.t('common.locationDenied'))
     );
   };
   document.getElementById('searchBtn').onclick = searchWorkers;

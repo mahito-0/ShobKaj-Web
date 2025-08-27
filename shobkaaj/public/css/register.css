@@ -1,3 +1,5 @@
-/* Register page */
-main .card{max-width:680px;margin:32px auto}
-main h2{margin-top:0}
+/* Register — airy card + aligned rows */
+main{min-height:calc(100vh - 120px); display:grid; place-items:center; padding:16px}
+main .card{width:min(680px,96vw); transition:box-shadow .25s, transform .1s}
+main .card:hover{box-shadow:var(--shadow-sm); transform:translateY(-2px)}
+main h2{margin:0 0 10px}

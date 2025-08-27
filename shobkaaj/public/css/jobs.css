@@ -1,14 +1,23 @@
-/* Jobs page */
-main .card{margin-bottom:16px}
-.grid.cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+/* Jobs — fixed positioning: content left, actions right; perfect badges */
+.filter{margin-bottom:16px}
 
-/* Job list items */
-#jobs .item{border:1px solid var(--border);background:var(--surface);border-radius:var(--radius);padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:var(--shadow-sm);transition:transform .08s,box-shadow .2s,border-color .2s}
-#jobs .item:hover{transform:translateY(-1px);box-shadow:var(--shadow-md);border-color:rgba(0,0,0,.08)}
-#jobs .item .small{margin-top:4px}
-#jobs .item>div:last-child{display:flex;gap:8px;align-items:center}
+#jobs .item{
+  border:1px solid var(--line); background:var(--surface); border-radius:var(--radius);
+  padding:16px; display:flex; gap:14px; align-items:flex-start; box-shadow:var(--shadow-sm); transition:transform .08s, box-shadow .2s, border-color .2s;
+}
+#jobs .item:hover{transform:translateY(-1px); box-shadow:var(--shadow-sm); border-color:#dfe3ea}
+#jobs .item > div:first-child{flex:1; min-width:0}
+#jobs .item > div:last-child{margin-left:auto; display:flex; gap:8px; align-items:center}
+#jobs .item .small{margin-top:6px; color:var(--muted)}
 
-/* Status badges (neutral) */
-.status-open{background:#eef2ff;border-color:#c7d2fe;color:#3730a3}
-.status-assigned{background:#fff7ed;border-color:#fde68a;color:#92400e}
-.status-completed{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
+/* Neutral status badges */
+.badge{padding:4px 10px; border-radius:999px; font-size:12px; border:1px solid var(--line); background:#f3f5fa; color:#2c323c}
+.status-open{background:#eff1f6; border-color:#e2e5ec; color:#151a21}
+.status-assigned{background:#ededf2; border-color:#e1e4ea; color:#161a21}
+.status-completed{background:#f7f8fb; border-color:#e9ecf1; color:#1b1f26}
+
+/* Mobile stacking */
+@media (max-width:640px){
+  #jobs .item{flex-direction:column}
+  #jobs .item > div:last-child{width:100%; justify-content:flex-start; flex-wrap:wrap}
+}

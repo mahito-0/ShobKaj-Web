@@ -1,8 +1,15 @@
-/* My Jobs page */
+/* My Jobs — tidy lists + action alignment + neutral rating */
 #clientJobs .applications .item{margin-top:8px}
-#workerAssigned .item,#workerApplied .item{align-items:flex-start}
+#workerAssigned .item, #workerApplied .item{align-items:flex-start}
 
-/* Rating widget */
-.rating{display:inline-flex;gap:4px;align-items:center;margin-bottom:8px}
-.rating .star{font-size:20px;color:#e5e7eb;cursor:pointer;user-select:none}
-.rating .star.active{color:#f59e0b}
+.rating{display:inline-flex; gap:4px; align-items:center; margin-bottom:8px}
+.rating .star{font-size:22px; color:#dfe2e8; cursor:pointer; user-select:none; transition:color .15s}
+.rating .star.active{color:#aeb4bf}
+
+#clientSection .card + .card, #workerSection .card + .card{margin-top:12px}
+
+/* Keep palette minimal: success/danger use primary accent look */
+.btn.success, .btn.danger{
+  background:linear-gradient(135deg,var(--btn),var(--btn-600) 55%,var(--btn-700));
+  border-color:var(--btn-600);
+}

@@ -2,9 +2,7 @@ let me = null, socket = null, currentConv = null, messages = [];
 function fmt(ts){ const d=new Date(ts); return d.toLocaleString(); }
 function esc(s){ return (s??'').toString().replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
 
-async function fetchJobTitle(jobId) {
-  try { const { job } = await $api(`/api/jobs/${jobId}`); return job?.title || ''; } catch { return ''; }
-}
+async function fetchJobTitle(jobId) { try { const { job } = await $api(`/api/jobs/${jobId}`); return job?.title || ''; } catch { return ''; } }
 
 function renderConversations(list) {
   const el = document.getElementById('convList');
@@ -23,11 +21,12 @@ function renderConversations(list) {
   const startDiv = document.createElement('div');
   startDiv.className = 'card'; startDiv.style.margin='12px';
   startDiv.innerHTML = `
-    <h4>Start new chat (User ID)</h4>
-    <input class="input" id="otherId" placeholder="Enter other user's ID"/>
-    <button class="btn" id="startBtn">${i18n.t('chat.send')}</button>
-    <div class="small">Ask your counterpart for their ID (Admin can see IDs).</div>
+    <h4 data-i18n="chat.startNew">${i18n.t('chat.startNew')}</h4>
+    <input class="input" id="otherId" data-i18n-placeholder="chat.enterUserId" placeholder="${i18n.t('chat.enterUserId')}"/>
+    <button class="btn" id="startBtn" data-i18n="chat.send">${i18n.t('chat.send')}</button>
+    <div class="small">Admin can see user IDs.</div>
   `;
+  i18n.apply(startDiv);
   el.appendChild(startDiv);
   document.getElementById('startBtn').onclick = async () => {
     const otherUserId = document.getElementById('otherId').value.trim();
@@ -85,13 +84,12 @@ async function loadConversations(openConvId=null) {
   socket = io({ withCredentials: true });
   socket.on('new-message', ({ message }) => {
     if (currentConv && message.conversationId === currentConv.id) {
-      messages.push(message);
-      renderMessages();
+      messages.push(message); renderMessages();
     }
   });
   socket.on('typing', ({ isTyping }) => {
     const el = document.getElementById('typing');
-    el.textContent = isTyping ? 'Typing...' : '';
+    el.textContent = isTyping ? i18n.t('chat.typing') : '';
   });
 
   let openConvId = sessionStorage.getItem('openConv');
@@ -105,7 +103,7 @@ async function loadConversations(openConvId=null) {
   sendBtn.textContent = i18n.t('chat.send');
 
   sendBtn.onclick = ()=>{
-    if (!currentConv) return alert('Select a conversation');
+    if (!currentConv) return alert(i18n.t('chat.select'));
     const text = input.value.trim();
     if (!text) return;
     socket.emit('send-message', { conversationId: currentConv.id, text });

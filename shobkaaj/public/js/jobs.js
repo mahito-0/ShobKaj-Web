@@ -6,7 +6,7 @@ async function loadJobs(params = {}) {
   const data = await $api('/api/jobs' + (qs ? `?${qs}` : ''));
   const wrap = document.getElementById('jobs');
   wrap.innerHTML = '';
-  if (!data.jobs.length) { wrap.innerHTML = '<div class="card">No jobs found</div>'; return; }
+  if (!data.jobs.length) { wrap.innerHTML = `<div class="card">${i18n.t('jobs.noJobs')}</div>`; return; }
 
   data.jobs.forEach(j => {
     const distance = (j.distanceKm != null) ? ` • ${j.distanceKm.toFixed(1)} km` : '';
@@ -14,12 +14,12 @@ async function loadJobs(params = {}) {
     let actionHtml = '';
     if (me?.role === 'worker') {
       actionHtml = `
-        <button class="btn" data-act="chat-client" data-id="${j.id}">Chat with Client</button>
-        ${j.status==='open' ? `<button class="btn outline" data-act="apply" data-id="${j.id}">Apply</button>` : ''}
+        <button class="btn" data-act="chat-client" data-id="${j.id}">${i18n.t('jobs.chatClient')}</button>
+        ${j.status==='open' ? `<button class="btn outline" data-act="apply" data-id="${j.id}">${i18n.t('jobs.apply')}</button>` : ''}
       `;
     } else if (me?.role === 'client' && j.createdBy === me.id) {
-      if (j.assignedTo) actionHtml = `<button class="btn outline" data-act="chat-worker" data-id="${j.id}">Chat (Assigned)</button>`;
-      else actionHtml = `<a class="btn outline" href="/my-jobs.html">Manage</a>`;
+      if (j.assignedTo) actionHtml = `<button class="btn outline" data-act="chat-worker" data-id="${j.id}">${i18n.t('jobs.chatWorker')}</button>`;
+      else actionHtml = `<a class="btn outline" href="/my-jobs.html">${i18n.t('jobs.manage')}</a>`;
     }
     const el = document.createElement('div');
     el.className = 'item';
@@ -45,9 +45,9 @@ async function loadJobs(params = {}) {
         window.location.href = '/chat.html';
       }
       if (act === 'apply') {
-        const note = prompt('Application note (optional):') || '';
+        const note = prompt(i18n.t('jobs.applyNotePrompt')) || '';
         await $api(`/api/jobs/${jobId}/apply`, { method: 'POST', body: { note } });
-        alert('Applied successfully!');
+        alert(i18n.t('jobs.appliedSuccess'));
       }
     } catch (ex) { alert(ex.message); }
   };
@@ -60,6 +60,9 @@ async function loadJobs(params = {}) {
 
   const qInput = document.getElementById('q');
   const radiusInput = document.getElementById('radius');
+  document.getElementById('searchBtn').setAttribute('data-i18n','common.search');
+  i18n.apply(document);
+
   document.getElementById('searchBtn').onclick = () => {
     const params = { q: qInput.value.trim() };
     if (loc) { params.lat = loc.lat; params.lng = loc.lng; }
@@ -69,7 +72,7 @@ async function loadJobs(params = {}) {
   document.getElementById('nearBtn').onclick = () => {
     navigator.geolocation?.getCurrentPosition(
       pos => { loc = { lat: pos.coords.latitude, lng: pos.coords.longitude }; document.getElementById('searchBtn').click(); },
-      err => alert('Location permission denied')
+      err => alert(i18n.t('common.locationDenied'))
     );
   };
 

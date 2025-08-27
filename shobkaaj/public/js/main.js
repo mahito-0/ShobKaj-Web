@@ -1,30 +1,4 @@
-function urlBase64ToUint8Array(base64String) {
-  const padding = '='.repeat((4 - base64String.length % 4) % 4);
-  const b64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
-  const raw = atob(b64);
-  const output = new Uint8Array(raw.length);
-  for (let i = 0; i < raw.length; ++i) output[i] = raw.charCodeAt(i);
-  return output;
-}
-
-async function initPush() {
-  if (!('serviceWorker' in navigator) || !('PushManager' in window)) return;
-  try {
-    const reg = await navigator.serviceWorker.register('/sw.js');
-    let perm = Notification.permission;
-    if (perm === 'default') perm = await Notification.requestPermission();
-    if (perm !== 'granted') return;
-    const { key } = await $api('/api/notifications/public-key');
-    const sub = await reg.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(key)
-    });
-    await $api('/api/notifications/subscribe', { method: 'POST', body: sub });
-    navigator.serviceWorker.addEventListener('message', (e)=>{
-      if (e.data?.type === 'navigate' && e.data.url) window.location.href = e.data.url;
-    });
-  } catch (e) { /* ignore */ }
-}
+i18n.init();
 
 function renderNavbar(user) {
   const el = document.getElementById('navbar');
@@ -58,7 +32,11 @@ function renderNavbar(user) {
   `;
   const langSel = document.getElementById('langSelect');
   langSel.value = i18n.lang;
-  langSel.onchange = (e) => { i18n.setLang(e.target.value); renderNavbar(user); i18n.apply(document); };
+  langSel.onchange = (e) => {
+    i18n.setLang(e.target.value);
+    // reload to ensure all pages (including dynamic parts) reflect the new language
+    window.location.reload();
+  };
 
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) logoutBtn.onclick = () => $auth.logout();
@@ -69,5 +47,4 @@ function renderNavbar(user) {
 (async () => {
   const user = await $auth.getMe();
   renderNavbar(user);
-  if (user) await initPush();
 })();

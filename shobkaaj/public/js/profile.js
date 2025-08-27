@@ -15,6 +15,7 @@ let me = null;
   const avatarImg = document.getElementById('avatarImg');
   avatarImg.src = me.avatar || '/img/avatar.png';
 
+  document.getElementById('locBtn').setAttribute('data-i18n','common.useMyLocation'); i18n.apply(document);
   document.getElementById('locBtn').onclick = ()=>{
     navigator.geolocation?.getCurrentPosition(
       pos => {
@@ -22,7 +23,7 @@ let me = null;
         form.dataset.lng = pos.coords.longitude;
         locLabel.textContent = `Lat ${pos.coords.latitude.toFixed(4)}, Lng ${pos.coords.longitude.toFixed(4)}`;
       },
-      err => alert('Location permission denied')
+      err => alert(i18n.t('common.locationDenied'))
     );
   };
 
@@ -42,12 +43,11 @@ let me = null;
     err.textContent = '';
     try {
       await $api('/api/me', { method:'PUT', body });
-      alert('Profile updated');
+      alert(i18n.t('profile.updated'));
       window.location.reload();
     } catch(ex){ err.textContent = ex.message; }
   });
 
-  // Avatar upload
   const avatarInput = document.getElementById('avatarInput');
   avatarInput.addEventListener('change', async ()=>{
     const file = avatarInput.files[0];
@@ -57,7 +57,7 @@ let me = null;
     try {
       const res = await $api('/api/me/avatar', { method: 'POST', formData: fd });
       document.getElementById('avatarImg').src = res.avatar || '/img/avatar.png';
-      alert('Profile picture updated.');
+      alert(i18n.t('profile.pictureUpdated'));
     } catch (e) { alert(e.message); }
   });
 })();
