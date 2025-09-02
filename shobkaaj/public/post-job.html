@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
   <nav class="navbar" id="navbar"></nav>
   <main class="container">
     <div class="card" style="max-width:680px;margin:32px auto;">
-      <h2>নতুন কাজ পোস্ট করুন</h2>
+      <h2>Post a New Job</h2>
       <form id="jobForm">
         <label>Title</label>
         <input class="input" name="title" required />
@@ -21,7 +21,7 @@
           <div><label>Budget (৳)</label><input class="input" type="number" name="budget" /></div>
           <div><label>Deadline</label><input class="input" type="date" name="deadline" /></div>
         </div>
-        <label>লোকেশন</label>
+        <label>Location</label>
         <div class="form-actions">
           <button type="button" id="locBtn" class="btn outline" data-i18n="common.useMyLocation">Use my location</button>
           <span id="locLabel" class="badge">N/A</span>
@@ -30,7 +30,7 @@
           <button class="btn" type="submit" data-i18n="common.post">Post</button>
           <a class="btn outline" href="/jobs.html" data-i18n="common.back">Back</a>
         </div>
-        <div id="err" style="color:#dc2626;margin-top:8px;"></div>
+        <div id="err" class="error-message"></div>
       </form>
     </div>
   </main>
@@ -38,39 +38,6 @@
   <script src="/js/i18n.js"></script>
   <script src="/js/auth.js"></script>
   <script src="/js/main.js"></script>
-  <script>
-    i18n.apply(document);
-    let locationData = null;
-    (async ()=>{
-      const me = await $auth.requireAuth(['client']);
-      if (!me) return;
-      document.getElementById('locBtn').onclick = () => {
-        navigator.geolocation?.getCurrentPosition(
-          pos => {
-            locationData = { lat: pos.coords.latitude, lng: pos.coords.longitude, address: 'Client location' };
-            document.getElementById('locLabel').textContent = `Lat ${locationData.lat.toFixed(4)}, Lng ${locationData.lng.toFixed(4)}`;
-          },
-          err => alert('লোকেশন অনুমতি পাওয়া যায়নি')
-        );
-      };
-      document.getElementById('jobForm').addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        const body = {
-          title: e.target.title.value.trim(),
-          description: e.target.description.value.trim(),
-          budget: Number(e.target.budget.value || 0),
-          deadline: e.target.deadline.value,
-          location: locationData
-        };
-        const err = document.getElementById('err');
-        err.textContent = '';
-        try {
-          await $api('/api/jobs', { method:'POST', body });
-          alert('Job posted!');
-          window.location.href = '/my-jobs.html';
-        } catch(ex) { err.textContent = ex.message; }
-      });
-    })();
-  </script>
+  <script src="/js/post-job.js"></script>
 </body>
 </html>

@@ -1,5 +1,3 @@
-let me = null;
-
 // Helper for fetch with timeout
 async function fetchWithTimeout(resource, options = {}) {
   const { timeout = 10000 } = options;
@@ -67,33 +65,25 @@ async function reverseGeocode(lat, lng) {
   }
 }
 
+i18n.apply(document);
+let locationData = null;
 (async ()=>{
-  me = await $auth.requireAuth();
+  const me = await $auth.requireAuth(['client']);
   if (!me) return;
-  i18n.apply(document);
 
-  const form = document.getElementById('profileForm');
-  form.name.value = me.name || '';
-  form.phone.value = me.phone || '';
-  form.nid.value = me.nid || '';
-  form.skills.value = (me.skills || []).join(', ');
-  form.bio.value = me.bio || '';
   const locLabel = document.getElementById('locLabel');
-
-  // Display existing location as human-readable if available
   if (me.location && me.location.address) {
     locLabel.textContent = me.location.address;
+    locationData = me.location;
   } else if (me.location && me.location.lat && me.location.lng) {
-    // If only lat/lng exist, try to reverse geocode on load
     const address = await reverseGeocode(me.location.lat, me.location.lng);
     locLabel.textContent = address;
-    // Update the user object with the new address for consistency (though not saved here)
-    me.location.address = address;
+    locationData = { ...me.location, address: address };
   } else {
     locLabel.textContent = 'N/A';
   }
 
-  document.getElementById('locBtn').onclick = async ()=>{
+  document.getElementById('locBtn').onclick = async () => {
     let lat, lng, address;
     try {
       const pos = await getLocationViaGeolocation();
@@ -114,48 +104,25 @@ async function reverseGeocode(lat, lng) {
         return;
       }
     }
-    
-    form.dataset.lat = lat;
-    form.dataset.lng = lng;
-    form.dataset.address = address; // Store the human-readable address
+    locationData = { lat, lng, address };
     locLabel.textContent = address;
   };
 
-  form.addEventListener('submit', async (e)=>{
+  document.getElementById('jobForm').addEventListener('submit', async (e)=>{
     e.preventDefault();
     const body = {
-      name: form.name.value.trim(),
-      phone: form.phone.value.trim(),
-      nid: form.nid.value.trim(),
-      skills: form.skills.value.split(',').map(s => s.trim()).filter(Boolean),
-      bio: form.bio.value.trim()
+      title: e.target.title.value.trim(),
+      description: e.target.description.value.trim(),
+      budget: Number(e.target.budget.value || 0),
+      deadline: e.target.deadline.value,
+      location: locationData
     };
-    if (form.dataset.lat && form.dataset.lng) {
-      body.location = { 
-        lat: Number(form.dataset.lat), 
-        lng: Number(form.dataset.lng), 
-        address: form.dataset.address || 'Updated via Profile' // Use the human-readable address
-      };
-    }
     const err = document.getElementById('err');
     err.textContent = '';
     try {
-      await $api('/api/me', { method:'PUT', body });
-      alert(i18n.t('profile.updated'));
-      window.location.reload();
-    } catch(ex){ err.textContent = ex.message; }
-  });
-
-  const avatarInput = document.getElementById('avatarInput');
-  avatarInput.addEventListener('change', async ()=>{
-    const file = avatarInput.files[0];
-    if (!file) return;
-    const fd = new FormData();
-    fd.append('avatar', file);
-    try {
-      const res = await $api('/api/me/avatar', { method: 'POST', formData: fd });
-      document.getElementById('avatarImg').src = res.avatar || '/img/avatar.png';
-      alert(i18n.t('profile.pictureUpdated'));
-    } catch (e) { alert(e.message); }
+      await $api('/api/jobs', { method:'POST', body });
+      alert('Job posted!');
+      window.location.href = '/my-jobs.html';
+    } catch(ex) { err.textContent = ex.message; }
   });
 })();

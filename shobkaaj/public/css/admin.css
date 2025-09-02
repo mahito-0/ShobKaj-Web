@@ -1,10 +1,15 @@
-/* Admin — crisp tables + readable monitor */
-.table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:12px}
-.table th,.table td{border:1px solid var(--line); padding:12px; text-align:left}
-.table th{background:#f2f4f8; color:#0d1321; position:sticky; top:0; z-index:1}
-.table tbody tr:hover td{background:#f7f8fb}
+/* 
+ * ShobKaaj - Admin Page Styles
+ * ----------------------------
+ * This file contains styles specific to the admin dashboard (admin.html).
+ */
 
-#monitor{
-  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:12px;
-  max-height:320px; overflow:auto; box-shadow:var(--shadow-sm)
+#monitor {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+  max-height: 320px;
+  overflow: auto;
+  box-shadow: var(--shadow-sm);
 }

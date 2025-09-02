@@ -1,17 +1,70 @@
-/* Notifications Center */
-.toolbar{display:flex;align-items:center;gap:12px}
-.toolbar .spacer{flex:1}
-.switch{display:flex;align-items:center;gap:8px;color:var(--muted)}
+/* 
+ * ShobKaaj - Notifications Page Styles
+ * ------------------------------------
+ * This file contains styles specific to the notifications page (notifications.html).
+ */
 
-#list .item{align-items:center}
-.n-title{font-weight:600}
-.n-body{color:var(--muted);margin-top:2px}
-.n-time{color:var(--muted);font-size:12px}
-.n-actions{display:flex;gap:8px;align-items:center}
-.n-unread{background:#eef6ef;border-color:#d8eadb}
-.dot-unread{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--btn)}
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-@media (max-width:640px){
-  #list .item{flex-direction:column; align-items:flex-start}
-  .n-actions{margin-top:8px}
+.toolbar .spacer {
+  flex: 1;
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+}
+
+#list .item {
+  align-items: center;
+}
+
+.n-title {
+  font-weight: 600;
+}
+
+.n-body {
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.n-time {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.n-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.n-unread {
+  background: var(--notification-unread-bg);
+  border-color: var(--notification-unread-border);
+}
+
+.dot-unread {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--btn);
+}
+
+@media (max-width: 640px) {
+  #list .item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .n-actions {
+    margin-top: 8px;
+  }
 }

@@ -72,6 +72,7 @@ const transporter = hasSMTP
 
 async function sendEmail(to, subject, html) {
   if (!to) return;
+  console.log(`Attempting to send email to: ${to} with subject: ${subject}`);
   try {
     const info = await transporter.sendMail({
       from: process.env.FROM_EMAIL || 'no-reply@shobkaaj.local',
@@ -79,6 +80,8 @@ async function sendEmail(to, subject, html) {
     });
     if (!hasSMTP && info?.message) {
       console.log('--- Email Preview ---\nTo:', to, '\nSubject:', subject, '\n', info.message.toString(), '\n---------------------');
+    } else if (hasSMTP) {
+      console.log('Email sent: %s', info.messageId);
     }
   } catch (e) { console.error('Email error:', e.message); }
 }
@@ -172,7 +175,7 @@ function emitToUser(userId, event, payload) {
 async function sendPushTo(userId, payload) {
   const subs = db.pushSubs.filter(s => s.userId === userId);
   for (const s of subs) {
-    try { await webpush.sendNotification(s.subscription, JSON.stringify(payload)); }
+    try { await webpush.sendNotification(s.subscription, JSON.stringify(payload)); } 
     catch (e) {
       if (e.statusCode === 410 || e.statusCode === 404) {
         db.pushSubs = db.pushSubs.filter(x => x !== s); saveDB();
@@ -230,6 +233,54 @@ app.post('/api/login', (req, res) => {
   req.session.userId = user.id; res.json({ user: userSafe(user) });
 });
 app.post('/api/logout', authRequired, (req, res) => req.session.destroy(() => res.json({ ok: true })));
+
+app.post('/api/forgot-password', async (req, res) => {
+  const { email } = req.body;
+  console.log(`Forgot password request for email: ${email}`);
+  const user = db.users.find(u => u.email === email);
+  if (!user) {
+    console.log(`User with email ${email} not found. Returning ok: true to prevent enumeration.`);
+    return res.json({ ok: true }); // Always return ok to prevent email enumeration
+  }
+
+  const resetToken = uuidv4();
+  const resetTokenExpires = Date.now() + 3600000; // 1 hour
+  user.resetToken = resetToken;
+  user.resetTokenExpires = resetTokenExpires;
+  saveDB();
+  console.log(`Generated reset token for user ${user.id}: ${resetToken}. Expires: ${new Date(resetTokenExpires)}`);
+
+  const resetLink = `http://localhost:3000/reset-password.html?token=${resetToken}`;
+  console.log(`Sending reset email to ${user.email} with link: ${resetLink}`);
+  await sendEmail(user.email, 'Password Reset Request', `
+    <p>You requested a password reset. Click the link below to reset your password:</p>
+    <p><a href="${resetLink}">${resetLink}</a></p>
+    <p>This link will expire in 1 hour.</p>
+  `);
+
+  res.json({ ok: true });
+});
+
+app.post('/api/reset-password', async (req, res) => {
+  const { token, newPassword } = req.body;
+  console.log(`Reset password request with token: ${token}`);
+  const user = db.users.find(u => u.resetToken === token && u.resetTokenExpires > Date.now());
+
+  if (!user) {
+    console.log(`Invalid or expired token: ${token}`);
+    return res.status(400).json({ error: 'Invalid or expired token' });
+  }
+
+  user.passwordHash = bcrypt.hashSync(newPassword, 10);
+  user.resetToken = null;
+  user.resetTokenExpires = null;
+  saveDB();
+  console.log(`Password successfully reset for user ${user.id}. Token invalidated.`);
+
+  await sendEmail(user.email, 'Password Reset Successful', 'Your password has been successfully reset.');
+
+  res.json({ ok: true });
+});
 app.get('/api/me', (req, res) => {
   if (!req.session.userId) return res.json({ user: null });
   const user = db.users.find(u => u.id === req.session.userId);
@@ -331,7 +382,7 @@ app.post('/api/jobs/:id/apply', authRequired, roleRequired('worker'), async (req
   await notifyUser(job.createdBy, {
     type: 'application',
     title: 'New application',
-    body: `${req.user.name} applied to "${job.title}"`,
+    body: `${req.user.name} applied to "${job.title}"`, 
     url: '/my-jobs.html'
   });
   await sendEmail(client?.email, `New application for "${job.title}"`, `<p>${req.user.name} applied to your job "${job.title}".</p><p>Note: ${note || '(none)'}.</p><p><a href="http://localhost:3000/my-jobs.html">Review applications</a></p>`);

@@ -66,7 +66,9 @@
         "lng": 90.42,
         "address": "Updated via Profile"
       },
-      "createdAt": 1756322662311
+      "createdAt": 1756322662311,
+      "resetToken": "773fd003-3c2e-4d10-bb06-db12fd2cf5cc",
+      "resetTokenExpires": 1756825099972
     },
     {
       "id": "b66c74e8-296a-4096-b386-a30e41b717ed",
@@ -88,7 +90,9 @@
         "lng": 90.4125,
         "address": "Dhaka, Bangladesh"
       },
-      "createdAt": 1756404954516
+      "createdAt": 1756404954516,
+      "resetToken": "7731a258-816d-4ed6-9d2d-a24d1e2142dc",
+      "resetTokenExpires": 1756825014754
     },
     {
       "id": "4cb7aa89-6ba4-4535-a4ac-41d36167e499",
@@ -111,6 +115,50 @@
         "address": "Dhaka, Bangladesh"
       },
       "createdAt": 1756404989388
+    },
+    {
+      "id": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "name": "Syed Al Mahmud",
+      "email": "mahmud@gmail.com",
+      "role": "client",
+      "phone": "01683886755",
+      "nid": "",
+      "passwordHash": "$2a$10$uer.6Oj5bK5502mRK0a5MOCt4RUZGIPBPz2jE3/OUcUWjqf5RyV3O",
+      "verified": false,
+      "banned": false,
+      "skills": [],
+      "bio": "",
+      "avatar": "/uploads/07d5f678-951b-4153-8c63-784faa0e5969_1756818567749.jpg",
+      "rating": 0,
+      "ratingCount": 0,
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdAt": 1756818510797
+    },
+    {
+      "id": "801d3c96-8171-414e-912b-3b875ae62929",
+      "name": "Syed Al Mahmud",
+      "email": "syedmahmud@gmail.com",
+      "role": "worker",
+      "phone": "01683886755",
+      "nid": "",
+      "passwordHash": "$2a$10$xm9aTRQn9kYbwwlqClhvIu1Whuso.K.ZTpUgEM2cD0iDiA4KcOCzS",
+      "verified": false,
+      "banned": false,
+      "skills": [],
+      "bio": "",
+      "avatar": "/uploads/801d3c96-8171-414e-912b-3b875ae62929_1756824499984.jpg",
+      "rating": 0,
+      "ratingCount": 0,
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdAt": 1756818547501
     }
   ],
   "jobs": [
@@ -134,6 +182,12 @@
           "note": "here",
           "status": "pending",
           "createdAt": 1756405263905
+        },
+        {
+          "workerId": "801d3c96-8171-414e-912b-3b875ae62929",
+          "note": "",
+          "status": "pending",
+          "createdAt": 1756820583463
         }
       ],
       "reviews": [],
@@ -174,6 +228,15 @@
       ],
       "jobId": "7e6e91f2-5d80-4c0a-a9e4-7e957097c95b",
       "createdAt": 1756405255948
+    },
+    {
+      "id": "afd8f826-6f5c-4340-81ca-6b7165175854",
+      "participants": [
+        "801d3c96-8171-414e-912b-3b875ae62929",
+        "4cb7aa89-6ba4-4535-a4ac-41d36167e499"
+      ],
+      "jobId": "7e6e91f2-5d80-4c0a-a9e4-7e957097c95b",
+      "createdAt": 1756824610584
     }
   ],
   "messages": [
@@ -216,6 +279,18 @@
         }
       },
       "createdAt": 1756248548464
+    }
+  ],
+  "notifications": [
+    {
+      "id": "80fee745-f722-4849-8169-f38d5dff6d0d",
+      "userId": "4cb7aa89-6ba4-4535-a4ac-41d36167e499",
+      "type": "application",
+      "title": "New application",
+      "body": "Syed Al Mahmud applied to \"Lptop re[PAIR\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756820583465
     }
   ]
 }

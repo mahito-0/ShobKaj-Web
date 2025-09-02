@@ -1,11 +1,53 @@
-/* Workers — content left + action right; avatars consistent */
-#results .item{
-  border:1px solid var(--line); background:var(--surface); border-radius:var(--radius);
-  padding:16px; display:flex; gap:14px; align-items:center; box-shadow:var(--shadow-sm); transition:transform .08s, box-shadow .2s, border-color .2s;
+/* 
+ * ShobKaaj - Workers Page Styles
+ * ------------------------------
+ * This file contains styles specific to the workers listing page (workers.html).
+ */
+
+#results .item {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform .08s, box-shadow .2s, border-color .2s;
 }
-#results .item:hover{transform:translateY(-1px); box-shadow:var(--shadow-sm); border-color:#dfe3ea}
-#results .item > div:first-child{flex:1; min-width:0; display:flex; gap:10px; align-items:center}
-#results .item .badge{margin-left:6px}
-#results .item > div:last-child{margin-left:auto; display:flex; gap:8px; align-items:center}
-#results .item img.avatar{width:44px; height:44px; transition:box-shadow .2s, transform .06s}
-#results .item:hover img.avatar{box-shadow:0 0 0 3px rgba(13,19,33,.06); transform:translateY(-1px)}
+
+#results .item:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--hover);
+}
+
+#results .item > div:first-child {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#results .item .badge {
+  margin-left: 6px;
+}
+
+#results .item > div:last-child {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#results .item img.avatar {
+  width: 44px;
+  height: 44px;
+  transition: box-shadow .2s, transform .06s;
+}
+
+#results .item:hover img.avatar {
+  box-shadow: 0 0 0 3px rgba(13, 19, 33, .06);
+  transform: translateY(-1px);
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,37 +10,49 @@
 <body>
   <nav class="navbar" id="navbar"></nav>
   <main class="container">
-    <div class="card" style="max-width:720px;margin:32px auto;">
-      <h2 data-i18n="nav.profile">প্রোফাইল</h2>
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+    <div class="card profile-card">
+      <div class="profile-header">
         <img id="avatarImg" class="avatar lg" src="/img/avatar.png" alt="avatar" onerror="this.src='/img/avatar.png'"/>
-        <div>
+        <div class="avatar-upload">
           <input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp"/>
           <div class="small">Max 2MB, PNG/JPG/WebP</div>
         </div>
       </div>
-      <form id="profileForm">
-        <div class="form-row">
-          <div><label>নাম</label><input class="input" name="name" required /></div>
-          <div><label>ফোন</label><input class="input" name="phone" /></div>
+      <form id="profileForm" class="profile-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Name</label>
+            <input class="input" name="name" required />
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input class="input" name="phone" />
+          </div>
+          <div class="form-group">
+            <label>NID</label>
+            <input class="input" name="nid" />
+          </div>
+          <div class="form-group">
+            <label>Skills</label>
+            <input class="input" name="skills" placeholder="plumbing, tuition, delivery"/>
+          </div>
         </div>
-        <div class="form-row">
-          <div><label>NID</label><input class="input" name="nid" /></div>
-          <div><label>স্কিলস</label><input class="input" name="skills" placeholder="plumbing, tuition, delivery"/></div>
+        <div class="form-group">
+          <label>Bio</label>
+          <textarea class="input" name="bio" rows="4"></textarea>
         </div>
-        <label>বায়ো</label>
-        <textarea class="input" name="bio" rows="4"></textarea>
-
-        <label>লোকেশন</label>
+        <div class="form-group">
+          <label>Location</label>
+          <div class="form-actions">
+            <button type="button" id="locBtn" class="btn outline" data-i18n="common.useMyLocation">Use my location</button>
+            <span id="locLabel" class="badge">N/A</span>
+          </div>
+        </div>
         <div class="form-actions">
-<button type="button" id="locBtn" class="btn outline" data-i18n="common.useMyLocation">Use my location</button>          <span id="locLabel" class="badge">N/A</span>
+          <button class="btn" type="submit" data-i18n="common.save">Save</button>
+          <a class="btn outline" href="/dashboard.html" data-i18n="common.back">Back</a>
         </div>
-
-        <div class="form-actions">
-<button class="btn" type="submit" data-i18n="common.save">Save</button>
-<a class="btn outline" href="/dashboard.html" data-i18n="common.back">Back</a>
-        </div>
-        <div id="err" style="color:#dc2626;margin-top:8px;"></div>
+        <div id="err" class="error-message"></div>
       </form>
     </div>
   </main>
