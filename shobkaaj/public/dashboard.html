@@ -34,9 +34,20 @@
             <div>${me.email} • ${me.phone || 'No phone'}</div>
             <div>Location: ${me?.location?.address || 'N/A'}</div>
             <div>Rating: ${(me.rating||0).toFixed(1)} (${me.ratingCount || 0})</div>
+            ${me.role === 'worker' ? `<div id="totalEarningsDisplay">Loading Earnings...</div>` : ''}
           </div>
         </div>
       `;
+
+      if (me.role === 'worker') {
+        try {
+          const earningsData = await $api('/api/me/earnings');
+          document.getElementById('totalEarningsDisplay').textContent = `Total Earnings: ${(earningsData.earnings || 0).toFixed(2)}`;
+        } catch (error) {
+          console.error('Failed to fetch earnings from new endpoint:', error);
+          document.getElementById('totalEarningsDisplay').textContent = 'Total Earnings: N/A';
+        }
+      }
       const actions = document.getElementById('actions');
       if (me.role === 'client') {
         actions.innerHTML = `

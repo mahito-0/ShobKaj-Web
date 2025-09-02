@@ -42,7 +42,7 @@ function loadDB() {
   return obj;
 }
 let db = loadDB();
-function saveDB() { fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2)); }
+function saveDB() { console.log('Saving DB...'); fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2)); console.log('DB saved.'); }
 
 // Uploads
 const UPLOAD_DIR = path.join(ROOT, 'public', 'uploads');
@@ -134,6 +134,7 @@ function ensureAdmin() {
       avatar: '',
       rating: 0,
       ratingCount: 0,
+      earnings: 0,
       location: { lat: 23.8103, lng: 90.4125, address: 'Dhaka, Bangladesh' },
       createdAt: Date.now()
     });
@@ -217,7 +218,7 @@ app.post('/api/register', (req, res) => {
     id, name, email, role, phone: phone || '', nid: nid || '',
     passwordHash: bcrypt.hashSync(password, 10),
     verified: false, banned: false, skills, bio, avatar: '',
-    rating: 0, ratingCount: 0,
+    rating: 0, ratingCount: 0, earnings: 0,
     location: location && typeof location.lat === 'number' && typeof location.lng === 'number'
       ? location : { lat: 23.8103, lng: 90.4125, address: 'Dhaka, Bangladesh' },
     createdAt: Date.now()
@@ -306,6 +307,10 @@ app.post('/api/me/avatar', authRequired, upload.single('avatar'), (req, res) => 
   req.user.avatar = relPath; saveDB(); res.json({ ok: true, avatar: relPath });
 });
 
+app.get('/api/me/earnings', authRequired, (req, res) => {
+  res.json({ earnings: req.user.earnings || 0 });
+});
+
 // Notifications API (Public key)
 app.get('/api/notifications/public-key', authRequired, (req, res) => res.json({ key: vapidKeys.publicKey }));
 
@@ -367,6 +372,25 @@ app.post('/api/jobs', authRequired, roleRequired('client'), (req, res) => {
   };
   db.jobs.push(job); saveDB(); res.json({ job });
 });
+
+app.delete('/api/jobs/:id', authRequired, roleRequired('client'), (req, res) => {
+  const jobId = req.params.id;
+  const jobIndex = db.jobs.findIndex(j => j.id === jobId);
+  if (jobIndex === -1) return res.status(404).json({ error: 'Job not found' });
+  const job = db.jobs[jobIndex];
+  if (job.createdBy !== req.user.id) return res.status(403).json({ error: 'Forbidden' });
+
+  // Remove job
+  db.jobs.splice(jobIndex, 1);
+
+  // Remove related conversations and messages
+  db.conversations = db.conversations.filter(c => c.jobId !== jobId);
+  db.messages = db.messages.filter(m => !db.conversations.some(c => c.id === m.conversationId && c.jobId === jobId));
+
+  saveDB();
+  res.json({ ok: true });
+});
+
 app.post('/api/jobs/:id/apply', authRequired, roleRequired('worker'), async (req, res) => {
   const job = db.jobs.find(j => j.id === req.params.id);
   if (!job) return res.status(404).json({ error: 'Job not found' });
@@ -428,8 +452,13 @@ app.post('/api/jobs/:id/complete', authRequired, roleRequired('client'), async (
   job.reviews.push({ by: req.user.id, target: job.assignedTo, rating, comment, createdAt: Date.now() });
   const worker = db.users.find(u => u.id === job.assignedTo);
   if (worker) {
+    console.log(`Worker ${worker.id} earnings BEFORE: ${worker.earnings}`);
+    console.log(`Job budget: ${job.budget}`);
     worker.ratingCount = (worker.ratingCount || 0) + 1;
     worker.rating = ((worker.rating || 0) * (worker.ratingCount - 1) + rating) / worker.ratingCount;
+    // New: Update worker's earnings
+    worker.earnings = (worker.earnings || 0) + (job.budget || 0);
+    console.log(`Worker ${worker.id} earnings AFTER: ${worker.earnings}`);
   }
   saveDB();
 

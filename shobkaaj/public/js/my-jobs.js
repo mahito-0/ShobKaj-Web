@@ -36,6 +36,7 @@ async function loadClientView() {
       <div class="small">Budget: ৳${j.budget} • ${esc(j.location?.address || '')}</div>
       <div style="margin-top:8px;">
         <button class="btn outline" data-act="viewApps" data-id="${j.id}">${i18n.t('myJobs.viewApps')}</button>
+        <button class="btn danger" data-act="delete" data-id="${j.id}">${i18n.t('myJobs.delete')}</button>
         ${j.assignedTo ? `<button class="btn" data-act="chat" data-id="${j.id}">${i18n.t('myJobs.openChat')}</button>` : ''}
         ${j.assignedTo && j.status!=='completed' ? `<button class="btn success" data-act="complete" data-id="${j.id}">${i18n.t('myJobs.complete')}</button>` : ''}
       </div>
@@ -108,6 +109,18 @@ async function loadClientView() {
       box.appendChild(ratingWrap);
       box.appendChild(txt);
       box.appendChild(submit);
+    }
+
+    if (act === 'delete') {
+      if (confirm(i18n.t('myJobs.deleteConfirm'))) {
+        try {
+          await $api(`/api/jobs/${jobId}`, { method: 'DELETE' });
+          alert(i18n.t('myJobs.deleted'));
+          await loadClientView(); // Reload the client jobs to update the list
+        } catch (ex) {
+          alert(ex.message);
+        }
+      }
     }
   };
 }

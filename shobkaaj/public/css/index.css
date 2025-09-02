@@ -17,6 +17,12 @@
   --promo-bg: #f8fdfb;
 }
 
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 /* Topbar */
 .topbar {
   display: flex;
@@ -74,7 +80,7 @@
   grid-template-columns: 1.2fr 1fr;
   gap: 28px;
   align-items: center;
-  padding: 8px 0 6px;
+  padding: 95px 0 6px;
 }
 
 .headline {
@@ -88,15 +94,16 @@
 /* Aurora wave canvas (sits behind hero content) */
 .aurora {
   position: absolute;
-  top: -56px;
-  left: -40px;
-  width: calc(100% + 80px);
-  height: 360px;
+  top: 0;
+  left: -50px;
+  right: -50px;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   pointer-events: none;
   filter: blur(0px) saturate(115%);
   opacity: .75;
-  border-radius: 24px;
+  border-radius: 0;
   -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 42%, rgba(0, 0, 0, 0) 100%);
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 42%, rgba(0, 0, 0, 0) 100%);
 }

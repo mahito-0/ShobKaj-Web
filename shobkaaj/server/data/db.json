@@ -12,7 +12,7 @@
       "banned": false,
       "skills": [],
       "bio": "",
-      "avatar": "/uploads/u_admin_1756248173659.png",
+      "avatar": "/uploads/u_admin_1756826587489.jpg",
       "rating": 0,
       "ratingCount": 0,
       "location": {
@@ -124,7 +124,7 @@
       "phone": "01683886755",
       "nid": "",
       "passwordHash": "$2a$10$uer.6Oj5bK5502mRK0a5MOCt4RUZGIPBPz2jE3/OUcUWjqf5RyV3O",
-      "verified": false,
+      "verified": true,
       "banned": false,
       "skills": [],
       "bio": "",
@@ -146,13 +146,13 @@
       "phone": "01683886755",
       "nid": "",
       "passwordHash": "$2a$10$xm9aTRQn9kYbwwlqClhvIu1Whuso.K.ZTpUgEM2cD0iDiA4KcOCzS",
-      "verified": false,
+      "verified": true,
       "banned": false,
       "skills": [],
       "bio": "",
       "avatar": "/uploads/801d3c96-8171-414e-912b-3b875ae62929_1756824499984.jpg",
-      "rating": 0,
-      "ratingCount": 0,
+      "rating": 4.8,
+      "ratingCount": 5,
       "location": {
         "lat": 23.8103,
         "lng": 90.4125,
@@ -217,6 +217,171 @@
       ],
       "reviews": [],
       "createdAt": 1756817413641
+    },
+    {
+      "id": "d52fd634-2d5c-4e46-ba2c-037924f9b6d8",
+      "title": "work",
+      "description": "ty",
+      "budget": 0,
+      "deadline": "",
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdBy": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "assignedTo": "801d3c96-8171-414e-912b-3b875ae62929",
+      "status": "completed",
+      "applications": [
+        {
+          "workerId": "801d3c96-8171-414e-912b-3b875ae62929",
+          "note": "",
+          "status": "accepted",
+          "createdAt": 1756829299020
+        }
+      ],
+      "reviews": [
+        {
+          "by": "07d5f678-951b-4153-8c63-784faa0e5969",
+          "target": "801d3c96-8171-414e-912b-3b875ae62929",
+          "rating": 5,
+          "comment": "",
+          "createdAt": 1756829355533
+        }
+      ],
+      "createdAt": 1756829289752
+    },
+    {
+      "id": "740ba282-1a71-45b8-ab48-7959351ffd97",
+      "title": "worked",
+      "description": "errr",
+      "budget": 2500,
+      "deadline": "",
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdBy": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "assignedTo": "801d3c96-8171-414e-912b-3b875ae62929",
+      "status": "completed",
+      "applications": [
+        {
+          "workerId": "801d3c96-8171-414e-912b-3b875ae62929",
+          "note": "",
+          "status": "accepted",
+          "createdAt": 1756829853845
+        }
+      ],
+      "reviews": [
+        {
+          "by": "07d5f678-951b-4153-8c63-784faa0e5969",
+          "target": "801d3c96-8171-414e-912b-3b875ae62929",
+          "rating": 5,
+          "comment": "",
+          "createdAt": 1756829872497
+        }
+      ],
+      "createdAt": 1756829838668
+    },
+    {
+      "id": "de1a7623-b581-43f6-8b80-561e0c224693",
+      "title": "qfde",
+      "description": "fasdfd",
+      "budget": 0,
+      "deadline": "",
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdBy": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "assignedTo": "801d3c96-8171-414e-912b-3b875ae62929",
+      "status": "completed",
+      "applications": [
+        {
+          "workerId": "801d3c96-8171-414e-912b-3b875ae62929",
+          "note": "",
+          "status": "accepted",
+          "createdAt": 1756830563485
+        }
+      ],
+      "reviews": [
+        {
+          "by": "07d5f678-951b-4153-8c63-784faa0e5969",
+          "target": "801d3c96-8171-414e-912b-3b875ae62929",
+          "rating": 4,
+          "comment": "",
+          "createdAt": 1756830580634
+        }
+      ],
+      "createdAt": 1756830463558
+    },
+    {
+      "id": "c7b9221b-094d-4a79-abd5-bb4b1a8dfe6c",
+      "title": "book write",
+      "description": "write a book about html",
+      "budget": 25000,
+      "deadline": "2025-09-30",
+      "location": {
+        "lat": 23.7571,
+        "lng": 90.404,
+        "address": "Lat 23.7571, Lng 90.4040"
+      },
+      "createdBy": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "assignedTo": "801d3c96-8171-414e-912b-3b875ae62929",
+      "status": "completed",
+      "applications": [
+        {
+          "workerId": "801d3c96-8171-414e-912b-3b875ae62929",
+          "note": "i can write",
+          "status": "accepted",
+          "createdAt": 1756830854230
+        }
+      ],
+      "reviews": [
+        {
+          "by": "07d5f678-951b-4153-8c63-784faa0e5969",
+          "target": "801d3c96-8171-414e-912b-3b875ae62929",
+          "rating": 5,
+          "comment": "",
+          "createdAt": 1756830903888
+        }
+      ],
+      "createdAt": 1756830787308
+    },
+    {
+      "id": "28babd9b-4cb1-4a90-9cc1-3b88c1d0515c",
+      "title": "hi",
+      "description": "hi",
+      "budget": 25000,
+      "deadline": "",
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdBy": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "assignedTo": "801d3c96-8171-414e-912b-3b875ae62929",
+      "status": "completed",
+      "applications": [
+        {
+          "workerId": "801d3c96-8171-414e-912b-3b875ae62929",
+          "note": "",
+          "status": "accepted",
+          "createdAt": 1756832078809
+        }
+      ],
+      "reviews": [
+        {
+          "by": "07d5f678-951b-4153-8c63-784faa0e5969",
+          "target": "801d3c96-8171-414e-912b-3b875ae62929",
+          "rating": 5,
+          "comment": "",
+          "createdAt": 1756832090304
+        }
+      ],
+      "createdAt": 1756832072802
     }
   ],
   "conversations": [
@@ -237,6 +402,15 @@
       ],
       "jobId": "7e6e91f2-5d80-4c0a-a9e4-7e957097c95b",
       "createdAt": 1756824610584
+    },
+    {
+      "id": "8d75399b-e2f4-40b0-8f3c-cfca66bd5c66",
+      "participants": [
+        "801d3c96-8171-414e-912b-3b875ae62929",
+        "07d5f678-951b-4153-8c63-784faa0e5969"
+      ],
+      "jobId": "c7b9221b-094d-4a79-abd5-bb4b1a8dfe6c",
+      "createdAt": 1756830797098
     }
   ],
   "messages": [
@@ -253,6 +427,20 @@
       "from": "4cb7aa89-6ba4-4535-a4ac-41d36167e499",
       "text": "hello",
       "createdAt": 1756405394218
+    },
+    {
+      "id": "72607dba-7f66-4e97-9bcf-fdc57951c275",
+      "conversationId": "afd8f826-6f5c-4340-81ca-6b7165175854",
+      "from": "801d3c96-8171-414e-912b-3b875ae62929",
+      "text": "hi",
+      "createdAt": 1756829265170
+    },
+    {
+      "id": "e1a2c7cc-7bf8-4aec-af01-267be97364a2",
+      "conversationId": "8d75399b-e2f4-40b0-8f3c-cfca66bd5c66",
+      "from": "801d3c96-8171-414e-912b-3b875ae62929",
+      "text": "hi",
+      "createdAt": 1756830803582
     }
   ],
   "pushSubs": [
@@ -291,6 +479,206 @@
       "url": "/my-jobs.html",
       "read": false,
       "createdAt": 1756820583465
+    },
+    {
+      "id": "954bc6de-aa67-48de-9568-23ba5072d3fb",
+      "userId": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "type": "application",
+      "title": "New application",
+      "body": "Syed Al Mahmud applied to \"work\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756829299021
+    },
+    {
+      "id": "48bed599-073d-46b4-9bfc-5680946e3f52",
+      "userId": "801d3c96-8171-414e-912b-3b875ae62929",
+      "type": "assigned",
+      "title": "Job assigned",
+      "body": "\"work\" assigned to you",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756829310511
+    },
+    {
+      "id": "222a833c-36f5-4549-baca-f261ea749093",
+      "userId": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "type": "assigned",
+      "title": "Worker assigned",
+      "body": "Assigned Syed Al Mahmud to \"work\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756829310512
+    },
+    {
+      "id": "0543d1d0-7ce8-4f2b-aa29-cb9d60e9f51d",
+      "userId": "801d3c96-8171-414e-912b-3b875ae62929",
+      "type": "completed",
+      "title": "Job completed",
+      "body": "\"work\" completed. You received 5★",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756829355534
+    },
+    {
+      "id": "9e70eb64-2aff-41fc-8bf2-021c313a0003",
+      "userId": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "type": "application",
+      "title": "New application",
+      "body": "Syed Al Mahmud applied to \"worked\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756829853846
+    },
+    {
+      "id": "4049b874-5bec-4d49-8826-7bbe77f43209",
+      "userId": "801d3c96-8171-414e-912b-3b875ae62929",
+      "type": "assigned",
+      "title": "Job assigned",
+      "body": "\"worked\" assigned to you",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756829868775
+    },
+    {
+      "id": "b54a28cf-9df2-4dd8-901c-e52cc8f83a46",
+      "userId": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "type": "assigned",
+      "title": "Worker assigned",
+      "body": "Assigned Syed Al Mahmud to \"worked\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756829868776
+    },
+    {
+      "id": "8f8784d2-b968-4b06-87f9-63427bbf9650",
+      "userId": "801d3c96-8171-414e-912b-3b875ae62929",
+      "type": "completed",
+      "title": "Job completed",
+      "body": "\"worked\" completed. You received 5★",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756829872498
+    },
+    {
+      "id": "adff5f13-f961-4337-a849-feb020db0d83",
+      "userId": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "type": "application",
+      "title": "New application",
+      "body": "Syed Al Mahmud applied to \"qfde\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756830563486
+    },
+    {
+      "id": "e437dac3-d2c0-4a06-8f3a-efb93af4994a",
+      "userId": "801d3c96-8171-414e-912b-3b875ae62929",
+      "type": "assigned",
+      "title": "Job assigned",
+      "body": "\"qfde\" assigned to you",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756830571124
+    },
+    {
+      "id": "c02b5712-562b-4f11-8af1-00a8731f7391",
+      "userId": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "type": "assigned",
+      "title": "Worker assigned",
+      "body": "Assigned Syed Al Mahmud to \"qfde\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756830571125
+    },
+    {
+      "id": "8de18a51-9778-497c-a5c1-daa958ea3cdd",
+      "userId": "801d3c96-8171-414e-912b-3b875ae62929",
+      "type": "completed",
+      "title": "Job completed",
+      "body": "\"qfde\" completed. You received 4★",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756830580635
+    },
+    {
+      "id": "3c3a7152-a1b2-4e46-82b6-70aeb287d54d",
+      "userId": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "type": "application",
+      "title": "New application",
+      "body": "Syed Al Mahmud applied to \"book write\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756830854231
+    },
+    {
+      "id": "cb79ac94-3993-4182-8aab-1a92866af112",
+      "userId": "801d3c96-8171-414e-912b-3b875ae62929",
+      "type": "assigned",
+      "title": "Job assigned",
+      "body": "\"book write\" assigned to you",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756830897908
+    },
+    {
+      "id": "69c2ba39-e5fe-4193-879c-355b05e61dd0",
+      "userId": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "type": "assigned",
+      "title": "Worker assigned",
+      "body": "Assigned Syed Al Mahmud to \"book write\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756830897910
+    },
+    {
+      "id": "57db5ca3-8a71-4e83-8e5f-c0b8c916ccaa",
+      "userId": "801d3c96-8171-414e-912b-3b875ae62929",
+      "type": "completed",
+      "title": "Job completed",
+      "body": "\"book write\" completed. You received 5★",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756830903889
+    },
+    {
+      "id": "71c87996-b6ca-4fc3-a7c4-9394e67aa8f4",
+      "userId": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "type": "application",
+      "title": "New application",
+      "body": "Syed Al Mahmud applied to \"hi\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756832078810
+    },
+    {
+      "id": "d26a3f00-c022-424b-9323-11f145936b3d",
+      "userId": "801d3c96-8171-414e-912b-3b875ae62929",
+      "type": "assigned",
+      "title": "Job assigned",
+      "body": "\"hi\" assigned to you",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756832086491
+    },
+    {
+      "id": "7d3f5007-283b-45ba-bebe-2892af77089d",
+      "userId": "07d5f678-951b-4153-8c63-784faa0e5969",
+      "type": "assigned",
+      "title": "Worker assigned",
+      "body": "Assigned Syed Al Mahmud to \"hi\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756832086492
+    },
+    {
+      "id": "479de50c-91f7-4ae6-ab17-88a1e829975d",
+      "userId": "801d3c96-8171-414e-912b-3b875ae62929",
+      "type": "completed",
+      "title": "Job completed",
+      "body": "\"hi\" completed. You received 5★",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1756832090305
     }
   ]
 }

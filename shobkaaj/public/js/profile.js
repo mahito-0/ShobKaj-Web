@@ -80,6 +80,10 @@ async function reverseGeocode(lat, lng) {
   form.bio.value = me.bio || '';
   const locLabel = document.getElementById('locLabel');
 
+  // Set avatar image source
+  const avatarImg = document.getElementById('avatarImg');
+  avatarImg.src = me.avatar || '/img/avatar.png';
+
   // Display existing location as human-readable if available
   if (me.location && me.location.address) {
     locLabel.textContent = me.location.address;
@@ -92,6 +96,8 @@ async function reverseGeocode(lat, lng) {
   } else {
     locLabel.textContent = 'N/A';
   }
+
+  
 
   document.getElementById('locBtn').onclick = async ()=>{
     let lat, lng, address;
@@ -154,7 +160,7 @@ async function reverseGeocode(lat, lng) {
     fd.append('avatar', file);
     try {
       const res = await $api('/api/me/avatar', { method: 'POST', formData: fd });
-      document.getElementById('avatarImg').src = res.avatar || '/img/avatar.png';
+      avatarImg.src = res.avatar || '/img/avatar.png';
       alert(i18n.t('profile.pictureUpdated'));
     } catch (e) { alert(e.message); }
   });
