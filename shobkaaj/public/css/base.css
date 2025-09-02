@@ -113,5 +113,14 @@ label{font-size:var(--fs-5); color:var(--muted)}
 
 .footer{color:var(--muted); font-size:14px; text-align:center; padding:20px}
 
+/* Bell in navbar */
+.bell{position:relative; padding:8px 10px; border-radius:10px}
+.bell:hover{background:#eef1f6}
+.bell .count{
+  position:absolute; top:2px; right:2px;
+  background:var(--btn); color:#fff; font-size:11px; line-height:18px; min-width:18px; text-align:center;
+  padding:0 6px; border-radius:999px;
+}
+
 /* Responsive base */
 @media (max-width:1024px){ .form-row{grid-template-columns:1fr} }

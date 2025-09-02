@@ -1,5 +1,41 @@
 i18n.init();
 
+function updateBell(count) {
+  const el = document.getElementById('notifCount');
+  if (!el) return;
+  if (count > 0) { el.style.display = 'inline-block'; el.textContent = count > 99 ? '99+' : String(count); }
+  else { el.style.display = 'none'; el.textContent = '0'; }
+}
+
+async function initNotifications(user) {
+  if (!user) return;
+  // Fetch unread count initially
+  try {
+    const { notifications } = await $api('/api/notifications?unread=1');
+    updateBell(notifications.length || 0);
+  } catch {}
+
+  // Load socket.io client dynamically
+  function ensureSocket() {
+    return new Promise((resolve) => {
+      if (window.io) return resolve(window.io);
+      const s = document.createElement('script');
+      s.src = '/socket.io/socket.io.js';
+      s.onload = () => resolve(window.io);
+      document.head.appendChild(s);
+    });
+  }
+
+  const ioFactory = await ensureSocket();
+  const socket = ioFactory({ withCredentials: true });
+  socket.on('notify', (n) => {
+    // increase bell count
+    const el = document.getElementById('notifCount');
+    const curr = Number(el?.textContent || 0) || 0;
+    updateBell(curr + 1);
+  });
+}
+
 function renderNavbar(user) {
   const el = document.getElementById('navbar');
   if (!el) return;
@@ -10,6 +46,10 @@ function renderNavbar(user) {
       <div class="nav-links">
         <a href="/jobs.html" data-i18n="nav.jobs">${i18n.t('nav.jobs')}</a>
         <a href="/workers.html" data-i18n="nav.workers">${i18n.t('nav.workers')}</a>
+        <a href="/notifications.html" class="bell" title="Notifications">
+          <span>🔔</span>
+          <span id="notifCount" class="count" style="display:none">0</span>
+        </a>
         ${user ? `
           <a href="/my-jobs.html" data-i18n="nav.myJobs">${i18n.t('nav.myJobs')}</a>
           <a href="/dashboard.html" data-i18n="nav.dashboard">${i18n.t('nav.dashboard')}</a>
@@ -32,19 +72,21 @@ function renderNavbar(user) {
   `;
   const langSel = document.getElementById('langSelect');
   langSel.value = i18n.lang;
-  langSel.onchange = (e) => {
-    i18n.setLang(e.target.value);
-    // reload to ensure all pages (including dynamic parts) reflect the new language
-    window.location.reload();
-  };
+  langSel.onchange = (e) => { i18n.setLang(e.target.value); window.location.reload(); };
 
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) logoutBtn.onclick = () => $auth.logout();
 
   i18n.apply(el);
+  initNotifications(user);
 }
 
 (async () => {
   const user = await $auth.getMe();
+  // Create a navbar shell on pages that didn't have it
+  if (!document.getElementById('navbar')) {
+    const nav = document.createElement('nav'); nav.id = 'navbar'; nav.className = 'navbar';
+    document.body.prepend(nav);
+  }
   renderNavbar(user);
 })();

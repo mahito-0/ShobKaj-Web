@@ -5,6 +5,14 @@
     bn: {
       appName: 'ShobKaaj',
 
+      // Notifications
+      'nav.register': 'রেজিস্টার', 'nav.logout': 'লগআউট', 'nav.notifications': 'নোটিফিকেশন',
+      'notifications.title': 'নোটিফিকেশন',
+      'notifications.empty': 'কোনো নোটিফিকেশন নেই',
+      'notifications.markAll': 'সবগুলো পড়া হিসেবে চিহ্নিত করুন',
+      'notifications.unreadOnly': 'শুধু আনরিড দেখান',
+      'notifications.view': 'খুলুন',
+
       // Nav
       'nav.jobs': 'কাজ', 'nav.myJobs': 'আমার কাজ', 'nav.workers': 'ওয়ার্কারস',
       'nav.dashboard': 'ড্যাশবোর্ড', 'nav.chat': 'চ্যাট', 'nav.postJob': 'কাজ পোস্ট',
@@ -65,6 +73,13 @@
     },
     en: {
       appName: 'ShobKaaj',
+
+      'nav.notifications': 'Notifications',
+       'notifications.title': 'Notifications',
+      'notifications.empty': 'No notifications yet',
+      'notifications.markAll': 'Mark all as read',
+      'notifications.unreadOnly': 'Unread only',
+      'notifications.view': 'Open',
 
       'nav.jobs': 'Jobs', 'nav.myJobs': 'My Jobs', 'nav.workers': 'Workers',
       'nav.dashboard': 'Dashboard', 'nav.chat': 'Chat', 'nav.postJob': 'Post Job',

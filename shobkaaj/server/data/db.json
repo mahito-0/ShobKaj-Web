@@ -62,9 +62,9 @@
       "rating": 0,
       "ratingCount": 0,
       "location": {
-        "lat": 23.8103,
-        "lng": 90.4125,
-        "address": "Dhaka, Bangladesh"
+        "lat": 23.73,
+        "lng": 90.42,
+        "address": "Updated via Profile"
       },
       "createdAt": 1756322662311
     },
@@ -102,7 +102,7 @@
       "banned": false,
       "skills": [],
       "bio": "",
-      "avatar": "",
+      "avatar": "/uploads/4cb7aa89-6ba4-4535-a4ac-41d36167e499_1756816465309.jpg",
       "rating": 0,
       "ratingCount": 0,
       "location": {
@@ -138,6 +138,31 @@
       ],
       "reviews": [],
       "createdAt": 1756405027065
+    },
+    {
+      "id": "827ad837-405b-4752-9e1f-b009c9f74365",
+      "title": "homework",
+      "description": "need a homework expart",
+      "budget": 2500,
+      "deadline": "2025-09-10",
+      "location": {
+        "lat": 23.73,
+        "lng": 90.42,
+        "address": "Client location"
+      },
+      "createdBy": "4cb7aa89-6ba4-4535-a4ac-41d36167e499",
+      "assignedTo": null,
+      "status": "open",
+      "applications": [
+        {
+          "workerId": "2b28b0b2-a99a-46b8-beee-a7c81ed31b45",
+          "note": "plz",
+          "status": "pending",
+          "createdAt": 1756817458649
+        }
+      ],
+      "reviews": [],
+      "createdAt": 1756817413641
     }
   ],
   "conversations": [

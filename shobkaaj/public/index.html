@@ -1,166 +1,192 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>ShobKaaj</title>
   <link rel="stylesheet" href="/css/base.css"/>
-    <link rel="stylesheet" href="/css/index.css"/>
+  <link rel="stylesheet" href="/css/index.css"/>
 </head>
 <body>
-  <nav class="navbar" id="navbar"></nav>
+  <main class="container">
+    <!-- Topbar -->
+    <header class="topbar" id="topbar">
+      <div class="brand">ShobKaaj</div>
+      <nav class="links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-  <!-- Hero -->
-  <header class="hero">
-    <div class="container">
-      <h1 data-i18n="hero.title">ShobKaaj — সবার কাজ, এক প্ল্যাটফর্মে</h1>
-      <p data-i18n="hero.subtitle">লোকাল সার্ভিস, টিউশন, ডেলিভারি, মেরামত, ইভেন্ট সাপোর্ট—সবকিছু এক অ্যাপে।</p>
-      <div class="form-actions">
-        <a href="/register.html" class="btn" data-i18n="hero.ctaStart">শুরু করুন</a>
-        <a href="/jobs.html" class="btn outline" data-i18n="hero.ctaJobs">কাজ দেখুন</a>
+    <!-- Hero (with Aurora canvas behind) -->
+    <section id="home" class="hero-grid" data-parallax>
+      <canvas id="aurora" class="aurora" aria-hidden="true"></canvas>
+
+      <div class="hero-left">
+        <h1 class="headline reveal">Headline<br/>anywhere</h1>
+
+        <div class="swatches reveal">
+          <span class="swatch swatch--accent" aria-hidden="true"></span>
+          <span class="swatch swatch--mint" aria-hidden="true"></span>
+        </div>
+
+        <div class="feature-row">
+          <div class="feature reveal">
+            <span class="ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" stroke="currentColor" fill="none" stroke-width="2"/><path d="M7 12l3 3 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>Verified</span>
+          </div>
+          <div class="feature reveal">
+            <span class="ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" fill="currentColor"/><circle cx="12" cy="10" r="2.5" fill="#fff"/></svg>
+            </span>
+            <span>GPS</span>
+          </div>
+          <div class="feature reveal">
+            <span class="ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2l7 3v6c0 5-3.5 9-7 11-3.5-2-7-6-7-11V5l7-3z" fill="currentColor"/></svg>
+            </span>
+            <span>Secure payments</span>
+          </div>
+          <div class="feature reveal">
+            <span class="ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" fill="currentColor"/></svg>
+            </span>
+            <span>Bangla-first</span>
+          </div>
+        </div>
+
+        <div id="services" class="services">
+          <div class="svc reveal tilt">
+            <div class="svc-ic">
+              <svg viewBox="0 0 48 48"><rect x="9" y="14" width="30" height="18" rx="3" fill="currentColor"/><rect x="14" y="20" width="20" height="2.6" rx="1.3" fill="#fff"/><rect x="14" y="24" width="12" height="2.6" rx="1.3" fill="#fff"/></svg>
+            </div>
+            <div class="svc-label">Tutoring</div>
+          </div>
+          <div class="svc reveal tilt">
+            <div class="svc-ic">
+              <svg viewBox="0 0 48 48"><rect x="6" y="20" width="22" height="12" rx="3" fill="currentColor"/><rect x="28" y="22" width="14" height="8" rx="2" fill="currentColor"/><circle cx="16" cy="34" r="4" fill="currentColor"/><circle cx="36" cy="34" r="4" fill="currentColor"/></svg>
+            </div>
+            <div class="svc-label">Delivery</div>
+          </div>
+          <div class="svc reveal tilt">
+            <div class="svc-ic">
+              <svg viewBox="0 0 48 48"><rect x="9" y="21" width="26" height="6" rx="3" fill="currentColor"/><rect x="30" y="12" width="6" height="26" rx="3" fill="currentColor"/></svg>
+            </div>
+            <div class="svc-label">Repairs</div>
+          </div>
+          <div class="svc reveal tilt">
+            <div class="svc-ic">
+              <svg viewBox="0 0 48 48"><path d="M8 22l16-12 16 12v14a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V22z" fill="currentColor"/></svg>
+            </div>
+            <div class="svc-label">Household</div>
+          </div>
+        </div>
       </div>
-    </div>
-  </header>
 
-  <main>
-    <!-- Quick stats -->
-    <section class="section">
-      <div class="container">
-        <div class="grid cards">
-          <div class="card">
-            <h3>1,200+ ভেরিফায়েড ওয়ার্কার</h3>
-            <p class="small">বিভিন্ন ক্যাটাগরিতে দক্ষ স্থানীয় সহযোদ্ধা।</p>
-          </div>
-          <div class="card">
-            <h3>50+ কাজের ক্যাটাগরি</h3>
-            <p class="small">টিউশন থেকে রিপেয়ার, ডেলিভারি থেকে ইভেন্ট সেটআপ।</p>
-          </div>
-          <div class="card">
-            <h3>নিরাপদ চ্যাট ও পেমেন্ট</h3>
-            <p class="small">ইন-অ্যাপ চ্যাট, রেটিং/রিভিউ, ডিজিটাল পেমেন্ট (ডেমো)।</p>
+      <div class="hero-right">
+        <div class="phone reveal" id="phone">
+          <div class="notch" aria-hidden="true"></div>
+          <div class="map" id="map">
+            <div class="pin pin--accent" style="top:34%;left:38%"></div>
+            <div class="pin pin--mint" style="top:54%;left:62%"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- How it works -->
+    <!-- Quick stats -->
     <section class="section">
-      <div class="container">
-        <h2>কীভাবে কাজ করে</h2>
-        <p class="lead">৩টি স্টেপে কাজ পোস্ট/পাওয়া — ঝামেলা ছাড়া।</p>
-        <div class="grid cards">
-          <div class="card">
-            <h3>ক্লায়েন্ট</h3>
-            <ol>
-              <li>কাজ পোস্ট করুন (বাজেট/লোকেশনসহ)</li>
-              <li>আবেদনগুলো দেখুন ও ওয়ার্কার বাছাই করুন</li>
-              <li>চ্যাটে ডিটেইলস ঠিক করে কাজ অ্যাসাইন করুন</li>
-            </ol>
-          </div>
-          <div class="card">
-            <h3>ওয়ার্কার</h3>
-            <ol>
-              <li>কাছের কাজ ব্রাউজ/সার্চ করুন</li>
-              <li>আবেদন পাঠান বা ক্লায়েন্টকে মেসেজ করুন</li>
-              <li>অ্যাসাইনড হলে কাজ করুন ও রেটিং নিন</li>
-            </ol>
-          </div>
+      <div class="grid cards">
+        <div class="card"><h3>1,200+ ভেরিফায়েড ওয়ার্কার</h3><p class="small">বিভিন্ন ক্যাটাগরিতে স্থানীয় সহযোদ্ধা।</p></div>
+        <div class="card"><h3>50+ কাজের ক্যাটাগরি</h3><p class="small">টিউশন, রিপেয়ার, ডেলিভারি, ইভেন্ট ইত্যাদি।</p></div>
+        <div class="card"><h3>নিরাপদ চ্যাট</h3><p class="small">ইন-অ্যাপ চ্যাট ও রিভিউ সিস্টেম।</p></div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="about" class="section">
+      <h2>কীভাবে কাজ করে</h2>
+      <p class="small">৩ ধাপে কাজ পোস্ট/পাওয়া — ঝামেলা ছাড়া।</p>
+      <div class="grid cards">
+        <div class="card">
+          <h3>ক্লায়েন্ট</h3>
+          <ol>
+            <li>কাজ পোস্ট করুন (বাজেট/লোকেশনসহ)</li>
+            <li>আবেদনগুলো দেখুন ও ওয়ার্কার বাছাই করুন</li>
+            <li>চ্যাটে ডিটেইলস ঠিক করে কাজ অ্যাসাইন করুন</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3>ওয়ার্কার</h3>
+          <ol>
+            <li>কাছের কাজ ব্রাউজ/সার্চ করুন</li>
+            <li>আবেদন পাঠান বা ক্লায়েন্টকে মেসেজ করুন</li>
+            <li>অ্যাসাইনড হলে কাজ করুন ও রেটিং নিন</li>
+          </ol>
         </div>
       </div>
     </section>
 
     <!-- Top categories -->
     <section class="section">
-      <div class="container">
-        <h2>টপ ক্যাটাগরি</h2>
-        <div class="chips">
-          <span class="chip">টিউশন</span>
-          <span class="chip">ডেলিভারি</span>
-          <span class="chip">হাউসকিপিং</span>
-          <span class="chip">ইলেক্ট্রিক/প্লাম্বিং</span>
-          <span class="chip">ডিভাইস রিপেয়ার</span>
-          <span class="chip">গ্রাফিক ডিজাইন</span>
-          <span class="chip">ফটোগ্রাফি</span>
-          <span class="chip">ইভেন্ট সেটআপ</span>
-          <span class="chip">ডেটা এন্ট্রি</span>
-          <span class="chip">কৃষি সহায়তা</span>
-        </div>
+      <h2>টপ ক্যাটাগরি</h2>
+      <div class="chips">
+        <span class="chip">টিউশন</span><span class="chip">ডেলিভারি</span><span class="chip">হাউসকিপিং</span>
+        <span class="chip">ইলেক্ট্রিক</span><span class="chip">প্লাম্বিং</span><span class="chip">ডিভাইস রিপেয়ার</span>
+        <span class="chip">ডিজাইন</span><span class="chip">ফটোগ্রাফি</span><span class="chip">ইভেন্ট সেটআপ</span><span class="chip">ডেটা এন্ট্রি</span>
       </div>
     </section>
 
     <!-- Why ShobKaaj -->
     <section class="section">
-      <div class="container">
-        <h2>কেন ShobKaaj?</h2>
-        <div class="grid cards">
-          <div class="card">
-            <h3>লোকেশন-ভিত্তিক ম্যাচিং</h3>
-            <p class="small">আপনার আশেপাশের কাজ ও ওয়ার্কার আগে দেখুন।</p>
-          </div>
-          <div class="card">
-            <h3>ভেরিফায়েড প্রোফাইল</h3>
-            <p class="small">NID/ফোন ও রেটিং সিস্টেমের মাধ্যমে ভরসা।</p>
-          </div>
-          <div class="card">
-            <h3>বাংলা-প্রথম UI</h3>
-            <p class="small">রুরাল/সেমি-আরবান ইউজারের জন্য সহজ ইন্টারফেস।</p>
-          </div>
-          <div class="card">
-            <h3>ফ্লেক্সিবল ইনকাম</h3>
-            <p class="small">স্টুডেন্ট/উইমেন/ফ্রিল্যান্সারের জন্য ফ্রি টাইমে কাজ।</p>
-          </div>
-        </div>
+      <h2>কেন ShobKaaj?</h2>
+      <div class="grid cards">
+        <div class="card"><h3>লোকেশন-ভিত্তিক ম্যাচিং</h3><p class="small">আপনার আশেপাশের কাজ ও ওয়ার্কার আগে দেখুন।</p></div>
+        <div class="card"><h3>ভেরিফায়েড প্রোফাইল</h3><p class="small">NID/ফোন ও রেটিং সিস্টেমের মাধ্যমে ভরসা।</p></div>
+        <div class="card"><h3>বাংলা-প্রথম UI</h3><p class="small">রুরাল/সেমি-আরবান ইউজারের জন্য সহজ ইন্টারফেস।</p></div>
+        <div class="card"><h3>ফ্লেক্সিবল ইনকাম</h3><p class="small">স্টুডেন্ট/উইমেন/ফ্রিল্যান্সারের জন্য ফ্রি টাইমে কাজ।</p></div>
       </div>
     </section>
 
     <!-- Safety & Trust -->
     <section class="section">
-      <div class="container">
-        <h2>সেফটি ও ট্রাস্ট</h2>
-        <div class="grid cards">
-          <div class="card">
-            <h3>নিরাপদ চ্যাট</h3>
-            <p class="small">ইন-অ্যাপ মেসেজিং; প্রয়োজন হলে অ্যাডমিন মনিটর।</p>
-          </div>
-          <div class="card">
-            <h3>রেটিং & রিভিউ</h3>
-            <p class="small">প্রতিটি কাজ শেষে ফিডব্যাক — ভাল কাজের পুরস্কার।</p>
-          </div>
-          <div class="card">
-            <h3>ডিজিটাল পেমেন্ট (ডেমো)</h3>
-            <p class="small">bKash/Nagad ইন্টিগ্রেশনের জন্য প্রস্তুত।</p>
-          </div>
-        </div>
+      <h2>সেফটি ও ট্রাস্ট</h2>
+      <div class="grid cards">
+        <div class="card"><h3>নিরাপদ চ্যাট</h3><p class="small">ইন-অ্যাপ মেসেজিং; প্রয়োজনে অ্যাডমিন মনিটর।</p></div>
+        <div class="card"><h3>রেটিং & রিভিউ</h3><p class="small">প্রতিটি কাজ শেষে ফিডব্যাক — ভাল কাজের পুরস্কার।</p></div>
+        <div class="card"><h3>ডিজিটাল পেমেন্ট (ডেমো)</h3><p class="small">bKash/Nagad ইন্টিগ্রেশনের জন্য প্রস্তুত।</p></div>
       </div>
     </section>
 
     <!-- For Clients and Workers -->
-    <section class="section">
-      <div class="container">
-        <div class="grid cards">
-          <div class="card">
-            <h3>ক্লায়েন্টদের জন্য</h3>
-            <ul>
-              <li>কাজ পোস্ট করুন — বাজেট ও ডেডলাইন সেট করুন</li>
-              <li>আবেদনকারীর স্কিল/রেটিং দেখুন</li>
-              <li>চ্যাটে কথা বলে অ্যাসাইন করুন</li>
-            </ul>
-            <div class="form-actions">
-              <a href="/post-job.html" class="btn">কাজ পোস্ট করুন</a>
-              <a href="/workers.html" class="btn outline">ওয়ার্কার খুঁজুন</a>
-            </div>
+    <section id="services-more" class="section">
+      <div class="grid cards">
+        <div class="card">
+          <h3>ক্লায়েন্টদের জন্য</h3>
+          <ul>
+            <li>কাজ পোস্ট করুন — বাজেট ও ডেডলাইন সেট করুন</li>
+            <li>আবেদনকারীর স্কিল/রেটিং দেখুন</li>
+            <li>চ্যাটে কথা বলে অ্যাসাইন করুন</li>
+          </ul>
+          <div class="form-actions">
+            <a href="/post-job.html" class="btn">কাজ পোস্ট করুন</a>
+            <a href="/workers.html" class="btn outline">ওয়ার্কার খুঁজুন</a>
           </div>
-          <div class="card">
-            <h3>ওয়ার্কারদের জন্য</h3>
-            <ul>
-              <li>কাছের কাজ দেখুন ও আবেদন করুন</li>
-              <li>প্রোফাইল/স্কিলস আপডেট রাখুন</li>
-              <li>অ্যাসাইনড কাজ ট্র্যাক করুন</li>
-            </ul>
-            <div class="form-actions">
-              <a href="/jobs.html" class="btn">কাজ দেখুন</a>
-              <a href="/profile.html" class="btn outline">প্রোফাইল আপডেট</a>
-            </div>
+        </div>
+        <div class="card">
+          <h3>ওয়ার্কারদের জন্য</h3>
+          <ul>
+            <li>কাছের কাজ দেখুন ও আবেদন করুন</li>
+            <li>প্রোফাইল/স্কিলস আপডেট রাখুন</li>
+            <li>অ্যাসাইনড কাজ ট্র্যাক করুন</li>
+          </ul>
+          <div class="form-actions">
+            <a href="/jobs.html" class="btn">কাজ দেখুন</a>
+            <a href="/profile.html" class="btn outline">প্রোফাইল আপডেট</a>
           </div>
         </div>
       </div>
@@ -168,46 +194,53 @@
 
     <!-- FAQs -->
     <section class="section">
-      <div class="container">
-        <h2>প্রশ্নোত্তর</h2>
-        <details class="card">
-          <summary><strong>কি ভাবে ভেরিফিকেশন কাজ করে?</strong></summary>
-          <p class="small">ফোন/NID তথ্য (ডেমো) + রেটিং সিস্টেমের মাধ্যমে ট্রাস্ট তৈরি করি।</p>
-        </details>
-        <details class="card">
-          <summary><strong>পেমেন্ট কি নিরাপদ?</strong></summary>
-          <p class="small">ডিজিটাল ওয়ালেট সাপোর্ট ডেমো হিসেবে আছে; লাইভে এসক্রো/রিসিট যোগ হবে।</p>
-        </details>
-        <details class="card">
-          <summary><strong>রুরাল ইউজারদের জন্য সুবিধা কী?</strong></summary>
-          <p class="small">বাংলা-প্রথম UI, লো-এন্ড ডিভাইস ও কম ডাটা ব্যবহারের দিকে ফোকাস।</p>
-        </details>
+      <h2>প্রশ্নোত্তর</h2>
+      <details class="card">
+        <summary><strong>কি ভাবে ভেরিফিকেশন কাজ করে?</strong></summary>
+        <p class="small">ফোন/NID তথ্য (ডেমো) + রেটিং সিস্টেমের মাধ্যমে ট্রাস্ট তৈরি করি।</p>
+      </details>
+      <details class="card">
+        <summary><strong>পেমেন্ট কি নিরাপদ?</strong></summary>
+        <p class="small">ডিজিটাল ওয়ালেট সাপোর্ট ডেমো হিসেবে আছে; লাইভে এসক্রো/রিসিট যোগ হবে।</p>
+      </details>
+      <details class="card">
+        <summary><strong>রুরাল ইউজারদের জন্য সুবিধা কী?</strong></summary>
+        <p class="small">বাংলা-প্রথম UI, লো-এন্ড ডিভাইস ও কম ডাটা ব্যবহারের দিকে ফোকাস।</p>
+      </details>
+    </section>
+
+    <!-- Promo CTA -->
+    <section class="section">
+      <div class="promo reveal">
+        <div>
+          <h3>We’ll learn any way to support</h3>
+          <p class="small">Need a custom help? Let’s talk and tailor it.</p>
+        </div>
+        <a id="getNow" href="/register.html" class="btn">Get now</a>
       </div>
     </section>
 
-    <!-- Call to action -->
-    <section class="section">
-      <div class="container">
-        <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-          <div>
-            <h3>আজই যোগ দিন</h3>
-            <p class="small">ShobKaaj দিয়ে কাজ পাওয়া/দেওয়া — সবকিছু এক জায়গায়।</p>
-          </div>
-          <div class="form-actions">
-            <a href="/register.html" class="btn">অ্যাকাউন্ট খুলুন</a>
-            <a href="/jobs.html" class="btn outline">কাজ ব্রাউজ করুন</a>
-          </div>
-        </div>
+    <!-- Footer -->
+    <footer id="contact" class="site-footer">
+      <div class="col">
+        <h4>ShobKaaj</h4>
+        <ul>
+          <li><a href="/jobs.html">Jobs</a></li>
+          <li><a href="/workers.html">Workers</a></li>
+          <li><a href="/chat.html">Chat</a></li>
+        </ul>
       </div>
-    </section>
+      <div class="col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Help center</a></li>
+          <li><a href="#">Safety</a></li>
+          <li><a href="#">Guidelines</a></li>
+        </ul>
+      </div>
+    </footer>
   </main>
 
-  <footer class="footer">© 2025 ShobKaaj</footer>
-
-  <script src="/js/api.js"></script>
-  <script src="/js/i18n.js"></script>
-  <script src="/js/auth.js"></script>
-  <script src="/js/main.js"></script>
-  <script>i18n.apply(document);</script>
+  <script src="/js/home.js"></script>
 </body>
 </html>

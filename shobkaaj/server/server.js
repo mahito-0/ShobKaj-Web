@@ -19,7 +19,7 @@ const ROOT = path.join(__dirname, '..');
 
 dotenv.config({ path: path.join(ROOT, '.env') });
 
-// Data paths (no Docker required)
+// Data dir
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 const DB_PATH = path.join(DATA_DIR, 'db.json');
@@ -29,19 +29,22 @@ const app = express();
 const httpServer = createServer(app);
 const io = new SocketIOServer(httpServer, { cors: { origin: true, credentials: true } });
 
-// JSON DB
+// DB
 function loadDB() {
   if (!fs.existsSync(DB_PATH)) {
-    fs.writeFileSync(DB_PATH, JSON.stringify({ users: [], jobs: [], conversations: [], messages: [], pushSubs: [] }, null, 2));
+    fs.writeFileSync(DB_PATH, JSON.stringify({
+      users: [], jobs: [], conversations: [], messages: [], pushSubs: [], notifications: []
+    }, null, 2));
   }
   const obj = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
-  obj.users ||= []; obj.jobs ||= []; obj.conversations ||= []; obj.messages ||= []; obj.pushSubs ||= [];
+  obj.users ||= []; obj.jobs ||= []; obj.conversations ||= []; obj.messages ||= [];
+  obj.pushSubs ||= []; obj.notifications ||= []; // NOTIFICATIONS
   return obj;
 }
 let db = loadDB();
 function saveDB() { fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2)); }
 
-// Uploads (public/uploads)
+// Uploads
 const UPLOAD_DIR = path.join(ROOT, 'public', 'uploads');
 if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
@@ -56,7 +59,7 @@ const upload = multer({
   fileFilter: (req, file, cb) => IMAGE_TYPES.includes(file.mimetype) ? cb(null, true) : cb(new Error('Only JPG/PNG/WEBP images allowed'))
 });
 
-// Email: if no SMTP env, use stream transport (logs to console)
+// Email (console preview if no SMTP)
 const hasSMTP = !!process.env.SMTP_HOST;
 const transporter = hasSMTP
   ? nodemailer.createTransport({
@@ -75,16 +78,12 @@ async function sendEmail(to, subject, html) {
       to, subject, html
     });
     if (!hasSMTP && info?.message) {
-      console.log('--- Email Preview (dev) ---');
-      console.log('To:', to);
-      console.log('Subject:', subject);
-      console.log(info.message.toString());
-      console.log('---------------------------');
+      console.log('--- Email Preview ---\nTo:', to, '\nSubject:', subject, '\n', info.message.toString(), '\n---------------------');
     }
   } catch (e) { console.error('Email error:', e.message); }
 }
 
-// Web Push (VAPID)
+// Web Push
 let vapidKeys = null;
 if (process.env.VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY) {
   vapidKeys = { publicKey: process.env.VAPID_PUBLIC_KEY, privateKey: process.env.VAPID_PRIVATE_KEY };
@@ -145,8 +144,7 @@ function authRequired(req, res, next) {
   if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
   const user = db.users.find(u => u.id === req.session.userId);
   if (!user || user.banned) return res.status(401).json({ error: 'Unauthorized' });
-  req.user = user;
-  next();
+  req.user = user; next();
 }
 function roleRequired(role) {
   return (req, res, next) => {
@@ -160,13 +158,12 @@ function distanceKm(lat1, lon1, lat2, lon2) {
   if ([lat1, lon1, lat2, lon2].some(v => typeof v !== 'number')) return null;
   const toRad = d => d * Math.PI / 180, R = 6371;
   const dLat = toRad(lat2 - lat1), dLon = toRad(lon2 - lon1);
-  const a = Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*sin2(dLon/2);
+  const a = Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;
   return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
-  function sin2(x){ return Math.sin(x)**2; }
 }
 
 // Presence
-const onlineUsers = new Map(); // userId -> Set(socketId)
+const onlineUsers = new Map();
 function emitToUser(userId, event, payload) {
   const set = onlineUsers.get(userId);
   if (!set) return;
@@ -175,21 +172,35 @@ function emitToUser(userId, event, payload) {
 async function sendPushTo(userId, payload) {
   const subs = db.pushSubs.filter(s => s.userId === userId);
   for (const s of subs) {
-    try {
-      await webpush.sendNotification(s.subscription, JSON.stringify(payload));
-    } catch (e) {
+    try { await webpush.sendNotification(s.subscription, JSON.stringify(payload)); }
+    catch (e) {
       if (e.statusCode === 410 || e.statusCode === 404) {
-        db.pushSubs = db.pushSubs.filter(x => x !== s);
-        saveDB();
-      } else {
-        console.error('Push error:', e.statusCode, e.body || e.message);
-      }
+        db.pushSubs = db.pushSubs.filter(x => x !== s); saveDB();
+      } else console.error('Push error:', e.statusCode, e.body || e.message);
     }
   }
 }
+
+// NOTIFICATIONS: store + emit + push
 async function notifyUser(userId, payload) {
-  emitToUser(userId, 'notify', payload);
-  await sendPushTo(userId, payload);
+  // payload: { type, title, body, url }
+  const n = {
+    id: uuidv4(),
+    userId,
+    type: payload?.type || 'info',
+    title: payload?.title || '',
+    body: payload?.body || '',
+    url: payload?.url || '',
+    read: false,
+    createdAt: Date.now()
+  };
+  db.notifications.push(n); // persist
+  saveDB();
+
+  // realtime
+  emitToUser(userId, 'notify', n);
+  // web push
+  await sendPushTo(userId, { title: n.title || 'ShobKaaj', body: n.body || '', url: n.url || '/', type: n.type });
 }
 
 // Auth
@@ -208,9 +219,7 @@ app.post('/api/register', (req, res) => {
       ? location : { lat: 23.8103, lng: 90.4125, address: 'Dhaka, Bangladesh' },
     createdAt: Date.now()
   };
-  db.users.push(newUser);
-  saveDB();
-  req.session.userId = id;
+  db.users.push(newUser); saveDB(); req.session.userId = id;
   res.json({ user: userSafe(newUser) });
 });
 app.post('/api/login', (req, res) => {
@@ -218,8 +227,7 @@ app.post('/api/login', (req, res) => {
   const user = db.users.find(u => u.email === email);
   if (!user || user.banned) return res.status(401).json({ error: 'Invalid credentials' });
   if (!bcrypt.compareSync(password, user.passwordHash)) return res.status(401).json({ error: 'Invalid credentials' });
-  req.session.userId = user.id;
-  res.json({ user: userSafe(user) });
+  req.session.userId = user.id; res.json({ user: userSafe(user) });
 });
 app.post('/api/logout', authRequired, (req, res) => req.session.destroy(() => res.json({ ok: true })));
 app.get('/api/me', (req, res) => {
@@ -240,26 +248,15 @@ app.put('/api/me', authRequired, (req, res) => {
   if (location && typeof location.lat === 'number' && typeof location.lng === 'number') {
     req.user.location = { lat: location.lat, lng: location.lng, address: String(location.address || 'Updated location') };
   }
-  saveDB();
-  res.json({ user: userSafe(req.user) });
+  saveDB(); res.json({ user: userSafe(req.user) });
 });
 app.post('/api/me/avatar', authRequired, upload.single('avatar'), (req, res) => {
   const relPath = '/uploads/' + path.basename(req.file.path);
-  req.user.avatar = relPath;
-  saveDB();
-  res.json({ ok: true, avatar: relPath });
+  req.user.avatar = relPath; saveDB(); res.json({ ok: true, avatar: relPath });
 });
 
-// Notifications API
+// Notifications API (Public key)
 app.get('/api/notifications/public-key', authRequired, (req, res) => res.json({ key: vapidKeys.publicKey }));
-app.post('/api/notifications/subscribe', authRequired, (req, res) => {
-  const sub = req.body;
-  if (!sub || !sub.endpoint) return res.status(400).json({ error: 'Invalid subscription' });
-  const exists = db.pushSubs.find(s => s.userId === req.user.id && s.subscription?.endpoint === sub.endpoint);
-  if (!exists) db.pushSubs.push({ userId: req.user.id, subscription: sub, createdAt: Date.now() });
-  saveDB();
-  res.json({ ok: true });
-});
 
 // Jobs
 app.get('/api/jobs', authRequired, (req, res) => {
@@ -317,9 +314,7 @@ app.post('/api/jobs', authRequired, roleRequired('client'), (req, res) => {
     reviews: [],
     createdAt: Date.now()
   };
-  db.jobs.push(job);
-  saveDB();
-  res.json({ job });
+  db.jobs.push(job); saveDB(); res.json({ job });
 });
 app.post('/api/jobs/:id/apply', authRequired, roleRequired('worker'), async (req, res) => {
   const job = db.jobs.find(j => j.id === req.params.id);
@@ -329,11 +324,16 @@ app.post('/api/jobs/:id/apply', authRequired, roleRequired('worker'), async (req
   if (job.applications.find(a => a.workerId === req.user.id)) return res.status(400).json({ error: 'Already applied' });
   const note = String((req.body?.note || '')).slice(0, 500);
   const appRec = { workerId: req.user.id, note, status: 'pending', createdAt: Date.now() };
-  job.applications.push(appRec);
-  saveDB();
+  job.applications.push(appRec); saveDB();
 
   const client = db.users.find(u => u.id === job.createdBy);
-  await notifyUser(job.createdBy, { type: 'application', title: 'New application', body: `${req.user.name} applied to "${job.title}"`, url: '/my-jobs.html' });
+  // Persisted notification + realtime + push
+  await notifyUser(job.createdBy, {
+    type: 'application',
+    title: 'New application',
+    body: `${req.user.name} applied to "${job.title}"`,
+    url: '/my-jobs.html'
+  });
   await sendEmail(client?.email, `New application for "${job.title}"`, `<p>${req.user.name} applied to your job "${job.title}".</p><p>Note: ${note || '(none)'}.</p><p><a href="http://localhost:3000/my-jobs.html">Review applications</a></p>`);
 
   res.json({ ok: true, application: appRec });
@@ -352,15 +352,15 @@ app.put('/api/jobs/:id/assign', authRequired, roleRequired('client'), async (req
   const { workerId } = req.body || {};
   const worker = db.users.find(u => u.id === workerId && u.role === 'worker');
   if (!worker) return res.status(400).json({ error: 'Invalid worker' });
-  job.assignedTo = workerId;
-  job.status = 'assigned';
+  job.assignedTo = workerId; job.status = 'assigned';
   job.applications = (job.applications || []).map(a => ({ ...a, status: a.workerId === workerId ? 'accepted' : 'rejected' }));
   saveDB();
 
   await notifyUser(workerId, { type: 'assigned', title: 'Job assigned', body: `"${job.title}" assigned to you`, url: '/my-jobs.html' });
   await notifyUser(job.createdBy, { type: 'assigned', title: 'Worker assigned', body: `Assigned ${worker.name} to "${job.title}"`, url: '/my-jobs.html' });
-  await sendEmail(worker.email, `You were assigned: "${job.title}"`, `<p>You have been assigned to "${job.title}".</p><p><a href="http://localhost:3000/my-jobs.html">View job</a></p>`);
+
   const client = db.users.find(u => u.id === job.createdBy);
+  await sendEmail(worker.email, `You were assigned: "${job.title}"`, `<p>You have been assigned to "${job.title}".</p><p><a href="http://localhost:3000/my-jobs.html">View job</a></p>`);
   await sendEmail(client?.email, `Worker assigned: "${job.title}"`, `<p>You assigned ${worker.name} to "${job.title}".</p><p><a href="http://localhost:3000/my-jobs.html">View job</a></p>`);
 
   res.json({ job });
@@ -382,13 +382,13 @@ app.post('/api/jobs/:id/complete', authRequired, roleRequired('client'), async (
   }
   saveDB();
 
-  await notifyUser(job.assignedTo, { type: 'completed', title: 'Job completed', body: `"${job.title}" marked completed. You received a ${rating}★`, url: '/my-jobs.html' });
+  await notifyUser(job.assignedTo, { type: 'completed', title: 'Job completed', body: `"${job.title}" completed. You received ${rating}★`, url: '/my-jobs.html' });
   await sendEmail(worker?.email, `Job completed: "${job.title}"`, `<p>Your job "${job.title}" was marked completed.</p><p>Rating: ${rating}★</p>`);
 
   res.json({ job });
 });
 
-// Job-to-chat
+// Job-to-chat (unchanged)
 app.post('/api/jobs/:id/chat', authRequired, (req, res) => {
   const job = db.jobs.find(j => j.id === req.params.id);
   if (!job) return res.status(404).json({ error: 'Job not found' });
@@ -473,6 +473,30 @@ app.get('/api/workers', authRequired, (req, res) => {
   res.json({ workers: results });
 });
 
+// NOTIFICATIONS API
+app.get('/api/notifications', authRequired, (req, res) => {
+  const unreadOnly = String(req.query.unread || '') === '1';
+  let list = db.notifications.filter(n => n.userId === req.user.id);
+  if (unreadOnly) list = list.filter(n => !n.read);
+  list.sort((a, b) => b.createdAt - a.createdAt);
+  res.json({ notifications: list });
+});
+app.post('/api/notifications/read', authRequired, (req, res) => {
+  const ids = Array.isArray(req.body?.ids) ? req.body.ids : [];
+  let count = 0;
+  db.notifications.forEach(n => {
+    if (n.userId === req.user.id && ids.includes(n.id) && !n.read) { n.read = true; count++; }
+  });
+  saveDB(); res.json({ updated: count });
+});
+app.post('/api/notifications/read-all', authRequired, (req, res) => {
+  let count = 0;
+  db.notifications.forEach(n => {
+    if (n.userId === req.user.id && !n.read) { n.read = true; count++; }
+  });
+  saveDB(); res.json({ updated: count });
+});
+
 // Admin
 app.get('/api/users', authRequired, roleRequired('admin'), (req, res) => res.json({ users: db.users.map(userSafe) }));
 app.patch('/api/users/:id', authRequired, roleRequired('admin'), (req, res) => {
@@ -481,8 +505,7 @@ app.patch('/api/users/:id', authRequired, roleRequired('admin'), (req, res) => {
   const { banned, verified } = req.body;
   if (typeof banned === 'boolean') user.banned = banned;
   if (typeof verified === 'boolean') user.verified = verified;
-  saveDB();
-  res.json({ user: userSafe(user) });
+  saveDB(); res.json({ user: userSafe(user) });
 });
 app.get('/api/admin/conversations', authRequired, roleRequired('admin'), (req, res) => {
   const list = db.conversations.map(c => ({
@@ -501,7 +524,7 @@ app.get('/api/admin/jobs', authRequired, roleRequired('admin'), (req, res) => {
   res.json({ jobs });
 });
 
-// Socket.IO
+// Sockets
 io.on('connection', (socket) => {
   const sess = socket.request.session;
   const userId = sess?.userId;
@@ -557,5 +580,5 @@ io.on('connection', (socket) => {
 // Fallback
 app.get('*', (req, res) => res.sendFile(path.join(ROOT, 'public', 'index.html')));
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => console.log(`ShobKaaj running on http://localhost:${PORT}`));
