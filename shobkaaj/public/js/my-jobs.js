@@ -77,10 +77,11 @@ async function loadClientView() {
     }
 
     if (act === 'assign') {
+      const jobIdToAssign = btn.getAttribute('data-job');
       const workerId = btn.getAttribute('data-worker');
       if (!confirm(i18n.t('myJobs.assignConfirm'))) return;
       try {
-        await $api(`/api/jobs/${jobId}/assign`, { method:'PUT', body:{ workerId } });
+        await $api(`/api/jobs/${jobIdToAssign}/assign`, { method:'PUT', body:{ workerId } });
         alert(i18n.t('myJobs.assigned'));
         await loadClientView();
       } catch(ex){ alert(ex.message); }

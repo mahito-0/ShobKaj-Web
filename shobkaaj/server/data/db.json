@@ -151,13 +151,13 @@
         "address": "Client location"
       },
       "createdBy": "4cb7aa89-6ba4-4535-a4ac-41d36167e499",
-      "assignedTo": null,
-      "status": "open",
+      "assignedTo": "2b28b0b2-a99a-46b8-beee-a7c81ed31b45",
+      "status": "assigned",
       "applications": [
         {
           "workerId": "2b28b0b2-a99a-46b8-beee-a7c81ed31b45",
           "note": "plz",
-          "status": "pending",
+          "status": "accepted",
           "createdAt": 1756817458649
         }
       ],
