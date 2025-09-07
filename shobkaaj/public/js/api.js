@@ -1,7 +1,15 @@
 async function api(path, { method = 'GET', body, formData } = {}) {
+  const headers = formData ? {} : { 'Content-Type': 'application/json' };
+
+  // Temporary: Get user ID from local storage. This will be replaced with a proper auth system.
+  const userId = localStorage.getItem('userId');
+  if (userId) {
+    headers['x-user-id'] = userId;
+  }
+
   const options = {
     method,
-    headers: formData ? undefined : { 'Content-Type': 'application/json' },
+    headers,
     credentials: 'include',
     body: formData ? formData : (body ? JSON.stringify(body) : undefined)
   };

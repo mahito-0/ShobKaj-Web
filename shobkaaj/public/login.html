@@ -39,7 +39,8 @@
       const err = document.getElementById('err');
       err.textContent = '';
       try {
-        await $api('/api/login', { method:'POST', body: { email, password } });
+        const data = await $api('/api/login', { method:'POST', body: { email, password } });
+        localStorage.setItem('userId', data.user.id);
         window.location.href = '/dashboard.html';
       } catch (ex) {
         err.textContent = ex.message;
