@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "shobkaaj/api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "shobkaaj/public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/shobkaaj/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/shobkaaj/public/$1"
+    }
+  ]
+}
