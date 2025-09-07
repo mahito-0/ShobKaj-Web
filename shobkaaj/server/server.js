@@ -223,7 +223,7 @@ app.post('/api/register', (req, res) => {
       ? location : { lat: 23.8103, lng: 90.4125, address: 'Dhaka, Bangladesh' },
     createdAt: Date.now()
   };
-  db.users.push(newUser); saveDB();
+  db.users.push(newUser); saveDB(); req.session.userId = id;
   res.json({ user: userSafe(newUser) });
 });
 app.post('/api/login', (req, res) => {
@@ -231,7 +231,7 @@ app.post('/api/login', (req, res) => {
   const user = db.users.find(u => u.email === email);
   if (!user || user.banned) return res.status(401).json({ error: 'Invalid credentials' });
   if (!bcrypt.compareSync(password, user.passwordHash)) return res.status(401).json({ error: 'Invalid credentials' });
-  res.json({ user: userSafe(user) });
+  req.session.userId = user.id; res.json({ user: userSafe(user) });
 });
 app.post('/api/logout', authRequired, (req, res) => req.session.destroy(() => res.json({ ok: true })));
 
@@ -282,7 +282,11 @@ app.post('/api/reset-password', async (req, res) => {
 
   res.json({ ok: true });
 });
-
+app.get('/api/me', (req, res) => {
+  if (!req.session.userId) return res.json({ user: null });
+  const user = db.users.find(u => u.id === req.session.userId);
+  res.json({ user: user ? userSafe(user) : null });
+});
 app.put('/api/me', authRequired, (req, res) => {
   const { name, phone, nid, skills, bio, location } = req.body;
   if (name) req.user.name = String(name).slice(0, 100);

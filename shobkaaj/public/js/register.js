@@ -106,8 +106,7 @@ document.getElementById('regForm').addEventListener('submit', async (e)=>{
   const err = document.getElementById('err');
   err.textContent = '';
   try {
-    const data = await $api('/api/register', { method:'POST', body });
-    localStorage.setItem('userId', data.user.id);
+    await $api('/api/register', { method:'POST', body });
     window.location.href = '/dashboard.html';
   } catch (ex) { err.textContent = ex.message; }
 });
