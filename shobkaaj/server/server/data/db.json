@@ -28,13 +28,13 @@
       "email": "mahmud.agni@gmail.com",
       "role": "client",
       "phone": "01683886755",
-      "nid": "252456156156",
+      "nid": "",
       "passwordHash": "$2a$10$0Ddofi0.0CEaoNpTH8tafeiqooAboo.2OHYFqXPVJvMyWAvfXgfnG",
       "verified": false,
       "banned": false,
       "skills": [],
       "bio": "",
-      "avatar": "/uploads/b03d84ab-2ce2-4daa-8629-790a22adebe8_1757365067250.webp",
+      "avatar": "/uploads/b03d84ab-2ce2-4daa-8629-790a22adebe8_1757364001269.png",
       "rating": 0,
       "ratingCount": 0,
       "location": {
@@ -43,28 +43,6 @@
         "address": "Dhaka, Bangladesh"
       },
       "createdAt": 1757363991081
-    },
-    {
-      "id": "f36908e7-d342-436f-a63e-c6b08868d893",
-      "name": "Syed Al Mahmud",
-      "email": "syedmahmud@gmail.com",
-      "role": "worker",
-      "phone": "01683886755",
-      "nid": "",
-      "passwordHash": "$2a$10$9khMWAA5kohwY7s0wF7EuOyibdq2QbmozJQZyEqJV5SH.O9kW.I7a",
-      "verified": false,
-      "banned": false,
-      "skills": [],
-      "bio": "",
-      "avatar": "",
-      "rating": 0,
-      "ratingCount": 0,
-      "location": {
-        "lat": 23.7571,
-        "lng": 90.404,
-        "address": "My Location"
-      },
-      "createdAt": 1757367811198
     }
   ],
   "jobs": [],
