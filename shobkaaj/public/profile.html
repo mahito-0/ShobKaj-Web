@@ -5,47 +5,118 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Profile - ShobKaaj</title>
   <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/utilities.css">
+  <link rel="stylesheet" href="/css/interactions.css">
+  <link rel="stylesheet" href="/css/toast.css">
   <link rel="stylesheet" href="/css/profile.css">
 </head>
 <body>
   <nav class="navbar" id="navbar"></nav>
   <main class="container">
-    <div class="card" style="max-width:720px;margin:32px auto;">
-      <h2 data-i18n="nav.profile">প্রোফাইল</h2>
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+    <!-- Loading State -->
+    <div id="loading" class="text-center py-8">
+      <div class="spinner lg mx-auto mb-4"></div>
+      <p class="text-muted">Loading profile...</p>
+    </div>
+    
+    <!-- Profile Content -->
+    <div id="profileContent" class="card" style="max-width:720px;margin:32px auto;display:none;">
+      <div class="mb-6">
+        <h2 class="text-2xl font-bold mb-2" data-i18n="nav.profile">প্রোফাইল</h2>
+        <p class="text-muted">Update your profile information and settings</p>
+      </div>
+      
+      <div class="flex items-center gap-4 mb-6 p-4 bg-surface rounded-lg">
         <img id="avatarImg" class="avatar lg" src="/img/avatar.png" alt="avatar" onerror="this.src='/img/avatar.png'"/>
-        <div>
-          <input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp"/>
-          <div class="small">Max 2MB, PNG/JPG/WebP</div>
+        <div class="flex-1">
+          <label for="avatarInput" class="btn outline cursor-pointer">
+            <span>📷</span>
+            <span>Change Picture</span>
+          </label>
+          <input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp" class="hidden"/>
+          <div class="text-xs text-muted mt-2">Max 2MB, PNG/JPG/WebP</div>
         </div>
       </div>
-      <form id="profileForm">
+      <form id="profileForm" class="form-stack">
         <div class="form-row">
-          <div><label>নাম</label><input class="input" name="name" required /></div>
-          <div><label>ফোন</label><input class="input" name="phone" /></div>
+          <div class="form-group">
+            <label class="font-medium">নাম *</label>
+            <input class="input" name="name" required placeholder="Enter your full name"/>
+          </div>
+          <div class="form-group">
+            <label class="font-medium">ফোন</label>
+            <input class="input" name="phone" placeholder="+8801XXXXXXXXX"/>
+          </div>
         </div>
+        
         <div class="form-row">
-          <div><label>NID</label><input class="input" name="nid" /></div>
-          <div><label>স্কিলস</label><input class="input" name="skills" placeholder="plumbing, tuition, delivery"/></div>
+          <div class="form-group">
+            <label class="font-medium">NID</label>
+            <input class="input" name="nid" placeholder="National ID Number"/>
+          </div>
+          <div class="form-group">
+            <label class="font-medium">স্কিলস</label>
+            <input class="input" name="skills" placeholder="plumbing, tuition, delivery"/>
+          </div>
         </div>
-        <label>বায়ো</label>
-        <textarea class="input" name="bio" rows="4"></textarea>
+        
+        <div class="form-group">
+          <label class="font-medium">বায়ো</label>
+          <textarea class="input" name="bio" rows="4" placeholder="Tell others about yourself..."></textarea>
+        </div>
 
-        <label>লোকেশন</label>
-        <div class="form-actions">
-<button type="button" id="locBtn" class="btn outline" data-i18n="common.useMyLocation">Use my location</button>          <span id="locLabel" class="badge">N/A</span>
+        <div class="form-group">
+          <label class="font-medium">লোকেশন</label>
+          <div class="flex items-center gap-3">
+            <button type="button" id="locBtn" class="btn outline" data-i18n="common.useMyLocation">
+              <span>📏</span>
+              <span>Use my location</span>
+            </button>
+            <span id="locLabel" class="badge">N/A</span>
+          </div>
+        </div>
+
+        <!-- Error Display -->
+        <div id="errorContainer" class="hidden">
+          <div class="p-4 bg-error-subtle border border-error rounded-lg">
+            <div class="flex items-center gap-2 text-error">
+              <span>⚠️</span>
+              <span id="errorMessage"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successContainer" class="hidden">
+          <div class="p-4 bg-success-subtle border border-success rounded-lg">
+            <div class="flex items-center gap-2 text-success">
+              <span>✓</span>
+              <span id="successMessage">Profile updated successfully!</span>
+            </div>
+          </div>
         </div>
 
         <div class="form-actions">
-<button class="btn" type="submit" data-i18n="common.save">Save</button>
-<a class="btn outline" href="/dashboard.html" data-i18n="common.back">Back</a>
+          <button class="btn" type="submit" id="saveBtn" data-i18n="common.save">
+            <span>Save Changes</span>
+          </button>
+          <a class="btn outline" href="/dashboard.html" data-i18n="common.back">Back</a>
         </div>
-        <div id="err" style="color:#dc2626;margin-top:8px;"></div>
       </form>
+    </div>
+    
+    <!-- Access Denied -->
+    <div id="accessDenied" class="text-center py-8" style="display:none;">
+      <div class="text-6xl mb-4">🚫</div>
+      <h2 class="text-xl font-bold mb-2">Access Denied</h2>
+      <p class="text-muted mb-4">You need to be logged in to access your profile.</p>
+      <a href="/login.html" class="btn">Login</a>
+    </div>
     </div>
   </main>
 
   <script src="/js/api.js"></script>
+  <script src="/js/mock-auth.js"></script>
   <script src="/js/i18n.js"></script>
   <script src="/js/auth.js"></script>
   <script src="/js/main.js"></script>

@@ -1,7 +1,185 @@
-/* Dashboard — glance + perfectly sized actions */
-#info .avatar.lg{box-shadow:var(--shadow-sm)}
-#actions{margin-top:12px}
-#actions .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-#actions .card{transition:box-shadow .25s, transform .1s, border-color .2s}
-#actions .card:hover{box-shadow:var(--shadow-sm); transform:translateY(-2px); border-color:#dfe3e9}
-#actions .card p{color:var(--muted); margin:4px 0 0}
+/*
+ * Dashboard - Modern & Interactive
+ * ===============================
+ * Clean dashboard with enhanced cards and smooth interactions
+ */
+
+/* Dashboard Layout */
+.dashboard-container {
+  padding: var(--space-6) 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* User Info Section */
+#info {
+  background: var(--surface-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-8);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+#info:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+#info .avatar.lg {
+  box-shadow: var(--shadow-md);
+  border: 3px solid var(--primary-subtle);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+#info .avatar.lg:hover {
+  transform: scale(1.05);
+  border-color: var(--primary);
+}
+
+/* Actions Section */
+#actions {
+  margin-top: var(--space-6);
+}
+
+#actions .grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Dashboard Cards */
+#actions .card {
+  position: relative;
+  background: var(--surface-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: all var(--duration-normal) var(--ease-out);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+#actions .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-muted));
+  transform: translateX(-100%);
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+#actions .card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-color: var(--primary);
+}
+
+#actions .card:hover::before {
+  transform: translateX(0);
+}
+
+#actions .card h3 {
+  margin-bottom: var(--space-3);
+  color: var(--text);
+  font-weight: var(--fw-semibold);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+#actions .card p {
+  color: var(--text-muted);
+  margin: 0;
+  line-height: var(--lh-relaxed);
+}
+
+/* Card Icons */
+.card-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--primary-subtle);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-4);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+#actions .card:hover .card-icon {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Quick Stats */
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.stat-card {
+  background: var(--surface-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  text-align: center;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-number {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--primary);
+  margin-bottom: var(--space-1);
+}
+
+.stat-label {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: var(--space-4);
+  }
+  
+  #actions .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  
+  .quick-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  #info {
+    padding: var(--space-4);
+  }
+  
+  #actions .card {
+    padding: var(--space-4);
+  }
+}
