@@ -3,132 +3,410 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>ShobKaaj</title>
+  <title>ShobKaaj - Find Work, Get Work Done</title>
+  <meta name="description" content="Bangladesh's premier job marketplace connecting skilled workers with clients. Find local services, post jobs, and build your freelance career.">
   <link rel="stylesheet" href="/css/base.css"/>
   <link rel="stylesheet" href="/css/index.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <main class="container">
-    <!-- Topbar -->
-    <header class="topbar" id="topbar">
-      <div class="brand">ShobKaaj</div>
-      <nav class="links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-        <a href="/login.html" class="btn outline">Login</a>
-        <a href="/register.html" class="btn">Register</a>
-      </nav>
-    </header>
-
-    <!-- Hero (with Aurora canvas behind) -->
-    <section id="home" class="hero-grid" data-parallax>
-      <canvas id="aurora" class="aurora" aria-hidden="true"></canvas>
-
-      <div class="hero-left">
-        <h1 class="headline reveal">Anywork<br/>anywhere</h1>
-
-
-        <div class="hero-actions reveal">
-          <a href="/login.html" class="btn">Get Started</a>
-        </div>
-
-        <div class="feature-row">
-          <div class="feature reveal">
-            <span class="ic" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" stroke="currentColor" fill="none" stroke-width="2"/><path d="M7 12l3 3 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <span>Verified</span>
-          </div>
-          <div class="feature reveal">
-            <span class="ic" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" fill="currentColor"/><circle cx="12" cy="10" r="2.5" fill="#fff"/></svg>
-            </span>
-            <span>GPS</span>
-          </div>
-          <div class="feature reveal">
-            <span class="ic" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 2l7 3v6c0 5-3.5 9-7 11-3.5-2-7-6-7-11V5l7-3z" fill="currentColor"/></svg>
-            </span>
-            <span>Secure payments</span>
-          </div>
-          <div class="feature reveal">
-            <span class="ic" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" fill="currentColor"/></svg>
-            </span>
-            <span>Bangla-first</span>
-          </div>
-        </div>
-
-        <div id="services" class="services">
-          <div class="svc reveal tilt">
-            <div class="svc-ic">
-              <svg viewBox="0 0 48 48"><rect x="9" y="14" width="30" height="18" rx="3" fill="currentColor"/><rect x="14" y="20" width="20" height="2.6" rx="1.3" fill="#fff"/><rect x="14" y="24" width="12" height="2.6" rx="1.3" fill="#fff"/></svg>
-            </div>
-            <div class="svc-label">Tutoring</div>
-          </div>
-          <div class="svc reveal tilt">
-            <div class="svc-ic">
-              <svg viewBox="0 0 48 48"><rect x="6" y="20" width="22" height="12" rx="3" fill="currentColor"/><rect x="28" y="22" width="14" height="8" rx="2" fill="currentColor"/><circle cx="16" cy="34" r="4" fill="currentColor"/><circle cx="36" cy="34" r="4" fill="currentColor"/></svg>
-            </div>
-            <div class="svc-label">Delivery</div>
-          </div>
-          <div class="svc reveal tilt">
-            <div class="svc-ic">
-              <svg viewBox="0 0 48 48"><rect x="9" y="21" width="26" height="6" rx="3" fill="currentColor"/><rect x="30" y="12" width="6" height="26" rx="3" fill="currentColor"/></svg>
-            </div>
-            <div class="svc-label">Repairs</div>
-          </div>
-          <div class="svc reveal tilt">
-            <div class="svc-ic">
-              <svg viewBox="0 0 48 48"><path d="M8 22l16-12 16 12v14a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V22z" fill="currentColor"/></svg>
-            </div>
-            <div class="svc-label">Household</div>
-          </div>
-        </div>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar"></nav>
+  
+  <main>
+    <!-- Enhanced Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="hero-background">
+        <canvas id="aurora" class="aurora-canvas" aria-hidden="true"></canvas>
+        <div class="hero-gradient-overlay"></div>
       </div>
-
-      <div class="hero-right">
-        <div class="phone reveal" id="phone">
-          <div class="notch" aria-hidden="true"></div>
-          <div class="map" id="map">
-            <div class="pin pin--accent" style="top:34%;left:38%"></div>
-            <div class="pin pin--mint" style="top:54%;left:62%"></div>
+      
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="badge-icon">🇧🇩</span>
+            <span>Made for Bangladesh</span>
+          </div>
+          
+          <h1 class="hero-title">
+            <span class="title-line">Find Work.</span>
+            <span class="title-line">Get Work Done.</span>
+            <span class="title-subtitle">সবকাজে সব কাজ</span>
+          </h1>
+          
+          <p class="hero-description">
+            Connect with skilled professionals or find your next opportunity in Bangladesh's fastest-growing job marketplace.
+          </p>
+          
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-number">1,200+</div>
+              <div class="stat-label">Verified Workers</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">50+</div>
+              <div class="stat-label">Job Categories</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">৳5M+</div>
+              <div class="stat-label">Payments Processed</div>
+            </div>
+          </div>
+          
+          <div class="hero-actions">
+            <a href="/register.html" class="btn primary large">
+              <span class="btn-text">Start Working Today</span>
+              <span class="btn-icon">→</span>
+            </a>
+            <a href="/jobs.html" class="btn secondary large">
+              <span class="btn-text">Browse Jobs</span>
+              <span class="btn-icon">🔍</span>
+            </a>
+          </div>
+          
+          <div class="trust-indicators">
+            <div class="trust-item">
+              <span class="trust-icon">✅</span>
+              <span>Verified Profiles</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon">🛡️</span>
+              <span>Secure Payments</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon">📍</span>
+              <span>Local Network</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon">🇧🇩</span>
+              <span>Bangla-First</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="hero-visual">
+          <div class="phone-mockup">
+            <div class="phone-screen">
+              <div class="app-interface">
+                <div class="interface-header">
+                  <div class="profile-pill">
+                    <div class="avatar"></div>
+                    <span>Mahmud Rahman</span>
+                  </div>
+                  <div class="notification-badge">3</div>
+                </div>
+                
+                <div class="job-cards">
+                  <div class="job-card featured">
+                    <div class="job-header">
+                      <span class="job-category">🏠 Household</span>
+                      <span class="job-urgent">Urgent</span>
+                    </div>
+                    <h3 class="job-title">House Cleaning Service</h3>
+                    <div class="job-details">
+                      <span class="job-location">📍 Dhanmondi, Dhaka</span>
+                      <span class="job-budget">৳1,500</span>
+                    </div>
+                  </div>
+                  
+                  <div class="job-card">
+                    <div class="job-header">
+                      <span class="job-category">📚 Tutoring</span>
+                    </div>
+                    <h3 class="job-title">Math Tutor Needed</h3>
+                    <div class="job-details">
+                      <span class="job-location">📍 Gulshan, Dhaka</span>
+                      <span class="job-budget">৳8,000/month</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="floating-elements">
+                  <div class="floating-chip">💼 New Job</div>
+                  <div class="floating-chip payment">💰 Payment Received</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Quick stats -->
-    <section class="section">
-      <div class="grid cards">
-        <div class="card"><h3>1,200+ ভেরিফায়েড ওয়ার্কার</h3><p class="small">বিভিন্ন ক্যাটাগরিতে স্থানীয় সহযোদ্ধা।</p></div>
-        <div class="card"><h3>50+ কাজের ক্যাটাগরি</h3><p class="small">টিউশন, রিপেয়ার, ডেলিভারি, ইভেন্ট ইত্যাদি।</p></div>
-        <div class="card"><h3>নিরাপদ চ্যাট</h3><p class="small">ইন-অ্যাপ চ্যাট ও রিভিউ সিস্টেম।</p></div>
+    <!-- Interactive Services Showcase -->
+    <section class="services-showcase" id="services">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span class="badge-icon">🛠️</span>
+            <span>Our Services</span>
+          </div>
+          <h2 class="section-title">Popular Job Categories</h2>
+          <p class="section-description">From household tasks to professional services, find the right help for any job.</p>
+        </div>
+        
+        <div class="services-grid">
+          <div class="service-card" data-category="tutoring">
+            <div class="service-icon">
+             <i class="fas fa-chalkboard-teacher"></i>            </div>
+            <h3 class="service-title">Tutoring</h3>
+            <p class="service-description">Academic support and skill development</p>
+            <div class="service-stats">
+              <span class="stat">250+ tutors</span>
+              <span class="stat-divider">•</span>
+              <span class="stat">৳500-2000/hr</span>
+            </div>
+            <div class="service-hover-content">
+              <div class="popular-jobs">
+                <span class="popular-job">Math Tutoring</span>
+                <span class="popular-job">English Classes</span>
+                <span class="popular-job">Computer Skills</span>
+              </div>
+              <a href="/jobs.html?category=tutoring" class="service-cta">Browse Tutoring Jobs</a>
+            </div>
+          </div>
+          
+          <div class="service-card" data-category="delivery">
+            <div class="service-icon">
+            <i class="fas fa-truck"></i>            </div>
+            <h3 class="service-title">Delivery</h3>
+            <p class="service-description">Fast and reliable delivery services</p>
+            <div class="service-stats">
+              <span class="stat">400+ drivers</span>
+              <span class="stat-divider">•</span>
+              <span class="stat">৳50-500/trip</span>
+            </div>
+            <div class="service-hover-content">
+              <div class="popular-jobs">
+                <span class="popular-job">Food Delivery</span>
+                <span class="popular-job">Package Pickup</span>
+                <span class="popular-job">Document Courier</span>
+              </div>
+              <a href="/jobs.html?category=delivery" class="service-cta">Browse Delivery Jobs</a>
+            </div>
+          </div>
+          
+          <div class="service-card" data-category="repairs">
+            <div class="service-icon">
+            <i class="fas fa-tools"></i>            </div>
+            <h3 class="service-title">Repairs</h3>
+            <p class="service-description">Fix and maintain your devices</p>
+            <div class="service-stats">
+              <span class="stat">180+ technicians</span>
+              <span class="stat-divider">•</span>
+              <span class="stat">৳200-3000/job</span>
+            </div>
+            <div class="service-hover-content">
+              <div class="popular-jobs">
+                <span class="popular-job">Phone Repair</span>
+                <span class="popular-job">AC Service</span>
+                <span class="popular-job">Plumbing</span>
+              </div>
+              <a href="/jobs.html?category=repairs" class="service-cta">Browse Repair Jobs</a>
+            </div>
+          </div>
+          
+          <div class="service-card" data-category="household">
+            <div class="service-icon">
+              <i class="fas fa-home"></i>
+            </div>
+            <h3 class="service-title">Household</h3>
+            <p class="service-description">Home cleaning and maintenance</p>
+            <div class="service-stats">
+              <span class="stat">320+ cleaners</span>
+              <span class="stat-divider">•</span>
+              <span class="stat">৳800-2500/day</span>
+            </div>
+            <div class="service-hover-content">
+              <div class="popular-jobs">
+                <span class="popular-job">House Cleaning</span>
+                <span class="popular-job">Cooking</span>
+                <span class="popular-job">Gardening</span>
+              </div>
+              <a href="/jobs.html?category=household" class="service-cta">Browse Household Jobs</a>
+            </div>
+          </div>
+          
+          <div class="service-card featured" data-category="all">
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48"><circle cx="24" cy="12" r="8" fill="currentColor"/><path d="M40 36c0-8.8-7.2-16-16-16s-16 7.2-16 16" stroke="currentColor" stroke-width="4" fill="none"/></svg>
+            </div>
+            <h3 class="service-title">View All Categories</h3>
+            <p class="service-description">Explore 50+ job categories</p>
+            <div class="service-stats">
+              <span class="stat">1,200+ workers</span>
+              <span class="stat-divider">•</span>
+              <span class="stat">24/7 support</span>
+            </div>
+            <div class="service-hover-content">
+              <div class="popular-jobs">
+                <span class="popular-job">Photography</span>
+                <span class="popular-job">Event Planning</span>
+                <span class="popular-job">Data Entry</span>
+              </div>
+              <a href="/jobs.html" class="service-cta primary">Browse All Jobs</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- How it works -->
-    <section id="about" class="section">
-      <h2>কীভাবে কাজ করে</h2>
-      <p class="small">৩ ধাপে কাজ পোস্ট/পাওয়া — ঝামেলা ছাড়া।</p>
-      <div class="grid cards">
-        <div class="card">
-          <h3>ক্লায়েন্ট</h3>
-          <ol>
-            <li>কাজ পোস্ট করুন (বাজেট/লোকেশনসহ)</li>
-            <li>আবেদনগুলো দেখুন ও ওয়ার্কার বাছাই করুন</li>
-            <li>চ্যাটে ডিটেইলস ঠিক করে কাজ অ্যাসাইন করুন</li>
-          </ol>
+    <!-- How It Works -->
+    <section class="how-it-works" id="about">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span class="badge-icon">⚙️</span>
+            <span>How It Works</span>
+          </div>
+          <h2 class="section-title">কীভাবে কাজ করে</h2>
+          <p class="section-description">Simple 3-step process to connect workers and clients</p>
         </div>
-        <div class="card">
-          <h3>ওয়ার্কার</h3>
-          <ol>
-            <li>কাছের কাজ ব্রাউজ/সার্চ করুন</li>
-            <li>আবেদন পাঠান বা ক্লায়েন্টকে মেসেজ করুন</li>
-            <li>অ্যাসাইনড হলে কাজ করুন ও রেটিং নিন</li>
-          </ol>
+        
+        <div class="process-steps">
+          <div class="process-track">
+            <div class="track-line"></div>
+            <div class="track-progress"></div>
+          </div>
+          
+          <div class="step-cards">
+            <div class="step-card" data-step="1">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <div class="step-icon">
+                  <svg viewBox="0 0 24 24"><path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor"/><path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" fill="none"/><path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                </div>
+                <h3 class="step-title">Post or Browse</h3>
+                <p class="step-description">Post a job with your budget and requirements, or browse available opportunities near you.</p>
+                <div class="step-features">
+                  <span class="feature">✓ Set your budget</span>
+                  <span class="feature">✓ Location-based matching</span>
+                  <span class="feature">✓ Category selection</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="step-card" data-step="2">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <div class="step-icon">
+                  <svg viewBox="0 0 24 24"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h3 class="step-title">Connect & Agree</h3>
+                <p class="step-description">Review applications, check ratings, and use in-app chat to finalize job details.</p>
+                <div class="step-features">
+                  <span class="feature">✓ Secure messaging</span>
+                  <span class="feature">✓ Profile verification</span>
+                  <span class="feature">✓ Rating system</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="step-card" data-step="3">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <div class="step-icon">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h3 class="step-title">Complete & Pay</h3>
+                <p class="step-description">Get the job done, receive payment securely, and leave feedback for future users.</p>
+                <div class="step-features">
+                  <span class="feature">✓ Secure payments</span>
+                  <span class="feature">✓ Job tracking</span>
+                  <span class="feature">✓ Mutual feedback</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span class="badge-icon">⭐</span>
+            <span>Success Stories</span>
+          </div>
+          <h2 class="section-title">What Our Users Say</h2>
+          <p class="section-description">Real experiences from our community of workers and clients</p>
+        </div>
+        
+        <div class="testimonials-grid">
+          <div class="testimonial-card featured">
+            <div class="testimonial-header">
+              <div class="user-info">
+                <div class="avatar-lg">R</div>
+                <div class="user-details">
+                  <h4 class="user-name">Rashida Begum</h4>
+                  <p class="user-role">House Cleaner • Dhaka</p>
+                </div>
+              </div>
+              <div class="rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-text">5.0</span>
+              </div>
+            </div>
+            <blockquote class="testimonial-text">
+              "বকাজের মাধ্যমে আমি মাসে ২০-২৫ হাজার টাকা আয় করতে পারি। গ্রাহকরা খুব ভালো এবং পেমেন্ট নিরাপদ।"
+            </blockquote>
+            <div class="testimonial-stats">
+              <span class="stat">150+ jobs completed</span>
+              <span class="stat-divider">•</span>
+              <span class="stat">৳25,000+ earned</span>
+            </div>
+          </div>
+          
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="user-info">
+                <div class="avatar-lg">M</div>
+                <div class="user-details">
+                  <h4 class="user-name">Dr. Mahmud Hassan</h4>
+                  <p class="user-role">Client • Gulshan</p>
+                </div>
+              </div>
+              <div class="rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-text">5.0</span>
+              </div>
+            </div>
+            <blockquote class="testimonial-text">
+              "Found an excellent tutor for my daughter within 2 hours. The verification system gives me confidence."
+            </blockquote>
+            <div class="testimonial-stats">
+              <span class="stat">12 jobs posted</span>
+              <span class="stat-divider">•</span>
+              <span class="stat">100% success rate</span>
+            </div>
+          </div>
+          
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="user-info">
+                <div class="avatar-lg">A</div>
+                <div class="user-details">
+                  <h4 class="user-name">Aminul Islam</h4>
+                  <p class="user-role">Delivery Driver • Chittagong</p>
+                </div>
+              </div>
+              <div class="rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-text">4.9</span>
+              </div>
+            </div>
+            <blockquote class="testimonial-text">
+              "Perfect for part-time work. I can choose my own hours and the app shows jobs near my location."
+            </blockquote>
+            <div class="testimonial-stats">
+              <span class="stat">200+ deliveries</span>
+              <span class="stat-divider">•</span>
+              <span class="stat">৳15,000+ earned</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -243,6 +521,10 @@
     </footer>
   </main>
 
+  <script src="/js/api.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/main.js"></script>
   <script src="/js/home.js"></script>
 </body>
 </html>
