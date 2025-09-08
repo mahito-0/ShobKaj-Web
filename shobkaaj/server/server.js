@@ -227,10 +227,10 @@ app.post('/api/login', (req, res) => {
   const user = db.users.find(u => u.email === email);
   if (!user || user.banned) return res.status(401).json({ error: 'Invalid credentials' });
   if (!bcrypt.compareSync(password, user.passwordHash)) return res.status(401).json({ error: 'Invalid credentials' });
-  req.session.userId = user.id;
   res.json({ user: userSafe(user) });
 });
 app.post('/api/logout', authRequired, (req, res) => req.session.destroy(() => res.json({ ok: true })));
+<<<<<<< HEAD
 
 app.post('/api/forgot-password', async (req, res) => {
   const { email } = req.body;
@@ -280,11 +280,13 @@ app.post('/api/reset-password', async (req, res) => {
   res.json({ ok: true });
 });
 
+=======
 app.get('/api/me', (req, res) => {
   if (!req.session.userId) return res.json({ user: null });
   const user = db.users.find(u => u.id === req.session.userId);
   res.json({ user: user ? userSafe(user) : null });
 });
+>>>>>>> parent of 52631de (up)
 app.put('/api/me', authRequired, (req, res) => {
   const { name, phone, nid, skills, bio, location } = req.body;
   if (name) req.user.name = String(name).slice(0, 100);
@@ -630,5 +632,5 @@ io.on('connection', (socket) => {
 // Fallback
 app.get('*', (req, res) => res.sendFile(path.join(ROOT, 'public', 'index.html')));
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => console.log(`ShobKaaj running on http://localhost:${PORT}`));
