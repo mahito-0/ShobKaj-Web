@@ -347,7 +347,7 @@ body {
 
 .stat-item:hover {
   transform: translateY(-8px) scale(1.05);
-  background: var(--glass-bg-strong);
+  background: transparent;
   border-color: var(--primary);
   box-shadow: var(--glow-primary), var(--glass-shadow);
 }
