@@ -1,27 +1,5 @@
-/* 
- * ShobKaaj - Login Page Styles
- * ----------------------------
- * This file contains styles specific to the login page (login.html).
- */
-
-main {
-  min-height: calc(100vh - 120px);
-  display: grid;
-  place-items: center;
-  padding: 16px;
-}
-
-.login-card {
-  max-width: 480px;
-  margin: 32px auto;
-  transition: box-shadow .25s, transform .1s;
-}
-
-.login-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-}
-
-main h2 {
-  margin: 0 0 10px;
-}
+/* Login — centered card, consistent widths */
+main{min-height:calc(100vh - 120px); display:grid; place-items:center; padding:16px}
+main .card{width:min(480px,96vw); transition:box-shadow .25s, transform .1s}
+main .card:hover{box-shadow:var(--shadow-sm); transform:translateY(-2px)}
+main h2{margin:0 0 10px}

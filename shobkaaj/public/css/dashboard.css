@@ -1,5 +1,7 @@
-/* 
- * ShobKaaj - Dashboard Page Styles
- * --------------------------------
- * This file contains styles specific to the dashboard page (dashboard.html).
- */
+/* Dashboard — glance + perfectly sized actions */
+#info .avatar.lg{box-shadow:var(--shadow-sm)}
+#actions{margin-top:12px}
+#actions .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+#actions .card{transition:box-shadow .25s, transform .1s, border-color .2s}
+#actions .card:hover{box-shadow:var(--shadow-sm); transform:translateY(-2px); border-color:#dfe3e9}
+#actions .card p{color:var(--muted); margin:4px 0 0}

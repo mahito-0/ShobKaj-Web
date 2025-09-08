@@ -1,76 +1,23 @@
-/* 
- * ShobKaaj - Jobs Page Styles
- * ---------------------------
- * This file contains styles specific to the jobs listing page (jobs.html).
- */
+/* Jobs — fixed positioning: content left, actions right; perfect badges */
+.filter{margin-bottom:16px}
 
-.filter {
-  margin-bottom: 16px;
+#jobs .item{
+  border:1px solid var(--line); background:var(--surface); border-radius:var(--radius);
+  padding:16px; display:flex; gap:14px; align-items:flex-start; box-shadow:var(--shadow-sm); transition:transform .08s, box-shadow .2s, border-color .2s;
 }
+#jobs .item:hover{transform:translateY(-1px); box-shadow:var(--shadow-sm); border-color:#dfe3ea}
+#jobs .item > div:first-child{flex:1; min-width:0}
+#jobs .item > div:last-child{margin-left:auto; display:flex; gap:8px; align-items:center}
+#jobs .item .small{margin-top:6px; color:var(--muted)}
 
-#jobs .item {
-  border: 1px solid var(--line);
-  background: var(--surface);
-  border-radius: var(--radius);
-  padding: 16px;
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  box-shadow: var(--shadow-sm);
-  transition: transform .08s, box-shadow .2s, border-color .2s;
-}
-
-#jobs .item:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--line);
-}
-
-#jobs .item > div:first-child {
-  flex: 1;
-  min-width: 0;
-}
-
-#jobs .item > div:last-child {
-  margin-left: auto;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-#jobs .item .small {
-  margin-top: 6px;
-  color: var(--muted);
-}
-
-/* Status Badges */
-.status-open {
-  background: var(--status-open-bg);
-  border-color: var(--status-open-border);
-  color: var(--status-open-text);
-}
-
-.status-assigned {
-  background: var(--status-assigned-bg);
-  border-color: var(--status-assigned-border);
-  color: var(--status-assigned-text);
-}
-
-.status-completed {
-  background: var(--status-completed-bg);
-  border-color: var(--status-completed-border);
-  color: var(--status-completed-text);
-}
+/* Neutral status badges */
+.badge{padding:4px 10px; border-radius:999px; font-size:12px; border:1px solid var(--line); background:#f3f5fa; color:#2c323c}
+.status-open{background:#eff1f6; border-color:#e2e5ec; color:#151a21}
+.status-assigned{background:#ededf2; border-color:#e1e4ea; color:#161a21}
+.status-completed{background:#f7f8fb; border-color:#e9ecf1; color:#1b1f26}
 
 /* Mobile stacking */
-@media (max-width: 640px) {
-  #jobs .item {
-    flex-direction: column;
-  }
-
-  #jobs .item > div:last-child {
-    width: 100%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
+@media (max-width:640px){
+  #jobs .item{flex-direction:column}
+  #jobs .item > div:last-child{width:100%; justify-content:flex-start; flex-wrap:wrap}
 }

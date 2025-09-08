@@ -1,28 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - ShobKaaj</title>
+  <title>লগইন - ShobKaaj</title>
   <link rel="stylesheet" href="/css/base.css"/>
   <link rel="stylesheet" href="/css/login.css"/>
 </head>
 <body>
   <nav class="navbar" id="navbar"></nav>
   <main class="container">
-    <div class="card login-card">
-      <h2>Login</h2>
+    <div class="card" style="max-width:480px;margin:32px auto;">
+      <h2>লগইন</h2>
       <form id="loginForm">
-        <label>Email</label>
+        <label>ইমেইল</label>
         <input class="input" type="email" name="email" required />
-        <label>Password</label>
+        <label>পাসওয়ার্ড</label>
         <input class="input" type="password" name="password" required />
         <div class="form-actions">
-          <button class="btn" type="submit">Login</button>
-          <a href="/register.html">No account? Register</a>
-          <a href="/forgot-password.html" style="margin-top: 8px; display: block;">Forgot password?</a>
+          <button class="btn" type="submit">লগইন</button>
+          <a href="/register.html">অ্যাকাউন্ট নেই? রেজিস্টার করুন</a>
         </div>
-        <div id="err" class="error-message"></div>
+        <div id="err" style="color:#dc2626;margin-top:8px;"></div>
       </form>
     </div>
   </main>

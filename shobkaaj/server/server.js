@@ -72,7 +72,6 @@ const transporter = hasSMTP
 
 async function sendEmail(to, subject, html) {
   if (!to) return;
-  console.log(`Attempting to send email to: ${to} with subject: ${subject}`);
   try {
     const info = await transporter.sendMail({
       from: process.env.FROM_EMAIL || 'no-reply@shobkaaj.local',
@@ -80,8 +79,6 @@ async function sendEmail(to, subject, html) {
     });
     if (!hasSMTP && info?.message) {
       console.log('--- Email Preview ---\nTo:', to, '\nSubject:', subject, '\n', info.message.toString(), '\n---------------------');
-    } else if (hasSMTP) {
-      console.log('Email sent: %s', info.messageId);
     }
   } catch (e) { console.error('Email error:', e.message); }
 }
@@ -175,7 +172,7 @@ function emitToUser(userId, event, payload) {
 async function sendPushTo(userId, payload) {
   const subs = db.pushSubs.filter(s => s.userId === userId);
   for (const s of subs) {
-    try { await webpush.sendNotification(s.subscription, JSON.stringify(payload)); } 
+    try { await webpush.sendNotification(s.subscription, JSON.stringify(payload)); }
     catch (e) {
       if (e.statusCode === 410 || e.statusCode === 404) {
         db.pushSubs = db.pushSubs.filter(x => x !== s); saveDB();
@@ -233,6 +230,7 @@ app.post('/api/login', (req, res) => {
   res.json({ user: userSafe(user) });
 });
 app.post('/api/logout', authRequired, (req, res) => req.session.destroy(() => res.json({ ok: true })));
+<<<<<<< HEAD
 
 app.post('/api/forgot-password', async (req, res) => {
   const { email } = req.body;
@@ -282,6 +280,13 @@ app.post('/api/reset-password', async (req, res) => {
   res.json({ ok: true });
 });
 
+=======
+app.get('/api/me', (req, res) => {
+  if (!req.session.userId) return res.json({ user: null });
+  const user = db.users.find(u => u.id === req.session.userId);
+  res.json({ user: user ? userSafe(user) : null });
+});
+>>>>>>> parent of 52631de (up)
 app.put('/api/me', authRequired, (req, res) => {
   const { name, phone, nid, skills, bio, location } = req.body;
   if (name) req.user.name = String(name).slice(0, 100);
@@ -378,7 +383,7 @@ app.post('/api/jobs/:id/apply', authRequired, roleRequired('worker'), async (req
   await notifyUser(job.createdBy, {
     type: 'application',
     title: 'New application',
-    body: `${req.user.name} applied to "${job.title}"`, 
+    body: `${req.user.name} applied to "${job.title}"`,
     url: '/my-jobs.html'
   });
   await sendEmail(client?.email, `New application for "${job.title}"`, `<p>${req.user.name} applied to your job "${job.title}".</p><p>Note: ${note || '(none)'}.</p><p><a href="http://localhost:3000/my-jobs.html">Review applications</a></p>`);
