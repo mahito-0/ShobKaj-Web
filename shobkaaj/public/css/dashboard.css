@@ -3,9 +3,3 @@
  * --------------------------------
  * This file contains styles specific to the dashboard page (dashboard.html).
  */
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin: 20px 0;
-}
