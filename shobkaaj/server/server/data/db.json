@@ -1,0 +1,53 @@
+{
+  "users": [
+    {
+      "id": "u_admin",
+      "name": "Admin",
+      "email": "admin@shobkaaj.com",
+      "passwordHash": "$2a$10$/0fENI77BvAt9HdtzNSrOuNqRI3nJdCOpc7oCFoZ7M19FFmFjY.PG",
+      "role": "admin",
+      "phone": "",
+      "nid": "",
+      "verified": true,
+      "banned": false,
+      "skills": [],
+      "bio": "",
+      "avatar": "",
+      "rating": 0,
+      "ratingCount": 0,
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdAt": 1757363437547
+    },
+    {
+      "id": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "name": "Syed Al Mahmud",
+      "email": "mahmud.agni@gmail.com",
+      "role": "client",
+      "phone": "01683886755",
+      "nid": "",
+      "passwordHash": "$2a$10$0Ddofi0.0CEaoNpTH8tafeiqooAboo.2OHYFqXPVJvMyWAvfXgfnG",
+      "verified": false,
+      "banned": false,
+      "skills": [],
+      "bio": "",
+      "avatar": "/uploads/b03d84ab-2ce2-4daa-8629-790a22adebe8_1757364001269.png",
+      "rating": 0,
+      "ratingCount": 0,
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdAt": 1757363991081
+    }
+  ],
+  "jobs": [],
+  "conversations": [],
+  "messages": [],
+  "pushSubs": [],
+  "notifications": []
+}
