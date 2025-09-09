@@ -57,8 +57,8 @@
       "skills": [],
       "bio": "",
       "avatar": "",
-      "rating": 0,
-      "ratingCount": 0,
+      "rating": 5,
+      "ratingCount": 1,
       "location": {
         "lat": 23.8103,
         "lng": 90.4125,
@@ -67,9 +67,84 @@
       "createdAt": 1757433827255
     }
   ],
-  "jobs": [],
+  "jobs": [
+    {
+      "id": "ce7d0033-0d87-4f78-b8ff-9e636fedb938",
+      "title": "TFFF",
+      "description": "TFFFFFFFFFFFFFFFFFFF",
+      "budget": 25000,
+      "deadline": "",
+      "location": {
+        "lat": 23.7571,
+        "lng": 90.404,
+        "address": "Client location"
+      },
+      "createdBy": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "assignedTo": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "status": "completed",
+      "applications": [
+        {
+          "workerId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+          "note": "",
+          "status": "accepted",
+          "createdAt": 1757434933573
+        }
+      ],
+      "reviews": [
+        {
+          "by": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+          "target": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+          "rating": 5,
+          "comment": "",
+          "createdAt": 1757434955832
+        }
+      ],
+      "createdAt": 1757434925208
+    }
+  ],
   "conversations": [],
   "messages": [],
   "pushSubs": [],
-  "notifications": []
+  "notifications": [
+    {
+      "id": "f7369aa9-f75c-4feb-ab07-9ef1eb6c90e5",
+      "userId": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "type": "application",
+      "title": "New application",
+      "body": "Syed Al Mahmud applied to \"TFFF\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757434933574
+    },
+    {
+      "id": "d8c15d89-718c-44eb-ba9d-db5438f1ac36",
+      "userId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "type": "assigned",
+      "title": "Job assigned",
+      "body": "\"TFFF\" assigned to you",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757434944251
+    },
+    {
+      "id": "50845dec-248d-4089-9e31-6a419dc7d414",
+      "userId": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "type": "assigned",
+      "title": "Worker assigned",
+      "body": "Assigned Syed Al Mahmud to \"TFFF\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757434944251
+    },
+    {
+      "id": "ec7aa98b-20d5-44eb-bfa6-a437a8df00bc",
+      "userId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "type": "completed",
+      "title": "Job completed",
+      "body": "\"TFFF\" completed. You received 5★",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757434955832
+    }
+  ]
 }
