@@ -3,8 +3,8 @@
 #workerAssigned .item, #workerApplied .item{align-items:flex-start}
 
 .rating{display:inline-flex; gap:4px; align-items:center; margin-bottom:8px}
-.rating .star{font-size:22px; color:#dfe2e8; cursor:pointer; user-select:none; transition:color .15s}
-.rating .star.active{color:#aeb4bf}
+.rating .star{font-size:22px; color:var(--star-color); cursor:pointer; user-select:none; transition:color .15s}
+.rating .star.active{color:var(--star-active-color)}
 
 #clientSection .card + .card, #workerSection .card + .card{margin-top:12px}
 

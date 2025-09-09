@@ -20,6 +20,10 @@
   --hover: #f6f8fa;
   --hover-secondary: #eaeef2;
   
+  /* Legacy compatibility variables */
+  --muted: var(--text-muted);
+  --border: var(--line);
+  
   /* Enhanced Brand Colors - Original Green Shade */
   --primary: #335733;
   --primary-hover: #2d4b2d;
@@ -362,7 +366,7 @@ a.text-link:hover {
   padding: var(--space-4);
 }
 /* Minimal base — refined neutrals + perfect sizing; accent used only on buttons */
-:root{
+ :root{
   /* Neutrals */
   --bg:#f5f7fb;          /* app background */
   --surface:#ffffff;     /* cards/surfaces */
@@ -447,6 +451,8 @@ a:focus-visible{outline:none; box-shadow:var(--ring); border-radius:8px}
 .navbar .inner{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px}
 .brand{font-weight:800; color:var(--text); letter-spacing:.2px}
 .nav-links{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+.mobile-menu-toggle{display:none; flex-direction:column; gap:4px; padding:8px; background:transparent; border:0; cursor:pointer}
+.mobile-menu-toggle .hamburger-line{width:22px; height:2px; background:var(--text)}
 .nav-links a{padding:8px 10px; border-radius:10px; transition:background .2s, transform .06s}
 .nav-links a:hover{background:#eef1f600; transform:translateY(-1px)}
 #langSelect{height:40px; border-radius:10px; border:1px solid var(--line); background:var(--surface); color:var(--text); padding:6px 8px}
@@ -471,7 +477,7 @@ a:focus-visible{outline:none; box-shadow:var(--ring); border-radius:8px}
 .btn:focus-visible{outline:none; box-shadow:var(--ring), var(--shadow-md)}
 .btn:disabled{opacity:.6; cursor:not-allowed}
 .btn.outline{background:transparent; color:var(--btn); border:1px solid var(--btn)}
-.btn.outline:hover{background:#eef0ff}
+.btn.outline:hover{background:var(--primary-subtle)}
 .btn.sm{height:36px; padding:0 12px; border-radius:10px; font-size:14px}
 .btn.lg{height:44px; padding:0 16px; border-radius:14px; font-size:17px}
 
@@ -501,6 +507,12 @@ body.menu-open {
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
+}
+@media (max-width:768px){
+  .mobile-menu-toggle{display:flex}
+  .nav-links{position:absolute; top:100%; left:0; right:0; background:var(--surface-elevated); border-bottom:1px solid var(--line); box-shadow:var(--shadow-md); display:none; flex-direction:column; align-items:stretch; padding:10px}
+  .nav-links.open{display:flex}
+  .nav-links a, .nav-links .btn, .nav-links .btn.outline{width:100%; justify-content:flex-start}
 }
 /* Forms — perfect sizes */
 .input,select,textarea{
@@ -1966,35 +1978,35 @@ label {
 }
 
 /* Generic building blocks */
-.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:20px}
-.grid{display:grid; gap:16px}
-.list{display:grid; gap:12px}
-.item{
-  border:1px solid var(--line); background:var(--surface); border-radius:var(--radius);
-  padding:16px; display:flex; gap:14px; /* structure content + actions */
-}
-.item > div:first-child{flex:1; min-width:0}
-.item > div:last-child{display:flex; gap:8px; align-items:center; margin-left:auto}
-.badge{padding:4px 10px; border-radius:999px; font-size:12px; border:1px solid var(--line); background:#f2f4fb; color:#2a2f3a}
+/* duplicates removed: card/grid/list/item/badge defined earlier */
 
-.table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:12px}
-.table th,.table td{border:1px solid var(--line); padding:12px; text-align:left}
-.table th{background:#f1f3f8; color:#0d1321; position:sticky; top:0; z-index:1}
+/* duplicate table styles removed (kept enhanced version above) */
 
-.avatar{width:40px; height:40px; border-radius:50%; object-fit:cover; border:1px solid var(--line); background:var(--surface)}
-.avatar.lg{width:84px; height:84px}
+/* duplicate avatar sizes removed */
 
-.footer{color:var(--muted); font-size:14px; text-align:center; padding:20px}
+/* duplicate footer style removed */
 
 /* Bell in navbar */
-.bell{position:relative; padding:8px 10px; border-radius:10px}
-.bell:hover{background:#eef1f6}
-.bell .count{
-  position:absolute; top:2px; right:2px;
-  background:var(--btn); color:#fff; font-size:11px; line-height:18px; min-width:18px; text-align:center;
-  padding:0 6px; border-radius:999px;
-}
+/* duplicate bell styles removed */
 
 /* Responsive base */
-@media (max-width:1024px){ .form-row{grid-template-columns:1fr} }
+/* duplicate responsive base removed */
 
+/* === Navbar style refinements (overrides) === */
+.navbar{
+  background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.88));
+}
+@media (prefers-color-scheme:dark){
+  .navbar{ background: linear-gradient(180deg, rgba(18,24,33,.92), rgba(18,24,33,.84)) }
+}
+.brand a{display:inline-block; padding:6px 8px; border-radius:10px}
+.brand a span{background:linear-gradient(135deg, var(--text), var(--primary)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+.brand a:hover{background:var(--hover)}
+.nav-links a{padding:8px 12px; border-radius:10px; transition:background .2s, transform .06s, color .2s}
+.nav-links a:hover{background:var(--hover); transform:translateY(-1px)}
+.nav-links .nav-item.active{color:var(--primary); background:var(--primary-subtle)}
+.nav-links .nav-item.active::after{content:""; display:block; height:2px; background:var(--primary); border-radius:2px; margin-top:6px}
+.navbar.scrolled{box-shadow: var(--shadow-md)}
+@media (max-width:768px){
+  .nav-links{border-radius:0 0 12px 12px}
+}

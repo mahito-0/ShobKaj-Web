@@ -6,26 +6,12 @@
  */
 
 :root {
-  /* Color Palette */
-  --primary: #335733;
-  --primary-hover: #2a482a;
-  --primary-subtle: rgba(51, 87, 51, 0.1);
+  /* Homepage-specific color overrides */
   --accent: #f97316;
   --accent-dark: #ea580c;
   --accent-weak: #fed7aa;
   --accent-weak-2: #fde68a;
-  --text: #1f2937;
-  --text-secondary: #4b5563;
-  --text-muted: #6b7280;
-  --bg: #f9fafb;
-  --surface: #ffffff;
-  --surface-elevated: #f3f4f6;
-  --line: #e5e7eb;
-  --error: #ef4444;
-  --success: #22c55e;
   --star-color: #f59e0b;
-  --badge-bg: #f3f4f6;
-  --badge-text: #4b5563;
   --promo-bg: #fff7ed;
   --phone-bg: #f9fafb;
   --map-bg-1: rgba(51, 87, 51, 0.1);
@@ -899,18 +885,31 @@ body {
   border-color: var(--primary);
 }
 
- .service-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 12px;
-            background: #f1f5f900;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            color: #2c532b;
-            font-size: 24px;
-        }
+.service-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: #2c532b;
+  font-size: 24px;
+}
+
+.service-icon i {
+  display: block !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  text-rendering: auto !important;
+  line-height: 1 !important;
+  color: #2c532b !important;
+  font-size: 24px !important;
+}
+
 
 
 
@@ -1119,6 +1118,20 @@ body {
   margin: 0 auto var(--space-4);
   color: var(--primary);
   opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.step-icon i {
+  display: block;
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
 }
 
 .step-icon svg {

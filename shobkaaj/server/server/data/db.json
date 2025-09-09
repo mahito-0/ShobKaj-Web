@@ -30,7 +30,7 @@
       "phone": "01683886755",
       "nid": "",
       "passwordHash": "$2a$10$0Ddofi0.0CEaoNpTH8tafeiqooAboo.2OHYFqXPVJvMyWAvfXgfnG",
-      "verified": false,
+      "verified": true,
       "banned": false,
       "skills": [],
       "bio": "",
@@ -43,6 +43,28 @@
         "address": "Dhaka, Bangladesh"
       },
       "createdAt": 1757363991081
+    },
+    {
+      "id": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "name": "Syed Al Mahmud",
+      "email": "syedmahmud@gmail.com",
+      "role": "worker",
+      "phone": "",
+      "nid": "",
+      "passwordHash": "$2a$10$BRojLxHyyMpdgHpGBUPR0uB2vUfNQzF5C3yTHKlGsLRg/oYKlgM5W",
+      "verified": true,
+      "banned": false,
+      "skills": [],
+      "bio": "",
+      "avatar": "",
+      "rating": 0,
+      "ratingCount": 0,
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdAt": 1757433827255
     }
   ],
   "jobs": [],

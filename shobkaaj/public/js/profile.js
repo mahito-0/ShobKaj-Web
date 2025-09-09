@@ -13,7 +13,7 @@ let me = null;
   const locLabel = document.getElementById('locLabel');
   locLabel.textContent = me.location ? `Lat ${me.location.lat.toFixed(4)}, Lng ${me.location.lng.toFixed(4)}` : 'N/A';
   const avatarImg = document.getElementById('avatarImg');
-  avatarImg.src = me.avatar || '/img/avatar.png';
+  avatarImg.src = me.avatar || '/img/avater.png';
 
   document.getElementById('locBtn').setAttribute('data-i18n','common.useMyLocation'); i18n.apply(document);
   document.getElementById('locBtn').onclick = ()=>{
@@ -56,7 +56,7 @@ let me = null;
     fd.append('avatar', file);
     try {
       const res = await $api('/api/me/avatar', { method: 'POST', formData: fd });
-      document.getElementById('avatarImg').src = res.avatar || '/img/avatar.png';
+      document.getElementById('avatarImg').src = res.avatar || '/img/avater.png';
       alert(i18n.t('profile.pictureUpdated'));
     } catch (e) { alert(e.message); }
   });

@@ -248,7 +248,9 @@ app.post('/api/forgot-password', async (req, res) => {
   saveDB();
   console.log(`Generated reset token for user ${user.id}: ${resetToken}. Expires: ${new Date(resetTokenExpires)}`);
 
-  const resetLink = `http://localhost:3000/reset-password.html?token=${resetToken}`;
+  const origin = req.headers.origin || `${req.protocol}://${req.headers.host}`.replace(/:\d+$/, '');
+  const base = origin || 'http://localhost:3000';
+  const resetLink = `${base}/reset-password.html?token=${resetToken}`;
   console.log(`Sending reset email to ${user.email} with link: ${resetLink}`);
   await sendEmail(user.email, 'Password Reset Request', `
     <p>You requested a password reset. Click the link below to reset your password:</p>
@@ -410,8 +412,10 @@ app.put('/api/jobs/:id/assign', authRequired, roleRequired('client'), async (req
   await notifyUser(job.createdBy, { type: 'assigned', title: 'Worker assigned', body: `Assigned ${worker.name} to "${job.title}"`, url: '/my-jobs.html' });
 
   const client = db.users.find(u => u.id === job.createdBy);
-  await sendEmail(worker.email, `You were assigned: "${job.title}"`, `<p>You have been assigned to "${job.title}".</p><p><a href="http://localhost:3000/my-jobs.html">View job</a></p>`);
-  await sendEmail(client?.email, `Worker assigned: "${job.title}"`, `<p>You assigned ${worker.name} to "${job.title}".</p><p><a href="http://localhost:3000/my-jobs.html">View job</a></p>`);
+  const origin = req.headers.origin || `${req.protocol}://${req.headers.host}`.replace(/:\d+$/, '');
+  const base = origin || 'http://localhost:3000';
+  await sendEmail(worker.email, `You were assigned: "${job.title}"`, `<p>You have been assigned to "${job.title}".</p><p><a href="${base}/my-jobs.html">View job</a></p>`);
+  await sendEmail(client?.email, `Worker assigned: "${job.title}"`, `<p>You assigned ${worker.name} to "${job.title}".</p><p><a href="${base}/my-jobs.html">View job</a></p>`);
 
   res.json({ job });
 });

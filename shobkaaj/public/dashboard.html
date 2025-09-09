@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ড্যাশবোর্ড - ShobKaaj</title>
   <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/dshboard.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 <body>
   <nav class="navbar" id="navbar"></nav>
@@ -25,10 +25,10 @@
       if (!me) return;
       i18n.apply(document);
       const info = document.getElementById('info');
-      const avatar = me.avatar || '/img/avatar.png';
+      const avatar = me.avatar || '/img/avater.png';
       info.innerHTML = `
         <div style="display:flex;gap:12px;align-items:center;">
-          <img class="avatar lg" src="${avatar}" onerror="this.src='/img/avatar.png'"/>
+          <img class="avatar lg" src="${avatar}" onerror="this.src='/img/avater.png'"/>
           <div>
             <div><strong>${me.name}</strong> (${me.role}) ${me.verified ? '<span class="badge">Verified</span>' : '<span class="badge">Unverified</span>'}</div>
             <div>${me.email} • ${me.phone || 'No phone'}</div>
@@ -46,11 +46,24 @@
           <div class="card"><h3>Chat</h3><p>Talk to workers.</p><a class="btn outline" href="/chat.html">Open Chat</a></div>
         `;
       } else if (me.role === 'worker') {
-        actions.innerHTML = `
-          <div class="card"><h3>Find Jobs</h3><p>See nearby open jobs.</p><a class="btn" href="/jobs.html">Browse Jobs</a></div>
-          <div class="card"><h3>My Jobs</h3><p>Assigned and applied jobs.</p><a class="btn outline" href="/my-jobs.html">Open</a></div>
-          <div class="card"><h3>Chat</h3><p>Talk to clients.</p><a class="btn outline" href="/chat.html">Open Chat</a></div>
-        `;
+        try {
+          const mine = await $api('/api/jobs/mine');
+          const completed = (mine.assignedJobs || []).filter(j => j.status === 'completed');
+          const total = completed.reduce((sum, j) => sum + (Number(j.budget) || 0), 0);
+          const totalFmt = '৳' + (total || 0).toLocaleString('en-BD');
+          actions.innerHTML = `
+            <div class="card"><h3>Total Earnings</h3><p>Completed jobs: ${completed.length}</p><div><strong style="font-size:24px">${totalFmt}</strong></div></div>
+            <div class="card"><h3>Find Jobs</h3><p>See nearby open jobs.</p><a class="btn" href="/jobs.html">Browse Jobs</a></div>
+            <div class="card"><h3>My Jobs</h3><p>Assigned and applied jobs.</p><a class="btn outline" href="/my-jobs.html">Open</a></div>
+            <div class="card"><h3>Chat</h3><p>Talk to clients.</p><a class="btn outline" href="/chat.html">Open Chat</a></div>
+          `;
+        } catch (e) {
+          actions.innerHTML = `
+            <div class="card"><h3>Find Jobs</h3><p>See nearby open jobs.</p><a class="btn" href="/jobs.html">Browse Jobs</a></div>
+            <div class="card"><h3>My Jobs</h3><p>Assigned and applied jobs.</p><a class="btn outline" href="/my-jobs.html">Open</a></div>
+            <div class="card"><h3>Chat</h3><p>Talk to clients.</p><a class="btn outline" href="/chat.html">Open Chat</a></div>
+          `;
+        }
       } else if (me.role === 'admin') {
         actions.innerHTML = `<div class="card"><h3>Admin Panel</h3><p>Users, Jobs, Live Chat Monitor</p><a class="btn" href="/admin.html">Open Admin</a></div>`;
       }

@@ -5,12 +5,12 @@ function esc(s){ return (s??'').toString().replace(/[&<>"']/g, m=>({ '&':'&amp;'
 function cardWorker(w) {
   const dist = (w.distanceKm != null) ? `${w.distanceKm.toFixed(1)} km` : '';
   const skills = (w.skills||[]).join(', ');
-  const avatar = w.avatar || '/img/avatar.png';
+  const avatar = w.avatar || '/img/avater.png';
   const div = document.createElement('div');
   div.className = 'item';
   div.innerHTML = `
     <div style="display:flex;gap:8px;align-items:center;">
-      <img class="avatar" src="${avatar}" onerror="this.src='/img/avatar.png'"/>
+      <img class="avatar" src="${avatar}" onerror="this.src='/img/avater.png'"/>
       <div>
         <div><strong>${esc(w.name)}</strong> <span class="badge">${(w.rating||0).toFixed(1)}★</span></div>
         <div class="small">${esc(skills || 'No skills')}${dist ? ' • ' + dist : ''}</div>

@@ -1,7 +1,9 @@
 /* Dashboard — glance + perfectly sized actions */
 #info .avatar.lg{box-shadow:var(--shadow-sm)}
 #actions{margin-top:12px}
-#actions .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+#actions{margin-top:16px}
+#actions.grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+#actions .card{min-height:160px; display:flex; flex-direction:column; justify-content:space-between}
 #actions .card{transition:box-shadow .25s, transform .1s, border-color .2s}
-#actions .card:hover{box-shadow:var(--shadow-sm); transform:translateY(-2px); border-color:#dfe3e9}
+#actions .card:hover{box-shadow:var(--shadow-sm); transform:translateY(-2px); border-color:var(--primary-subtle)}
 #actions .card p{color:var(--muted); margin:4px 0 0}

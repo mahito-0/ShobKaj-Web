@@ -8,7 +8,7 @@
 .n-body{color:var(--muted);margin-top:2px}
 .n-time{color:var(--muted);font-size:12px}
 .n-actions{display:flex;gap:8px;align-items:center}
-.n-unread{background:#eef6ef;border-color:#d8eadb}
+.n-unread{background:var(--notification-unread-bg);border-color:var(--notification-unread-border)}
 .dot-unread{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--btn)}
 
 @media (max-width:640px){

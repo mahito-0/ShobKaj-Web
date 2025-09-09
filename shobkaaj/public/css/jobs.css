@@ -5,16 +5,16 @@
   border:1px solid var(--line); background:var(--surface); border-radius:var(--radius);
   padding:16px; display:flex; gap:14px; align-items:flex-start; box-shadow:var(--shadow-sm); transition:transform .08s, box-shadow .2s, border-color .2s;
 }
-#jobs .item:hover{transform:translateY(-1px); box-shadow:var(--shadow-sm); border-color:#dfe3ea}
+#jobs .item:hover{transform:translateY(-1px); box-shadow:var(--shadow-sm); border-color:var(--primary-subtle)}
 #jobs .item > div:first-child{flex:1; min-width:0}
 #jobs .item > div:last-child{margin-left:auto; display:flex; gap:8px; align-items:center}
 #jobs .item .small{margin-top:6px; color:var(--muted)}
 
-/* Neutral status badges */
-.badge{padding:4px 10px; border-radius:999px; font-size:12px; border:1px solid var(--line); background:#f3f5fa; color:#2c323c}
-.status-open{background:#eff1f6; border-color:#e2e5ec; color:#151a21}
-.status-assigned{background:#ededf2; border-color:#e1e4ea; color:#161a21}
-.status-completed{background:#f7f8fb; border-color:#e9ecf1; color:#1b1f26}
+/* Status badges with consistent colors */
+.badge{padding:4px 10px; border-radius:999px; font-size:12px; border:1px solid var(--line); background:var(--surface); color:var(--text-secondary)}
+.status-open{background:var(--status-open-bg); border-color:var(--status-open-border); color:var(--status-open-text)}
+.status-assigned{background:var(--status-assigned-bg); border-color:var(--status-assigned-border); color:var(--status-assigned-text)}
+.status-completed{background:var(--status-completed-bg); border-color:var(--status-completed-border); color:var(--status-completed-text)}
 
 /* Mobile stacking */
 @media (max-width:640px){

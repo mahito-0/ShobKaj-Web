@@ -10,11 +10,11 @@ function renderConversations(list) {
   list.forEach(c => {
     const last = c.lastMessage ? ` • ${esc(c.lastMessage.text.slice(0,30))}` : '';
     const otherName = esc(c.other?.name || 'User');
-    const avatar = c.other?.avatar || '/img/avatar.png';
+    const avatar = c.other?.avatar || '/img/avater.png';
     const jobBadge = c.jobId ? ` <span class="badge">Job</span>` : '';
     const div = document.createElement('div');
     div.className = 'conv' + (currentConv?.id===c.id ? ' active' : '');
-    div.innerHTML = `<img class="avatar" src="${avatar}" onerror="this.src='/img/avatar.png'"/><div><strong>${otherName}</strong>${jobBadge}<div class="small">${last}</div></div>`;
+    div.innerHTML = `<img class="avatar" src="${avatar}" onerror="this.src='/img/avater.png'"/><div><strong>${otherName}</strong>${jobBadge}<div class="small">${last}</div></div>`;
     div.onclick = () => openConversation(c);
     el.appendChild(div);
   });
@@ -57,8 +57,8 @@ async function openConversation(conv) {
     const title = await fetchJobTitle(conv.jobId);
     head += ` • <span class="badge">Job: ${esc(title.slice(0,20))}</span>`;
   }
-  const avatar = conv.other?.avatar || '/img/avatar.png';
-  document.getElementById('activeHeader').innerHTML = `<span style="display:flex;align-items:center;gap:8px;"><img class="avatar" src="${avatar}" onerror="this.src='/img/avatar.png'"/> <strong>${head}</strong> <span class="badge">Conv: ${conv.id.slice(0,8)}</span></span>`;
+  const avatar = conv.other?.avatar || '/img/avater.png';
+  document.getElementById('activeHeader').innerHTML = `<span style="display:flex;align-items:center;gap:8px;"><img class="avatar" src="${avatar}" onerror="this.src='/img/avater.png'"/> <strong>${head}</strong> <span class="badge">Conv: ${conv.id.slice(0,8)}</span></span>`;
   const data = await $api(`/api/conversations/${conv.id}/messages`);
   messages = data.messages;
   renderMessages();
