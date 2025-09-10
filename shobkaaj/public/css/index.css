@@ -678,8 +678,8 @@ h2 {
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-sm);
   font-size: var(--fs-xs);
-  font-weight: var(--fw-medium);
-  color: var(--text);
+  font-weight: var(--fw-extrabold);
+  color: #335733;
 }
 .avatar {
   width: 24px; height: 24px;
@@ -845,7 +845,6 @@ h2 {
   ========================= */
 .services-showcase {
   padding: var(--section-padding) 0;
-  background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
 }
 .services-grid {
   display: grid;

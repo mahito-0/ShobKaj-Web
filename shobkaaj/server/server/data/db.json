@@ -102,8 +102,33 @@
       "createdAt": 1757434925208
     }
   ],
-  "conversations": [],
-  "messages": [],
+  "conversations": [
+    {
+      "id": "23140883-6b4e-4ffb-94ef-175639cae5aa",
+      "participants": [
+        "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+        "b03d84ab-2ce2-4daa-8629-790a22adebe8"
+      ],
+      "jobId": "ce7d0033-0d87-4f78-b8ff-9e636fedb938",
+      "createdAt": 1757522536659
+    }
+  ],
+  "messages": [
+    {
+      "id": "2074a2d2-a84c-40cc-81cf-a06727b54bdb",
+      "conversationId": "23140883-6b4e-4ffb-94ef-175639cae5aa",
+      "from": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "text": "hi",
+      "createdAt": 1757522544512
+    },
+    {
+      "id": "ec4f69f7-64cb-49c5-8d38-c816c40150c6",
+      "conversationId": "23140883-6b4e-4ffb-94ef-175639cae5aa",
+      "from": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "text": "hello",
+      "createdAt": 1757522600377
+    }
+  ],
   "pushSubs": [],
   "notifications": [
     {

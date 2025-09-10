@@ -51,8 +51,11 @@ function renderNavbar(user) {
         const nameElement = heroProfilePill.querySelector('span');
         
         if (avatarElement) {
-          avatarElement.src = avatar;
-          avatarElement.alt = user.name;
+          avatarElement.style.backgroundImage = `url('${avatar}')`;
+          avatarElement.style.backgroundSize = 'cover';
+          avatarElement.style.backgroundPosition = 'center';
+          avatarElement.textContent = ''; // Clear any existing content like initials
+          avatarElement.setAttribute('aria-label', user.name); // Add accessibility
         }
         if (nameElement) {
           nameElement.textContent = user.name;
@@ -71,7 +74,7 @@ function renderNavbar(user) {
     if (user.role === 'admin') {
       navItems = [
         { href: '/admin.html', text: i18n.t('nav.admin'), auth: true },
-        { href: '/profile.html', text: i18n.t('nav.profile'), auth: true },
+        { href: '/dashboard.html', text: i18n.t('nav.dashboard'), auth: true },
       ];
     } else {
       navItems = [
@@ -82,7 +85,7 @@ function renderNavbar(user) {
         { href: '/post-job.html', text: i18n.t('nav.postJob'), auth: true, role: 'client' },
         { href: '/chat.html', text: i18n.t('nav.chat'), auth: true },
         { href: '/notifications.html', text: i18n.t('nav.notifications'), auth: true },
-        { href: '/profile.html', text: i18n.t('nav.profile'), auth: true },
+
       ];
 
       if (user.role === 'client') {
@@ -104,25 +107,20 @@ function renderNavbar(user) {
         <span class="hamburger-line"></span>
       </button>
       <div class="nav-links" id="navLinks">
-        ${isHomePage && !user ? `
-          <a href="/login.html" class="nav-item" data-i18n="nav.login">${i18n.t('nav.login')}</a>
-          <a href="/register.html" class="nav-item" data-i18n="nav.register">${i18n.t('nav.register')}</a>
-        ` : ''}
         ${navItems.map(item => {
           if (item.auth && !user) return '';
           if (item.role && item.role !== user?.role) return '';
           return `<a href="${item.href}" class="nav-item${path.endsWith(item.href) ? ' active' : ''}" data-i18n="${item.text}">${item.text}</a>`;
         }).join('')}
         ${user ? `
-          <div class="avatar-dropdown" tabindex="0">
-            <img class="avatar" id="avatarDropdown" src="${avatar}" onerror="this.src='/img/avater.png'"/>
-            <div class="dropdown-content" id="dropdownContent">
-              <a href="/profile.html" class="btn outline" data-i18n="nav.profile">${i18n.t('nav.profile')}</a>
-              <button class="btn outline" id="logoutBtn" data-i18n="nav.logout">${i18n.t('nav.logout')}</button>
-            </div>
-          </div>
-        ` : ''}
-        <select id="langSelect" class="input" style="width:auto;padding:0px 0px;">
+            <a href="/profile.html" style="display: flex; align-items: center; gap: 10px;">
+                <img class="avatar" src="${avatar}" onerror="this.src='/img/avater.png'"/>
+            </a>
+            <button class="btn outline" id="logoutBtn" data-i18n="nav.logout">${i18n.t('nav.logout')}</button>
+        ` : `
+            <a href="/login.html" class="btn outline" data-i18n="nav.login">${i18n.t('nav.login')}</a>
+        `}
+        <select id="langSelect" class="input" style="width:auto;padding:0px 0px; background:transparent; border:none; font-size:inherit; font-family:inherit; cursor:pointer;" aria-label="${i18n.t('nav.language')}">
           <option value="bn">বাংলা</option>
           <option value="en">English</option>
         </select>
@@ -139,19 +137,7 @@ function renderNavbar(user) {
 
   i18n.apply(el);
 
-  const avatarDropdown = el.querySelector('.avatar-dropdown');
-  if (avatarDropdown) {
-    const dropdownContent = avatarDropdown.querySelector('.dropdown-content');
-    avatarDropdown.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dropdownContent.classList.toggle('show');
-    });
-    avatarDropdown.addEventListener('focusout', (e) => {
-        if (!avatarDropdown.contains(e.relatedTarget)) {
-            dropdownContent.classList.remove('show');
-        }
-    });
-  }
+  
 
   initNotifications(user);
 

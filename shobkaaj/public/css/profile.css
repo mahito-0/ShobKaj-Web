@@ -1,6 +1,6 @@
 /* Profile — consistent input sizes + avatar row aligned */
 main{min-height:calc(100vh - 120px); display:grid; place-items:center; padding:16px}
-main .card{width:min(720px,96vw); transition:box-shadow .25s, transform .1s}
+main .card{width:min(700px,96vw); transition:box-shadow .25s, transform .1s}
 main .card:hover{box-shadow:var(--shadow-sm); transform:translateY(-2px)}
 #avatarInput{display:block}
 input[type="file"]::-webkit-file-upload-button{

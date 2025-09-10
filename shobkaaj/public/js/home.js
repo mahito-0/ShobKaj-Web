@@ -176,4 +176,25 @@
       el.onpointermove = null; el.onpointerleave = null; el.style.transform = '';
     });
   }
+
+  // Back to Top Button functionality
+  const backToTopBtn = document.getElementById('backToTopBtn');
+  if (backToTopBtn) {
+    // Show/hide the button based on scroll position
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) { // Show button after scrolling 300px
+        backToTopBtn.classList.add('show');
+      } else {
+        backToTopBtn.classList.remove('show');
+      }
+    });
+
+    // Scroll to top when button is clicked
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Smooth scroll
+      });
+    });
+  }
 })();
