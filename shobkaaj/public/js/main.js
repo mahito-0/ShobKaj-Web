@@ -64,68 +64,36 @@ function renderNavbar(user) {
     }
   }
 
-  // Define navigation items for different pages and user roles
-  const allNavItems = [
-    { href: '/workers.html', text: i18n.t('nav.workers'), auth: false },
-    { href: '/my-jobs.html', text: i18n.t('nav.myJobs'), auth: true },
-    { href: '/dashboard.html', text: i18n.t('nav.dashboard'), auth: true },
-    { href: '/profile.html', text: i18n.t('nav.profile'), auth: true },
-    { href: '/chat.html', text: i18n.t('nav.chat'), auth: true },
-    { href: '/admin.html', text: i18n.t('nav.admin'), auth: true, role: 'admin' },
-    { href: '/login.html', text: i18n.t('nav.login'), auth: false },
-    { href: '/register.html', text: i18n.t('nav.register'), auth: false },
-    { href: '/jobs.html', text: i18n.t('nav.jobs'), auth: false },
-    { href: '/post-job.html', text: i18n.t('nav.postJob'), auth: true },
-  ];
+  let navItems = [];
+  let primaryCTA = null;
 
-  // Decide what nav links each page should show (authoritative per-page lists)
-  const pageNavMap = {
-    '/index.html': user ? ['/jobs.html','/workers.html','/chat.html','/notifications.html','/profile.html'] : ['/login.html','/register.html','/jobs.html','/workers.html'],
-    '/': user ? ['/jobs.html','/workers.html','/chat.html','/notifications.html','/profile.html'] : ['/login.html','/register.html','/jobs.html','/workers.html'],
-    '/login.html': user ? ['/jobs.html','/profile.html','/notifications.html'] : ['/register.html','/jobs.html'],
-    '/register.html': user ? ['/jobs.html','/profile.html','/notifications.html'] : ['/login.html','/jobs.html'],
-    '/jobs.html': ['/jobs.html','/workers.html','/chat.html','/notifications.html','/profile.html'],
-    '/workers.html': ['/workers.html','/jobs.html','/chat.html','/profile.html'],
-    '/post-job.html': ['/post-job.html','/my-jobs.html','/profile.html','/notifications.html'],
-    '/my-jobs.html': ['/my-jobs.html','/post-job.html','/profile.html','/notifications.html'],
-    '/dashboard.html': ['/dashboard.html','/admin.html','/profile.html','/notifications.html'],
-    '/profile.html': ['/profile.html','/my-jobs.html','/post-job.html','/jobs.html'],
-    '/chat.html': ['/chat.html','/profile.html','/notifications.html'],
-    '/notifications.html': ['/notifications.html','/profile.html','/jobs.html'],
-    '/admin.html': ['/admin.html','/dashboard.html','/profile.html']
-  };
+  if (user) {
+    if (user.role === 'admin') {
+      navItems = [
+        { href: '/admin.html', text: i18n.t('nav.admin'), auth: true },
+        { href: '/profile.html', text: i18n.t('nav.profile'), auth: true },
+      ];
+    } else {
+      navItems = [
+        { href: '/dashboard.html', text: i18n.t('nav.dashboard'), auth: true },
+        { href: '/jobs.html', text: i18n.t('nav.jobs'), auth: true },
+        { href: '/workers.html', text: i18n.t('nav.workers'), auth: true },
+        { href: '/my-jobs.html', text: i18n.t('nav.myJobs'), auth: true },
+        { href: '/post-job.html', text: i18n.t('nav.postJob'), auth: true, role: 'client' },
+        { href: '/chat.html', text: i18n.t('nav.chat'), auth: true },
+        { href: '/notifications.html', text: i18n.t('nav.notifications'), auth: true },
+        { href: '/profile.html', text: i18n.t('nav.profile'), auth: true },
+      ];
 
-  // Determine current path key
-  const currentPath = path.endsWith('/') ? '/index.html' : path;
-  const hrefsForPage = pageNavMap[currentPath] || ['/jobs.html','/workers.html','/profile.html'];
-
-  // Map hrefs to nav item objects (preserve order)
-  let navItems = hrefsForPage.map(h => allNavItems.find(it => it.href === h)).filter(Boolean);
-
-  // Filter nav items based on authentication and role
-  let filteredNavItems = navItems.filter(item => {
-    if (item.auth && !user) return false;
-    if (item.role && user && user.role !== item.role) return false;
-    if (item.role && !user) return false;
-    return true;
-  });
-
-  function getPrimaryCTA() {
-    if (!user) {
-      if (path.endsWith('/login.html')) return { href: '/register.html', text: i18n.t('nav.register') };
-      return { href: '/login.html', text: i18n.t('nav.login') };
+      if (user.role === 'client') {
+        navItems = navItems.filter(item => item.href !== '/jobs.html');
+      } else if (user.role === 'worker') {
+        navItems = navItems.filter(item => item.href !== '/post-job.html' && item.href !== '/workers.html');
+      }
     }
-    if (user.role === 'client') {
-      return { href: '/post-job.html', text: i18n.t('nav.postJob') };
-    }
-    return { href: '/jobs.html', text: i18n.t('nav.jobs') };
   }
-  const primaryCTA = getPrimaryCTA();
 
-  // Ensure primary CTA doesn't duplicate in nav items
-  if (primaryCTA) {
-    filteredNavItems = filteredNavItems.filter(it => it.href !== primaryCTA.href);
-  }
+  const isHomePage = path === '/index.html' || path === '/';
 
   el.innerHTML = `
     <div class="inner">
@@ -136,24 +104,24 @@ function renderNavbar(user) {
         <span class="hamburger-line"></span>
       </button>
       <div class="nav-links" id="navLinks">
-        ${primaryCTA ? `<a href="${primaryCTA.href}" class="btn primary-action">${primaryCTA.text}</a>` : ''}
-        ${filteredNavItems.map(item => `
-          <a href="${item.href}" class="nav-item${path.endsWith(item.href) ? ' active' : ''}" data-i18n="${item.text}">${item.text}</a>
-        `).join('')}
-        <a href="/notifications.html" class="bell" title="Notifications">
-          <span>🔔</span>
-          <span id="notifCount" class="count" style="display:none">0</span>
-        </a>
+        ${isHomePage && !user ? `
+          <a href="/login.html" class="nav-item" data-i18n="nav.login">${i18n.t('nav.login')}</a>
+          <a href="/register.html" class="nav-item" data-i18n="nav.register">${i18n.t('nav.register')}</a>
+        ` : ''}
+        ${navItems.map(item => {
+          if (item.auth && !user) return '';
+          if (item.role && item.role !== user?.role) return '';
+          return `<a href="${item.href}" class="nav-item${path.endsWith(item.href) ? ' active' : ''}" data-i18n="${item.text}">${item.text}</a>`;
+        }).join('')}
         ${user ? `
           <div class="avatar-dropdown" tabindex="0">
             <img class="avatar" id="avatarDropdown" src="${avatar}" onerror="this.src='/img/avater.png'"/>
             <div class="dropdown-content" id="dropdownContent">
-              <a href="/profile.html" class="btn outline${path.endsWith('/profile.html') ? ' active' : ''}" data-i18n="nav.profile">${i18n.t('nav.profile')}</a>
-              ${user.role === 'admin' ? `<a href="/admin.html" class="btn outline${path.endsWith('/admin.html') ? ' active' : ''}" data-i18n="nav.admin">${i18n.t('nav.admin')}</a>` : ''}
+              <a href="/profile.html" class="btn outline" data-i18n="nav.profile">${i18n.t('nav.profile')}</a>
               <button class="btn outline" id="logoutBtn" data-i18n="nav.logout">${i18n.t('nav.logout')}</button>
             </div>
           </div>
-        ` : ``}
+        ` : ''}
         <select id="langSelect" class="input" style="width:auto;padding:0px 0px;">
           <option value="bn">বাংলা</option>
           <option value="en">English</option>
@@ -161,6 +129,7 @@ function renderNavbar(user) {
       </div>
     </div>
   `;
+
   const langSel = document.getElementById('langSelect');
   langSel.value = i18n.lang;
   langSel.onchange = (e) => { i18n.setLang(e.target.value); window.location.reload(); };
