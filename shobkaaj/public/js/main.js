@@ -74,49 +74,39 @@ function renderNavbar(user) {
     { href: '/admin.html', text: i18n.t('nav.admin'), auth: true, role: 'admin' },
     { href: '/login.html', text: i18n.t('nav.login'), auth: false },
     { href: '/register.html', text: i18n.t('nav.register'), auth: false },
+    { href: '/jobs.html', text: i18n.t('nav.jobs'), auth: false },
+    { href: '/post-job.html', text: i18n.t('nav.postJob'), auth: true },
   ];
 
-  // If there's a logged-in user, remove login/register from the nav items
-  let visibleNavItems = user
-    ? allNavItems.filter(it => it.href !== '/login.html' && it.href !== '/register.html')
-    : allNavItems.slice();
-
-  // Role-specific exclusions:
-  // - clients should not see the "jobs" nav item
-  // - workers should not see the "workers" nav item
-  if (user) {
-    if (user.role === 'client') {
-      visibleNavItems = visibleNavItems.filter(it => it.href !== '/jobs.html');
-    }
-    if (user.role === 'worker') {
-      visibleNavItems = visibleNavItems.filter(it => it.href !== '/workers.html');
-    }
-  }
-
-  const navConfig = {
-    '/index.html': [...visibleNavItems],
-    '/': [...visibleNavItems],
-    '/login.html': [...visibleNavItems],
-    '/register.html': [...visibleNavItems],
-    '/jobs.html': [...visibleNavItems],
-    '/workers.html': [...visibleNavItems],
-    '/post-job.html': [...visibleNavItems],
-    '/my-jobs.html': [...visibleNavItems],
-    '/dashboard.html': [...visibleNavItems],
-    '/profile.html': [...visibleNavItems],
-    '/chat.html': [...visibleNavItems],
-    '/notifications.html': [...visibleNavItems],
-    '/admin.html': [...visibleNavItems],
+  // Decide what nav links each page should show (authoritative per-page lists)
+  const pageNavMap = {
+    '/index.html': user ? ['/jobs.html','/workers.html','/chat.html','/notifications.html','/profile.html'] : ['/login.html','/register.html','/jobs.html','/workers.html'],
+    '/': user ? ['/jobs.html','/workers.html','/chat.html','/notifications.html','/profile.html'] : ['/login.html','/register.html','/jobs.html','/workers.html'],
+    '/login.html': user ? ['/jobs.html','/profile.html','/notifications.html'] : ['/register.html','/jobs.html'],
+    '/register.html': user ? ['/jobs.html','/profile.html','/notifications.html'] : ['/login.html','/jobs.html'],
+    '/jobs.html': ['/jobs.html','/workers.html','/chat.html','/notifications.html','/profile.html'],
+    '/workers.html': ['/workers.html','/jobs.html','/chat.html','/profile.html'],
+    '/post-job.html': ['/post-job.html','/my-jobs.html','/profile.html','/notifications.html'],
+    '/my-jobs.html': ['/my-jobs.html','/post-job.html','/profile.html','/notifications.html'],
+    '/dashboard.html': ['/dashboard.html','/admin.html','/profile.html','/notifications.html'],
+    '/profile.html': ['/profile.html','/my-jobs.html','/post-job.html','/jobs.html'],
+    '/chat.html': ['/chat.html','/profile.html','/notifications.html'],
+    '/notifications.html': ['/notifications.html','/profile.html','/jobs.html'],
+    '/admin.html': ['/admin.html','/dashboard.html','/profile.html']
   };
 
-  // Get the navigation items for the current page
+  // Determine current path key
   const currentPath = path.endsWith('/') ? '/index.html' : path;
-  const navItems = navConfig[currentPath] || [];
+  const hrefsForPage = pageNavMap[currentPath] || ['/jobs.html','/workers.html','/profile.html'];
 
-  // Filter nav items based on user authentication and role
-  const filteredNavItems = navItems.filter(item => {
+  // Map hrefs to nav item objects (preserve order)
+  let navItems = hrefsForPage.map(h => allNavItems.find(it => it.href === h)).filter(Boolean);
+
+  // Filter nav items based on authentication and role
+  let filteredNavItems = navItems.filter(item => {
     if (item.auth && !user) return false;
     if (item.role && user && user.role !== item.role) return false;
+    if (item.role && !user) return false;
     return true;
   });
 
@@ -131,6 +121,11 @@ function renderNavbar(user) {
     return { href: '/jobs.html', text: i18n.t('nav.jobs') };
   }
   const primaryCTA = getPrimaryCTA();
+
+  // Ensure primary CTA doesn't duplicate in nav items
+  if (primaryCTA) {
+    filteredNavItems = filteredNavItems.filter(it => it.href !== primaryCTA.href);
+  }
 
   el.innerHTML = `
     <div class="inner">
