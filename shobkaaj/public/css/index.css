@@ -633,8 +633,8 @@ h2 {
 }
 .phone-mockup {
   position: relative;
-  width: 288px;
-  height: 576px;
+  width: 298px;
+  height: 530px;
   background: linear-gradient(145deg, #f0f0f3, #cacaca);
   border-radius: 36px;
   padding: 10px;
@@ -678,8 +678,8 @@ h2 {
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-sm);
   font-size: var(--fs-xs);
-  font-weight: var(--fw-medium);
-  color: var(--text);
+  font-weight: var(--fw-bold);
+  color: #335733;
 }
 .avatar {
   width: 24px; height: 24px;

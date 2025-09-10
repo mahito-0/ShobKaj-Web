@@ -228,7 +228,7 @@ a:focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--r
   .navbar, .topbar { background: linear-gradient(180deg, rgba(18, 24, 33, 0), rgba(18, 24, 33, 0)); }
 }
 .navbar .inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 36px; }
-.brand { font-weight: 800; color: var(--text); letter-spacing: .2px; }
+.brand { font-size: 30px; font-weight: 800; color: var(--text); letter-spacing: .2px; }
 
 /* scrolled state */
 .navbar.scrolled { background: rgba(255,255,255,0.98); box-shadow: var(--shadow-md); }
