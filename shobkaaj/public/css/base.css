@@ -258,7 +258,8 @@ a:focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--r
 .btn:focus-visible{ outline:none; box-shadow: var(--ring), var(--shadow-md); }
 .btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; box-shadow: var(--shadow-xs); }
 
-.btn.outline{ background:transparent; color:var(--primary); border:1px solid var(--primary); box-shadow:none; }
+.btn.outline{ background:transparent; color:white; border:1px solid whitesmoke; box-shadow:none; }
+.btn.outline:hover{ background:var(--primary); color:var(--text); border-color:var(--text); box-shadow:var(--shadow-sm); }
 .btn.ghost{ background:transparent; border:none; color:var(--text); box-shadow:none; }
 .btn.destructive{ background: linear-gradient(135deg, var(--error) 0%, var(--error-muted) 100%); border-color:var(--error); color:#fff; }
 .btn.primary-action{ padding: var(--space-2) var(--space-4); background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%); border:none; font-weight:var(--fw-semibold); box-shadow:var(--shadow-sm); }
@@ -365,8 +366,8 @@ select:focus { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http:/
 
 /* language selector */
 .langSelect{ position:relative; }
-.lang-select{ appearance:none; background: var(--surface); padding:0 var(--space-10) }
-.lang-select:focus{ outline:none; box-shadow: var(--ring); }
+.lang-select{ appearance:none; background: transparent; padding:0 var(--space-10) }
+.lang-select:focus{ background: transparent; outline:none; box-shadow: var(--ring); }
 
 /* 11) RESPONSIVE RULES (mobile / tablet) */
 @media (max-width: 1024px) {
