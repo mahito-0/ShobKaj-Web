@@ -34,7 +34,7 @@
       "banned": false,
       "skills": [],
       "bio": "",
-      "avatar": "/uploads/b03d84ab-2ce2-4daa-8629-790a22adebe8_1757514187935.jpg",
+      "avatar": "/uploads/b03d84ab-2ce2-4daa-8629-790a22adebe8_1757536021735.jpg",
       "rating": 0,
       "ratingCount": 0,
       "location": {
@@ -54,7 +54,9 @@
       "passwordHash": "$2a$10$BRojLxHyyMpdgHpGBUPR0uB2vUfNQzF5C3yTHKlGsLRg/oYKlgM5W",
       "verified": true,
       "banned": false,
-      "skills": [],
+      "skills": [
+        "tuition"
+      ],
       "bio": "",
       "avatar": "/uploads/a7e7b40b-3467-46ac-99c3-ead5eb741b6d_1757514159144.jpg",
       "rating": 5,
@@ -111,6 +113,15 @@
       ],
       "jobId": "ce7d0033-0d87-4f78-b8ff-9e636fedb938",
       "createdAt": 1757522536659
+    },
+    {
+      "id": "2d00b3c0-f81c-4a46-8934-d5a4cd027e93",
+      "participants": [
+        "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+        "a7e7b40b-3467-46ac-99c3-ead5eb741b6d"
+      ],
+      "jobId": null,
+      "createdAt": 1757537428829
     }
   ],
   "messages": [
