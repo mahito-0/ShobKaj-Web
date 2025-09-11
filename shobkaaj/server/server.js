@@ -131,6 +131,7 @@ function ensureAdmin() {
       avatar: '',
       rating: 0,
       ratingCount: 0,
+      totalEarnings: 0,
       location: { lat: 23.8103, lng: 90.4125, address: 'Dhaka, Bangladesh' },
       createdAt: Date.now()
     });
@@ -431,9 +432,12 @@ app.post('/api/jobs/:id/complete', authRequired, roleRequired('client'), async (
   job.reviews.push({ by: req.user.id, target: job.assignedTo, rating, comment, createdAt: Date.now() });
   const worker = db.users.find(u => u.id === job.assignedTo);
   if (worker) {
-    worker.ratingCount = (worker.ratingCount || 0) + 1;
-    worker.rating = ((worker.rating || 0) * (worker.ratingCount - 1) + rating) / worker.ratingCount;
+    if (worker) {
+    if (worker) {
+    worker.totalEarnings = (worker.totalEarnings || 0) + job.budget;
   }
+  saveDB();
+  saveDB();
   saveDB();
 
   await notifyUser(job.assignedTo, { type: 'completed', title: 'Job completed', body: `"${job.title}" completed. You received ${rating}★`, url: '/my-jobs.html' });

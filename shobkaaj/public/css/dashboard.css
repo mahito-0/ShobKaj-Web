@@ -7,3 +7,20 @@
 #actions .card{transition:box-shadow .25s, transform .1s, border-color .2s}
 #actions .card:hover{box-shadow:var(--shadow-sm); transform:translateY(-2px); border-color:var(--primary-subtle)}
 #actions .card p{color:var(--muted); margin:4px 0 0}
+h2{font-size:2rem; text-align:center}
+
+#actions .card a.btn {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+}
+
+.btn {
+  padding: 10px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.btn-hover {
+  background: var(--hover);
+  color: white;
+}

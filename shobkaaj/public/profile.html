@@ -12,7 +12,7 @@
   <main class="container">
     <div class="card" style="max-width:720px;margin:32px auto;">
       <h2 data-i18n="nav.profile">প্রোফাইল</h2>
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <div class="profile-header">
         <img id="avatarImg" class="avatar lg" src="/img/avater.png" alt="avatar" onerror="this.src='/img/avater.png'"/>
         <div>
           <input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp"/>
@@ -33,12 +33,10 @@
 
         <label>লোকেশন</label>
         <div class="form-actions">
-<button type="button" id="locBtn" class="btn outline" data-i18n="common.useMyLocation">Use my location</button>          <span id="locLabel" class="badge">N/A</span>
-        </div>
-
-        <div class="form-actions">
-<button class="btn" type="submit" data-i18n="common.save">Save</button>
-<a class="btn outline" href="/dashboard.html" data-i18n="common.back">Back</a>
+          <button type="button" id="locBtn" class="btn outline" data-i18n="common.useMyLocation">Use my location</button>
+          <span id="locLabel" class="badge">N/A</span>
+          <button class="btn" type="submit" data-i18n="common.save">Save</button>
+          <a class="btn outline" href="/dashboard.html" data-i18n="common.back">Back</a>
         </div>
         <div id="err" style="color:#dc2626;margin-top:8px;"></div>
       </form>

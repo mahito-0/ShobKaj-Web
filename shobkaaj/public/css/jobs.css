@@ -21,3 +21,11 @@
   #jobs .item{flex-direction:column}
   #jobs .item > div:last-child{width:100%; justify-content:flex-start; flex-wrap:wrap}
 }
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}

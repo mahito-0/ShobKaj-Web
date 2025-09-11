@@ -8,3 +8,11 @@
   background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:12px;
   max-height:320px; overflow:auto; box-shadow:var(--shadow-sm)
 }
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}

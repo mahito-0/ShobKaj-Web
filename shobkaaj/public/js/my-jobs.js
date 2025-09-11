@@ -34,7 +34,7 @@ async function loadClientView() {
         <div class="small">Apps: ${j.applicationsCount || 0}</div>
       </div>
       <div class="small">Budget: ৳${j.budget} • ${esc(j.location?.address || '')}</div>
-      <div style="margin-top:8px;">
+      <div class="form-actions" style="margin-top:8px;">
         <button class="btn outline" data-act="viewApps" data-id="${j.id}">${i18n.t('myJobs.viewApps')}</button>
         ${j.assignedTo ? `<button class="btn" data-act="chat" data-id="${j.id}">${i18n.t('myJobs.openChat')}</button>` : ''}
         ${j.assignedTo && j.status!=='completed' ? `<button class="btn success" data-act="complete" data-id="${j.id}">${i18n.t('myJobs.complete')}</button>` : ''}
@@ -66,7 +66,7 @@ async function loadClientView() {
               <div><strong>${esc(a.worker?.name || 'Worker')}</strong> <span class="badge">${(a.worker?.rating||0).toFixed(1)}★</span></div>
               <div class="small">${esc(a.note || '')}</div>
             </div>
-            <div>
+            <div class="form-actions">
               ${a.status==='pending' ? `<button class="btn" data-act="assign" data-job="${jobId}" data-worker="${a.workerId}">${i18n.t('myJobs.assign')}</button>` : `<span class="badge">${a.status}</span>`}
             </div>
           `;
@@ -99,15 +99,21 @@ async function loadClientView() {
       txt.className = 'input'; txt.placeholder = i18n.t('myJobs.reviewPlaceholder');
       const submit = document.createElement('button');
       submit.className = 'btn success'; submit.textContent = i18n.t('myJobs.complete');
+      const formActionsDiv = document.createElement('div');
+      formActionsDiv.className = 'form-actions';
+      formActionsDiv.appendChild(submit);
+      box.appendChild(ratingWrap);
+      box.appendChild(txt);
+      box.appendChild(formActionsDiv);
+
       submit.onclick = async ()=>{
         try {
           await $api(`/api/jobs/${jobId}/complete`, { method:'POST', body:{ rating: r.value, comment: txt.value.trim() } });
-          alert(i18n.t('myJobs.completed')); await loadClientView();
+          alert(i18n.t('myJobs.completed'));
+          // Reload dashboard to reflect updated earnings
+          window.location.href = '/dashboard.html';
         } catch(ex){ alert(ex.message); }
       };
-      box.appendChild(ratingWrap);
-      box.appendChild(txt);
-      box.appendChild(submit);
     }
   };
 }
@@ -128,7 +134,7 @@ async function loadWorkerView() {
         <div><strong>${esc(j.title)}</strong> <span class="badge ${j.status==='completed'?'status-completed':'status-assigned'}">${j.status}</span></div>
         <div class="small">Budget: ৳${j.budget} • ${esc(j.location?.address || '')}</div>
       </div>
-      <div>
+      <div class="form-actions">
         <button class="btn" data-act="chat" data-id="${j.id}">${i18n.t('myJobs.openChat')}</button>
       </div>
     `;
@@ -144,7 +150,7 @@ async function loadWorkerView() {
         <div><strong>${esc(j.title)}</strong></div>
         <div class="small">Status: <span class="badge">${esc(j.myApplication?.status || 'pending')}</span></div>
       </div>
-      <div>
+      <div class="form-actions">
         <button class="btn outline" data-act="chat" data-id="${j.id}">${i18n.t('myJobs.openChat')}</button>
       </div>
     `;

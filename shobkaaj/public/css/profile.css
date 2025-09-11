@@ -1,11 +1,92 @@
 /* Profile — consistent input sizes + avatar row aligned */
-main{min-height:calc(100vh - 120px); display:grid; place-items:center; padding:16px}
-main .card{width:min(700px,96vw); transition:box-shadow .25s, transform .1s}
-main .card:hover{box-shadow:var(--shadow-sm); transform:translateY(-2px)}
-#avatarInput{display:block}
-input[type="file"]::-webkit-file-upload-button{
-  height:36px; padding:0 12px; border:1px solid var(--line); border-radius:10px; background:var(--surface); color:var(--text);
-  cursor:pointer; transition:background .2s
+main {
+  min-height: calc(100vh - 120px);
+  display: grid;
+  place-items: center;
+  padding: 16px;
 }
-input[type="file"]::-webkit-file-upload-button:hover{background:var(--hover)}
-#locLabel.badge{min-width:90px; text-align:center}
+
+main .card {
+  width: min(700px, 96vw);
+  transition: box-shadow 0.25s, transform 0.1s;
+}
+
+main .card:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+#avatarInput {
+  display: block;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+  background: var(--hover);
+}
+
+#locLabel.badge {
+  min-width: 90px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.avatar.lg {
+  width: 128px;
+  height: 128px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.form-actions {
+  width: 100%;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-row > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.input, textarea {
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-header {
+    flex-direction: column;
+  }
+}

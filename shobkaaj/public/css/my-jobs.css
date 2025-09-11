@@ -13,3 +13,34 @@
   background:linear-gradient(135deg,var(--btn),var(--btn-600) 55%,var(--btn-700));
   border-color:var(--btn-600);
 }
+h2{font-size:2rem; text-align:center}
+h3{font-size:1.5rem; text-align:center}
+
+.card{
+  display:flex; /* Changed from inline-flex to flex for better parent-child flex interaction */
+  flex-direction:column;
+  align-items:center;
+  gap:1rem;
+  justify-content:center;
+  width:350px;
+  max-width:350px;
+  margin:20px 10px 0;
+  /* Removed float:left; */
+  /* Removed -ms-text-combine-horizontal:top; */
+}
+
+/* Styles for parent containers to arrange cards horizontally */
+#clientJobs, #workerAssigned, #workerApplied {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between cards */
+  justify-content: center; /* Center the rows of cards */
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}

@@ -729,8 +729,7 @@ h2 {
 .job-card:nth-child(1) { animation-delay: 0.2s; }
 .job-card:nth-child(2) { animation-delay: 0.4s; }
 @keyframes slideInCard {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); }
 }
 .job-card.featured {
   border-color: var(--primary);
@@ -1428,96 +1427,6 @@ h2 {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .site-footer .footer-content {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--space-6);
-  }
-  .site-footer .footer-section { min-width: unset; width: 100%; }
-  .site-footer .footer-bottom {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
-    align-items: center;
-  }
-  .site-footer .social-links { justify-content: center; }
-}
-
-/* =========================
-  Common Animations
-  ========================= */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); }
-}
-@keyframes slideInUp {
-  from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); }
-}
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); }
-}
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); }
-}
-@keyframes actionsGrandEntry {
-  0% { opacity: 0; transform: translateY(60px) scale(0.9); filter: blur(12px); }
-  70% { opacity: 0.9; transform: translateY(-5px) scale(1.05); filter: blur(1px); }
-  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
-}
-@keyframes statsNumberPulse {
-  0%, 100% { background-position: 0% 50%; transform: scale(1); }
-  50% { background-position: 100% 50%; transform: scale(1.05); }
-}
-@keyframes auroraFloat {
-  0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.05); }
-}
-@keyframes floatPhone {
-  0%, 100% { transform: translateY(0) rotateY(-5deg); } 50% { transform: translateY(-10px) rotateY(5deg); }
-}
-
-/* =========================
-  Accessibility & System Queries
-  ========================= */
-/* Reduce motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  * {
-   animation-duration: 0.01ms !important;
-   animation-iteration-count: 1 !important;
-   transition-duration: 0.01ms !important;
-  }
-  .aurora-canvas { animation: none; }
-  .hero-gradient-overlay { animation: none; }
-  .floating-chip { animation: none; }
-}
-
-/* Reduced motion (repeated group for some animated items) */
-@media (prefers-reduced-motion: reduce) {
-  .swatch--accent, .swatch--mint, .map, .pin, .reveal { animation: none; }
-  .reveal { opacity: 1; transform: none; }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  :root {
-   --glass-bg: rgba(255, 255, 255, 0.2);
-   --glass-border: rgba(0, 0, 0, 0.3);
-   --blur-strength: 5px;
-  }
-  .hero-badge, .stat-item, .trust-item {
-   border-width: 2px;
-   border-color: var(--primary);
-  }
-}
-
-/* Print styles */
-@media print {
-  .hero-background, .aurora-canvas, .hero-gradient-overlay, .floating-elements { display: none; }
-  .hero-section { background: white; min-height: auto; }
-  .btn, .service-hover-content { display: none; }
-}
-
-/* Responsive breakpoints */
 @media (max-width: 1440px) {
   /* nothing specific here in original; kept as placeholder */
 }
@@ -1571,4 +1480,17 @@ h2 {
   .service-card, .step-card, .testimonial-card { padding: var(--space-4); }
   .btn.large { padding: var(--space-4); font-size: var(--fs-base); }
   .trust-item { padding: var(--space-2) var(--space-4); font-size: var(--fs-xs); }
+}
+
+.service-hover-content .service-cta {
+  width: 100%;
+  justify-content: center;
+}
+
+.grid.cards .form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
 }

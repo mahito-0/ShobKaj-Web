@@ -28,7 +28,7 @@
       "email": "mahmud.agni@gmail.com",
       "role": "client",
       "phone": "01683886755",
-      "nid": "",
+      "nid": "252456156156",
       "passwordHash": "$2a$10$0Ddofi0.0CEaoNpTH8tafeiqooAboo.2OHYFqXPVJvMyWAvfXgfnG",
       "verified": true,
       "banned": false,
@@ -60,7 +60,7 @@
       "bio": "",
       "avatar": "/uploads/a7e7b40b-3467-46ac-99c3-ead5eb741b6d_1757514159144.jpg",
       "rating": 5,
-      "ratingCount": 1,
+      "ratingCount": 4,
       "location": {
         "lat": 23.8103,
         "lng": 90.4125,
@@ -102,6 +102,105 @@
         }
       ],
       "createdAt": 1757434925208
+    },
+    {
+      "id": "d3bfd2cb-73dc-42bc-9b67-aa3d24efa7e2",
+      "title": "book write",
+      "description": "write a good book on C++",
+      "budget": 10000,
+      "deadline": "2025-09-25",
+      "location": {
+        "lat": 23.7571,
+        "lng": 90.404,
+        "address": "Client location"
+      },
+      "createdBy": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "assignedTo": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "status": "completed",
+      "applications": [
+        {
+          "workerId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+          "note": "",
+          "status": "accepted",
+          "createdAt": 1757585818476
+        }
+      ],
+      "reviews": [
+        {
+          "by": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+          "target": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+          "rating": 5,
+          "comment": "",
+          "createdAt": 1757586182048
+        }
+      ],
+      "createdAt": 1757584618402
+    },
+    {
+      "id": "67ed08b2-57c0-4f13-b6ca-a3bdcd8e0ed2",
+      "title": "rfsdrf",
+      "description": "sdfgfsdg",
+      "budget": 10000,
+      "deadline": "",
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdBy": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "assignedTo": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "status": "completed",
+      "applications": [
+        {
+          "workerId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+          "note": "",
+          "status": "accepted",
+          "createdAt": 1757586326053
+        }
+      ],
+      "reviews": [
+        {
+          "by": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+          "target": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+          "rating": 5,
+          "comment": "",
+          "createdAt": 1757586362800
+        }
+      ],
+      "createdAt": 1757586310810
+    },
+    {
+      "id": "e7ea2156-6757-4671-9642-ac66e12fc9f0",
+      "title": "fasdg",
+      "description": "fdg",
+      "budget": 156,
+      "deadline": "",
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdBy": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "assignedTo": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "status": "completed",
+      "applications": [
+        {
+          "workerId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+          "note": "",
+          "status": "accepted",
+          "createdAt": 1757586483165
+        }
+      ],
+      "reviews": [
+        {
+          "by": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+          "target": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+          "rating": 5,
+          "comment": "",
+          "createdAt": 1757586597418
+        }
+      ],
+      "createdAt": 1757586475130
     }
   ],
   "conversations": [
@@ -122,6 +221,24 @@
       ],
       "jobId": null,
       "createdAt": 1757537428829
+    },
+    {
+      "id": "a89e7204-c939-4a3b-9759-408fade5e73a",
+      "participants": [
+        "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+        "a7e7b40b-3467-46ac-99c3-ead5eb741b6d"
+      ],
+      "jobId": "d3bfd2cb-73dc-42bc-9b67-aa3d24efa7e2",
+      "createdAt": 1757586011497
+    },
+    {
+      "id": "7982bfc2-1b4a-4b2b-8ab5-c626aa977782",
+      "participants": [
+        "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+        "b03d84ab-2ce2-4daa-8629-790a22adebe8"
+      ],
+      "jobId": "67ed08b2-57c0-4f13-b6ca-a3bdcd8e0ed2",
+      "createdAt": 1757586320377
     }
   ],
   "messages": [
@@ -181,6 +298,126 @@
       "url": "/my-jobs.html",
       "read": false,
       "createdAt": 1757434955832
+    },
+    {
+      "id": "a46fa2d4-5fe0-49fa-b66a-dae381aa8f12",
+      "userId": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "type": "application",
+      "title": "New application",
+      "body": "Mahmud applied to \"book write\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757585818477
+    },
+    {
+      "id": "344b1a32-80a3-40d6-9e07-77f796f68162",
+      "userId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "type": "assigned",
+      "title": "Job assigned",
+      "body": "\"book write\" assigned to you",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757585834764
+    },
+    {
+      "id": "507d1e7d-6feb-4b01-9def-25ec8230613b",
+      "userId": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "type": "assigned",
+      "title": "Worker assigned",
+      "body": "Assigned Mahmud to \"book write\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757585834765
+    },
+    {
+      "id": "9f264792-aab6-4547-a476-2b6195a1574f",
+      "userId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "type": "completed",
+      "title": "Job completed",
+      "body": "\"book write\" completed. You received 5★",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757586182049
+    },
+    {
+      "id": "4087d384-e50b-450b-a802-4521d4075b43",
+      "userId": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "type": "application",
+      "title": "New application",
+      "body": "Mahmud applied to \"rfsdrf\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757586326054
+    },
+    {
+      "id": "e68996bb-bff0-4a71-b4c1-29b0cf056add",
+      "userId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "type": "assigned",
+      "title": "Job assigned",
+      "body": "\"rfsdrf\" assigned to you",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757586357980
+    },
+    {
+      "id": "bfcb4dbe-632e-4efb-9847-e0f146bbff4e",
+      "userId": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "type": "assigned",
+      "title": "Worker assigned",
+      "body": "Assigned Mahmud to \"rfsdrf\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757586357981
+    },
+    {
+      "id": "0db53043-ff15-4e43-975f-fe8e3947f5f8",
+      "userId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "type": "completed",
+      "title": "Job completed",
+      "body": "\"rfsdrf\" completed. You received 5★",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757586362801
+    },
+    {
+      "id": "9dfb4a9c-8303-4775-9a74-367401d8eead",
+      "userId": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "type": "application",
+      "title": "New application",
+      "body": "Mahmud applied to \"fasdg\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757586483165
+    },
+    {
+      "id": "9b7130ec-6d6e-41a1-83ae-e92de0d946d9",
+      "userId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "type": "assigned",
+      "title": "Job assigned",
+      "body": "\"fasdg\" assigned to you",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757586579172
+    },
+    {
+      "id": "7937bc9c-75db-456a-a57d-a1f33b588b77",
+      "userId": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "type": "assigned",
+      "title": "Worker assigned",
+      "body": "Assigned Mahmud to \"fasdg\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757586579172
+    },
+    {
+      "id": "8ca8e61f-cea3-4d37-9393-51109d983340",
+      "userId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "type": "completed",
+      "title": "Job completed",
+      "body": "\"fasdg\" completed. You received 5★",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757586597418
     }
   ]
 }

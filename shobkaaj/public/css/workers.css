@@ -9,3 +9,13 @@
 #results .item > div:last-child{margin-left:auto; display:flex; gap:8px; align-items:center}
 #results .item img.avatar{width:44px; height:44px; transition:box-shadow .2s, transform .06s}
 #results .item:hover img.avatar{box-shadow:var(--shadow-sm); transform:translateY(-1px)}
+h2{font-size:2rem; text-align:center}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
