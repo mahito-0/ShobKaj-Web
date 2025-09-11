@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 // Temporary db access
-const DB_PATH = path.resolve(process.cwd(), '..', 'server', 'data', 'db.json');
+const DB_PATH = path.resolve(process.cwd(), 'db.json');
 
 function loadDB() {
   if (!fs.existsSync(DB_PATH)) {
