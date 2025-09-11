@@ -403,9 +403,9 @@ h2 {
   display: flex;
   gap: var(--space-4);
   margin: var(--space-5) 0;
-  animation: slideInLeft 0.8s var(--ease-out) 0.8s forwards;
-  opacity: 0;
-  transform: translateX(-20px);
+  /* animation: slideInLeft 0.8s var(--ease-out) 0.8s forwards; */
+  /* opacity: 0; */
+  /* transform: translateX(-20px); */
 }
 
 /* Buttons */

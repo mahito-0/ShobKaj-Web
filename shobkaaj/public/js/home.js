@@ -11,9 +11,9 @@
   });
 
   /* Topbar shadow on scroll */
-  const topbar = document.getElementById('topbar');
-  const onScroll = () => topbar?.classList.toggle('scrolled', window.scrollY > 8);
-  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+  // const topbar = document.getElementById('topbar');
+  // const onScroll = () => topbar?.classList.toggle('scrolled', window.scrollY > 8);
+  // onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
 
   /* Reveal on scroll */
   const ro = new IntersectionObserver((entries) => {

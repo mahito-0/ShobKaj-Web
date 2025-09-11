@@ -142,12 +142,12 @@ function renderNavbar(user) {
   initNotifications(user);
 
   // Scroll shadow behavior
-  function applyScrollState() {
-    if (window.scrollY > 4) el.classList.add('scrolled');
-    else el.classList.remove('scrolled');
-  }
-  applyScrollState();
-  window.addEventListener('scroll', applyScrollState, { passive: true });
+  //function applyScrollState() {
+   // if (window.scrollY > 4) el.classList.add('scrolled');
+   // else el.classList.remove('scrolled');
+ // }
+  // applyScrollState();
+  // window.addEventListener('scroll', applyScrollState, { passive: true });
 
   // Mobile menu toggle
   const menuBtn = document.getElementById('mobileMenuBtn');
