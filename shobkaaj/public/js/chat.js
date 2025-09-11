@@ -6,18 +6,8 @@ async function fetchJobTitle(jobId) { try { const { job } = await $api(`/api/job
 
 function renderConversations(list) {
   const el = document.getElementById('convList');
-  el.innerHTML = `<div style="padding:12px;font-weight:600;" data-i18n="chat.conversations">${i18n.t('chat.conversations')}</div>`;
-  list.forEach(c => {
-    const last = c.lastMessage ? ` • ${esc(c.lastMessage.text.slice(0,30))}` : '';
-    const otherName = esc(c.other?.name || 'User');
-    const avatar = c.other?.avatar || '/img/avater.png';
-    const jobBadge = c.jobId ? ` <span class="badge">Job</span>` : '';
-    const div = document.createElement('div');
-    div.className = 'conv' + (currentConv?.id===c.id ? ' active' : '');
-    div.innerHTML = `<img class="avatar" src="${avatar}" onerror="this.src='/img/avater.png'"/><div><strong>${otherName}</strong>${jobBadge}<div class="small">${last}</div></div>`;
-    div.onclick = () => openConversation(c);
-    el.appendChild(div);
-  });
+  el.innerHTML = ''; // Clear existing content
+
   const startDiv = document.createElement('div');
   startDiv.className = 'card'; startDiv.style.margin='12px';
   startDiv.innerHTML = `
@@ -27,7 +17,27 @@ function renderConversations(list) {
     <div class="small">Admin can see user IDs.</div>
   `;
   i18n.apply(startDiv);
-  el.appendChild(startDiv);
+  el.appendChild(startDiv); // Append startDiv first
+
+  const conversationsHeader = document.createElement('div');
+  conversationsHeader.style.padding = '12px';
+  conversationsHeader.style.fontWeight = '600';
+  conversationsHeader.setAttribute('data-i18n', 'chat.conversations');
+  conversationsHeader.textContent = i18n.t('chat.conversations');
+  el.appendChild(conversationsHeader); // Append header after startDiv
+
+  list.forEach(c => {
+    const last = c.lastMessage ? ` • ${esc(c.lastMessage.text.slice(0,30))}` : '';
+    const otherName = esc(c.other?.name || 'User');
+    const avatar = c.other?.avatar || '/img/avater.png';
+    const jobBadge = c.jobId ? ` <span class="badge">Job</span>` : '';
+    const div = document.createElement('div');
+    div.className = 'conv' + (currentConv?.id===c.id ? ' active' : '');
+    div.innerHTML = `<img class="avatar" src="${avatar}" onerror="this.src='/img/avater.png'"/><div><strong>${otherName}</strong>${jobBadge}<div class="small">${last}</div></div>`;
+    div.onclick = () => openConversation(c);
+    el.appendChild(div); // Append each conversation item
+  });
+
   document.getElementById('startBtn').onclick = async () => {
     const otherUserId = document.getElementById('otherId').value.trim();
     if (!otherUserId) return;

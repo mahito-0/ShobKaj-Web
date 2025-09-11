@@ -13,4 +13,5 @@
   background:linear-gradient(135deg,var(--btn),var(--btn-600) 55%,var(--btn-700));
   border-color:var(--btn-600);
 }
-
+h2{font-size:2rem; text-align:center}
+h3{font-size:1.5rem; text-align:center}
