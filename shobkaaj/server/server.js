@@ -432,12 +432,8 @@ app.post('/api/jobs/:id/complete', authRequired, roleRequired('client'), async (
   job.reviews.push({ by: req.user.id, target: job.assignedTo, rating, comment, createdAt: Date.now() });
   const worker = db.users.find(u => u.id === job.assignedTo);
   if (worker) {
-    if (worker) {
-    if (worker) {
     worker.totalEarnings = (worker.totalEarnings || 0) + job.budget;
   }
-  saveDB();
-  saveDB();
   saveDB();
 
   await notifyUser(job.assignedTo, { type: 'completed', title: 'Job completed', body: `"${job.title}" completed. You received ${rating}★`, url: '/my-jobs.html' });
