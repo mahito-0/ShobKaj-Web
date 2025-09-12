@@ -37,13 +37,13 @@ async function initNotifications(user) {
 }
 
 function renderNavbar(user) {
-  const el = document.getElementById('navbar');
-  if (!el) return;
+  const navbarEl = document.getElementById('navbar');
+  if (!navbarEl) return;
   const avatar = user?.avatar || '/img/avater.png';
-  const path = window.location.pathname || '/';
+  const currentPath = window.location.pathname || '/';
 
   // Update hero profile pill on the homepage
-  if (path === '/index.html' || path === '/') {
+  if (currentPath === '/index.html' || currentPath === '/') {
     const heroProfilePill = document.querySelector('.hero-section .profile-pill');
     if (heroProfilePill) {
       if (user) {
@@ -96,9 +96,9 @@ function renderNavbar(user) {
     }
   }
 
-  const isHomePage = path === '/index.html' || path === '/';
+  const isHomePage = currentPath === '/index.html' || currentPath === '/';
 
-  el.innerHTML = `
+  navbarEl.innerHTML = `
     <div class="inner">
       <div class="brand"><a href="/"><span>${i18n.t('appName')}</span></a></div>
       <button id="mobileMenuBtn" class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
@@ -110,7 +110,7 @@ function renderNavbar(user) {
         ${navItems.map(item => {
           if (item.auth && !user) return '';
           if (item.role && item.role !== user?.role) return '';
-          return `<a href="${item.href}" class="nav-item${path.endsWith(item.href) ? ' active' : ''}" data-i18n="${item.text}">${item.text}</a>`;
+          return `<a href="${item.href}" class="nav-item${currentPath.endsWith(item.href) ? ' active' : ''}" data-i18n="${item.text}">${item.text}</a>`;
         }).join('')}
         ${user ? `
             <a href="/profile.html" style="display: flex; align-items: center; gap: 10px;">
@@ -135,7 +135,7 @@ function renderNavbar(user) {
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) logoutBtn.onclick = () => $auth.logout();
 
-  i18n.apply(el);
+  i18n.apply(navbarEl);
 
   
 

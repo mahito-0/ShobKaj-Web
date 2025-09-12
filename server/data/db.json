@@ -1,0 +1,143 @@
+{
+  "users": [
+    {
+      "id": "u_admin",
+      "name": "Admin",
+      "email": "admin@shobkaaj.com",
+      "passwordHash": "$2a$10$KqHASJGCKH1r9ze8KKg8oOypk.aXpaR39hBSmQ2ooPh.1NNtfFNCS",
+      "role": "admin",
+      "phone": "",
+      "nid": "",
+      "verified": true,
+      "banned": false,
+      "skills": [],
+      "bio": "",
+      "avatar": "",
+      "rating": 0,
+      "ratingCount": 0,
+      "totalEarnings": 0,
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdAt": 1757704092966
+    },
+    {
+      "id": "7f460e6b-abdd-40b9-a6e6-c0972d664679",
+      "name": "Syed Al Mahmud",
+      "email": "mahmud.agni@gmail.com",
+      "role": "client",
+      "phone": "01683886755",
+      "nid": "",
+      "passwordHash": "$2a$10$/0cZs6htD/d9zpY6rKFG7.tXdNfIAj/ZAIBNDmB8CRvc20wD1X0NO",
+      "verified": false,
+      "banned": false,
+      "skills": [],
+      "bio": "",
+      "avatar": "/uploads/7f460e6b-abdd-40b9-a6e6-c0972d664679_1757706276114.png",
+      "rating": 0,
+      "ratingCount": 0,
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdAt": 1757704157140
+    },
+    {
+      "id": "1a1f2843-5550-4de0-a608-685ffb2c50fe",
+      "name": "Syed Al Mahmud",
+      "email": "syedmahmud@gmail.com",
+      "role": "worker",
+      "phone": "",
+      "nid": "",
+      "passwordHash": "$2a$10$WKD2EM/ZGqev/K0HRJ6DVucXrTa59HLJxUaEHo4UsxzsLXX8xixya",
+      "verified": false,
+      "banned": false,
+      "skills": [],
+      "bio": "",
+      "avatar": "/uploads/1a1f2843-5550-4de0-a608-685ffb2c50fe_1757704228075.png",
+      "rating": 0,
+      "ratingCount": 0,
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdAt": 1757704190005
+    }
+  ],
+  "jobs": [
+    {
+      "id": "f5f884d9-e5a7-4a80-b0cd-76a33dfe428a",
+      "title": "thh",
+      "description": "ththth",
+      "budget": 0,
+      "deadline": "",
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdBy": "7f460e6b-abdd-40b9-a6e6-c0972d664679",
+      "assignedTo": "1a1f2843-5550-4de0-a608-685ffb2c50fe",
+      "status": "assigned",
+      "applications": [
+        {
+          "workerId": "1a1f2843-5550-4de0-a608-685ffb2c50fe",
+          "note": "",
+          "status": "accepted",
+          "createdAt": 1757706334263
+        }
+      ],
+      "reviews": [],
+      "createdAt": 1757706323411
+    }
+  ],
+  "conversations": [
+    {
+      "id": "c0c35acc-2493-451e-ad4b-92fb4df28f06",
+      "participants": [
+        "1a1f2843-5550-4de0-a608-685ffb2c50fe",
+        "7f460e6b-abdd-40b9-a6e6-c0972d664679"
+      ],
+      "jobId": "f5f884d9-e5a7-4a80-b0cd-76a33dfe428a",
+      "createdAt": 1757706330490
+    }
+  ],
+  "messages": [],
+  "pushSubs": [],
+  "notifications": [
+    {
+      "id": "a9808953-a6e5-40b0-967d-49af75a414af",
+      "userId": "7f460e6b-abdd-40b9-a6e6-c0972d664679",
+      "type": "application",
+      "title": "New application",
+      "body": "Syed Al Mahmud applied to \"thh\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757706334264
+    },
+    {
+      "id": "da2c97e5-1db8-4e57-aa35-568ed5c47831",
+      "userId": "1a1f2843-5550-4de0-a608-685ffb2c50fe",
+      "type": "assigned",
+      "title": "Job assigned",
+      "body": "\"thh\" assigned to you",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757706351933
+    },
+    {
+      "id": "d47c7503-7bdd-434c-aad3-71bc272b2bd4",
+      "userId": "7f460e6b-abdd-40b9-a6e6-c0972d664679",
+      "type": "assigned",
+      "title": "Worker assigned",
+      "body": "Assigned Syed Al Mahmud to \"thh\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757706351933
+    }
+  ]
+}
