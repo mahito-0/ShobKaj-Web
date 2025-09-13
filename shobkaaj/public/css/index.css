@@ -490,7 +490,7 @@ h2 {
 .btn.secondary:hover {
   background: var(--surface-elevated);
   border-color: var(--primary);
-  color: var(--primary);
+  color: var(--badge-text);
   box-shadow: var(--neuro-inset), var(--glow-secondary);
 }
 .btn-text { position: relative; z-index: 2; transition: all 0.3s var(--smooth); }
@@ -689,7 +689,7 @@ h2 {
   color: #335733;
 }
 .avatar {
-  width: 24px; height: 24px;
+  width: 28px; height: 28px;
   background: var(--primary);
   border-radius: 50%;
   display: flex;
@@ -888,7 +888,7 @@ h2 {
 }
 .service-icon {
   width: 64px; height: 64px; border-radius: 12px; background: #f1f5f9;
-  display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center; 
   color: #2c532b; font-size: 24px;
 }
 .service-icon i {
@@ -1074,16 +1074,15 @@ h2 {
 /* Promo & Footer */
 .promo {
   border-radius: 18px;
+  max-width: 450px;
   border: 1px solid var(--line);
   background: var(--bg);
   padding: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin: 20px auto;
 }
 
 /* =========================
@@ -1456,7 +1455,7 @@ h2 {
   .hero-stats { gap: var(--space-4); }
   .stat-item { min-width: 140px; padding: var(--space-3); }
   .hero-actions { flex-direction: column; align-items: center; gap: var(--space-4); }
-  .btn.large { width: 100%; max-width: 300px; padding: var(--space-4) var(--space-6); }
+  .btn.large { width: 100%; max-width: 400px; padding: var(--space-4) var(--space-6); }
   .trust-indicators { justify-content: center; }
   .services-grid { grid-template-columns: 1fr; gap: var(--space-4); }
   .step-cards { grid-template-columns: 1fr; gap: var(--space-6); }
