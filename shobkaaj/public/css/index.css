@@ -140,7 +140,7 @@
   --text-muted: #a9aaac;
   --bg: #0d1117;
   --surface: #161b22;
-  --surface-elevated: #21262d;
+  --surface-elevated: #21262d00;
   --line: #374151;
   --glass-bg: rgba(0, 0, 0, 0.1);
   --glass-border: rgba(255, 255, 255, 0.05);
@@ -223,7 +223,7 @@ h2 {
   text-align: center;
   transition: transform .06s, box-shadow .2s, background .2s;
 }
-.chip:hover { background: var(--hover); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.chip:hover { background: var(--primary-subtle); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 
 /* Reveal Animation utility */
 .reveal {
@@ -1154,7 +1154,7 @@ h2 {
   transform: translateY(-3px) scale(1.02); box-shadow: var(--shadow-md); background: var(--primary-subtle); border-color: var(--primary);
 }
 @media (prefers-color-scheme: dark) {
-  .feature { background: rgba(22, 27, 34, 0.6); }
+  .feature { background: rgba(189, 189, 189, 0.089); }
   .feature:hover { background: var(--primary-subtle); }
 }
 .ic {
@@ -1233,6 +1233,7 @@ h2 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color var(--duration-fast, 180ms) var(--smooth);
+  border-top: 1px solid #e5e7eb;
 }
 
 /* container inside footer so we can center & wrap content cleanly */
@@ -1434,7 +1435,6 @@ h2 {
     background: linear-gradient(180deg, var(--footer-bg-from), rgba(255,255,255,0.02));
     color: var(--text-secondary, #9ca3af);
     border-top-color: rgba(255,255,255,0.04);
-    box-shadow: 0 -6px 24px rgba(0,0,0,0.45);
   }
   .site-footer .footer-section h4 { color: var(--text); }
   .site-footer .footer-section a { color: var(--text-secondary); }

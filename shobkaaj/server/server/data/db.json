@@ -292,7 +292,7 @@
       "title": "New application",
       "body": "Syed Al Mahmud applied to \"TFFF\"",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757434933574
     },
     {
@@ -312,7 +312,7 @@
       "title": "Worker assigned",
       "body": "Assigned Syed Al Mahmud to \"TFFF\"",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757434944251
     },
     {
@@ -332,7 +332,7 @@
       "title": "New application",
       "body": "Mahmud applied to \"book write\"",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757585818477
     },
     {
@@ -352,7 +352,7 @@
       "title": "Worker assigned",
       "body": "Assigned Mahmud to \"book write\"",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757585834765
     },
     {
@@ -372,7 +372,7 @@
       "title": "New application",
       "body": "Mahmud applied to \"rfsdrf\"",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757586326054
     },
     {
@@ -392,7 +392,7 @@
       "title": "Worker assigned",
       "body": "Assigned Mahmud to \"rfsdrf\"",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757586357981
     },
     {
@@ -412,7 +412,7 @@
       "title": "New application",
       "body": "Mahmud applied to \"fasdg\"",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757586483165
     },
     {
@@ -432,7 +432,7 @@
       "title": "Worker assigned",
       "body": "Assigned Mahmud to \"fasdg\"",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757586579172
     },
     {
