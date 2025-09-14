@@ -13,3 +13,9 @@ h2{font-size:2rem; text-align:center}
   flex-wrap: wrap;
   margin-top: 1rem;
 }
+
+/* Dark theme support */
+[data-theme="dark"] main .card {
+  background: var(--surface);
+  border-color: var(--line);
+}

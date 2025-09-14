@@ -90,3 +90,19 @@ h2 {
     flex-direction: column;
   }
 }
+
+/* Dark theme support */
+[data-theme="dark"] main .card {
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+[data-theme="dark"] input[type="file"]::-webkit-file-upload-button {
+  background: var(--surface-elevated);
+  color: var(--text);
+  border-color: var(--line);
+}
+
+[data-theme="dark"] input[type="file"]::-webkit-file-upload-button:hover {
+  background: var(--hover);
+}

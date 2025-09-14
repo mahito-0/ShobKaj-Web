@@ -22,13 +22,22 @@ h2{font-size:2rem; text-align:center}
 }
 
 .form-links a {
-  color: var(--primary-color, #3b82f6);
+  color: var(--primary);
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.2s;
 }
 
 .form-links a:hover {
-  color: var(--primary-hover, #2563eb);
+  color: var(--primary-hover);
   text-decoration: underline;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .form-links a {
+  color: var(--primary);
+}
+
+[data-theme="dark"] .form-links a:hover {
+  color: var(--primary-hover);
 }
