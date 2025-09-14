@@ -15,7 +15,7 @@ h2{font-size:2rem; text-align:center}
   text-align: center;
 }
 
-.btn {
+#actions .btn {
   padding: 10px 0;
   font-size: 1.1rem;
   font-weight: 600;

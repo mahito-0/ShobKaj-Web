@@ -100,9 +100,9 @@
   --blur-strength: 10px;
 }
 
-/* Dark mode overrides */
+/* Dark mode overrides - system preference only when no manual theme */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
    --primary: #2f634e;
    --primary-hover: #5ce0a8;
    --primary-subtle: rgba(110, 231, 183, 0.1);
@@ -126,6 +126,32 @@
    --map-bg-2: #374151;
    --hover: #374151;
   }
+}
+
+/* Manual dark theme override */
+[data-theme="dark"] {
+  --primary: #2f634e;
+  --primary-hover: #5ce0a8;
+  --primary-subtle: rgba(110, 231, 183, 0.1);
+  --accent: #fb923c;
+  --accent-dark: #f97316;
+  --text: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --text-muted: #a9aaac;
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface-elevated: #21262d;
+  --line: #374151;
+  --glass-bg: rgba(0, 0, 0, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --neuro-light: #374151;
+  --badge-bg: #374151;
+  --badge-text: #9ca3af;
+  --promo-bg: #1f2937;
+  --phone-bg: #111827;
+  --map-bg-1: rgba(110, 231, 183, 0.1);
+  --map-bg-2: #374151;
+  --hover: #374151;
 }
 
 /* =========================
@@ -189,15 +215,15 @@ h2 {
   align-items: center;
   justify-content: center;
   padding: 8px 12px;
-  background: #f2f3f7;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 999px;
   font-size: 13px;
-  color: #333742;
+  color: var(--text);
   text-align: center;
   transition: transform .06s, box-shadow .2s, background .2s;
 }
-.chip:hover { background: #eceef3; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.chip:hover { background: var(--hover); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 
 /* Reveal Animation utility */
 .reveal {
@@ -238,8 +264,9 @@ h2 {
   transform: translateY(-2px);
 }
 @media (prefers-color-scheme: dark) {
-  .topbar.scrolled { background: rgba(13, 17, 23, 0.85); }
+  .topbar.scrolled:not([data-theme]) { background: rgba(13, 17, 23, 0.85); }
 }
+[data-theme="dark"] .topbar.scrolled { background: rgba(13, 17, 23, 0.85); }
 .topbar .brand {
   font-weight: var(--fw-extrabold);
   font-size: var(--fs-xl);
@@ -887,9 +914,9 @@ h2 {
   border-color: var(--primary);
 }
 .service-icon {
-  width: 64px; height: 64px; border-radius: 12px; background: #f1f5f9;
+  width: 64px; height: 64px; border-radius: 12px; background: var(--surface-elevated);
   display: flex; align-items: center; justify-content: center; 
-  color: #2c532b; font-size: 24px;
+  color: var(--primary); font-size: 24px;
 }
 .service-icon i {
   display: block !important;
@@ -899,7 +926,7 @@ h2 {
   font-variant: normal !important;
   text-rendering: auto !important;
   line-height: 1 !important;
-  color: #2c532b !important;
+  color: var(--primary) !important;
   font-size: 24px !important;
 }
 .service-title {

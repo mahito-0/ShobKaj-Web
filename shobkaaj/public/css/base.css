@@ -125,9 +125,9 @@
   --bg-app: #f5f7fb; /* backup app background used by legacy rules if needed */
 }
 
-/* 2) DARK MODE VARIABLES (override) */
+/* 2) DARK MODE VARIABLES (system preference only when no manual theme) */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
    --bg: #0d1117;
    --surface: #161b22;
    --surface-elevated: #21262d;
@@ -177,6 +177,85 @@
    --ring-primary: 0 0 0 3px rgba(51,87,51,0.3);
    --ring: var(--ring-primary);
   }
+}
+
+/* 2.1) THEME TOGGLE SYSTEM */
+[data-theme="dark"] {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface-elevated: #21262d;
+  --text: #f0f6fc;
+  --text-secondary: #8b949e;
+  --text-muted: #656d76;
+  --line: #30363d;
+  --hover: #21262d;
+  --hover-secondary: #30363d;
+
+  --primary: #4a7c59;
+  --primary-hover: #335733;
+  --primary-active: #2d4b2d;
+  --primary-subtle: #1a2e1a;
+  --primary-muted: #335733;
+
+  --error: #f85149;
+  --error-subtle: #2d1617;
+  --success: #4a7c59;
+  --info: #58a6ff;
+
+  --table-header-bg: #1f2732;
+  --table-header-text: #e8e9ec;
+  --table-row-hover: #1f2732;
+
+  --conv-hover: #1f2732;
+  --conv-active: #2a323d;
+  --conv-active-border: #3e4c5a;
+  --message-bg: #1f2732;
+  --message-me-bg: #2a323d;
+  --message-me-border: #3e4c5a;
+  --message-arrow-border: #1f2732;
+
+  --status-open-bg: #2a323d; --status-open-border: #3e4c5a; --status-open-text: #e8e9ec;
+  --status-assigned-bg: #2a323d; --status-assigned-border: #3e4c5a; --status-assigned-text: #e8e9ec;
+  --status-completed-bg: #2a323d; --status-completed-border: #3e4c5a; --status-completed-text: #e8e9ec;
+
+  --star-color: #3e4c5a; --star-active-color: #667085;
+  --notification-unread-bg: #2a323d; --notification-unread-border: #3e4c5a;
+  
+  --ring-primary: rgba(74, 124, 89, 0.3);
+  --ring: var(--ring-primary);
+}
+
+/* Theme toggle button styles */
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--text-secondary);
+}
+
+.theme-toggle:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-subtle);
+  transform: translateY(-1px);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.theme-toggle:hover svg {
+  transform: scale(1.1);
 }
 
 /* 3) RESET + BASE LAYOUT */
@@ -232,14 +311,17 @@ a:focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--r
 
 }
 @media (prefers-color-scheme: dark) {
-  .navbar, .topbar { background: linear-gradient(180deg, rgba(18, 24, 33, 0), rgba(18, 24, 33, 0)); }
+  .navbar:not([data-theme]), .topbar:not([data-theme]) { background: linear-gradient(180deg, rgba(18, 24, 33, 0), rgba(18, 24, 33, 0)); }
 }
 .navbar .inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 36px; }
 .brand { font-weight: 800; color: var(--text); letter-spacing: .2px; font-size: 30px; }
 
 /* scrolled state */
 .navbar.scrolled { background: rgba(255,255,255,0.98); box-shadow: var(--shadow-md); }
-@media (prefers-color-scheme: dark) { .navbar.scrolled { background: rgba(13,17,23,0.98); } }
+@media (prefers-color-scheme: dark) { 
+  .navbar.scrolled:not([data-theme]) { background: rgba(13,17,23,0.98); } 
+}
+[data-theme="dark"] .navbar.scrolled { background: rgba(13,17,23,0.98); }
 
 /* 7) BUTTONS (consolidated) */
 .btn{
@@ -257,8 +339,8 @@ a:focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--r
 .btn:active{ transform: translateY(0); box-shadow: var(--shadow-sm); }
 .btn:focus-visible{ outline:none; box-shadow: var(--ring), var(--shadow-md); }
 .btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; box-shadow: var(--shadow-xs); }
-.btn.outline{ background:transparent; color:white; border:1px solid whitesmoke; box-shadow:none; }
-.btn.outline:hover{ background:var(--primary); color:var(--text); border-color:var(--text); box-shadow:var(--shadow-sm); }
+.btn.outline{ background:transparent; color:var(--text); border:1px solid var(--line); box-shadow:none; }
+.btn.outline:hover{ background:var(--primary); color:#ffffff; border-color:var(--primary); box-shadow:var(--shadow-sm); }
 .btn.ghost{ background:transparent; border:none; color:var(--text); box-shadow:none; }
 .btn.destructive{ background: linear-gradient(135deg, var(--error) 0%, var(--error-muted) 100%); border-color:var(--error); color:#fff; }
 .btn.primary-action{ padding: var(--space-2) var(--space-4); background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%); border:none; font-weight:var(--fw-semibold); box-shadow:var(--shadow-sm); }
