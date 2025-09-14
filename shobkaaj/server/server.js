@@ -154,7 +154,7 @@ function roleRequired(role) {
     next();
   };
 }
-function userSafe(user) { if (!user) return null; const { passwordHash, ...safe } = user; return safe; }
+function userSafe(user) { if (!user) return null; const { passwordHash, secretMessage, ...safe } = user; return safe; }
 function distanceKm(lat1, lon1, lat2, lon2) {
   if ([lat1, lon1, lat2, lon2].some(v => typeof v !== 'number')) return null;
   const toRad = d => d * Math.PI / 180, R = 6371;
@@ -206,14 +206,15 @@ async function notifyUser(userId, payload) {
 
 // Auth
 app.post('/api/register', (req, res) => {
-  const { name, email, password, role, phone, nid, skills = [], bio = '', location } = req.body;
-  if (!name || !email || !password || !role) return res.status(400).json({ error: 'Missing fields' });
+  const { name, email, password, role, phone, nid, secretMessage, skills = [], bio = '', location } = req.body;
+  if (!name || !email || !password || !role || !secretMessage) return res.status(400).json({ error: 'Missing fields' });
   if (!['client', 'worker'].includes(role)) return res.status(400).json({ error: 'Invalid role' });
   if (db.users.find(u => u.email === email)) return res.status(400).json({ error: 'Email already exists' });
   const id = uuidv4();
   const newUser = {
     id, name, email, role, phone: phone || '', nid: nid || '',
     passwordHash: bcrypt.hashSync(password, 10),
+    secretMessage: secretMessage.trim(),
     verified: false, banned: false, skills, bio, avatar: '',
     rating: 0, ratingCount: 0,
     location: location && typeof location.lat === 'number' && typeof location.lng === 'number'
@@ -279,6 +280,35 @@ app.post('/api/reset-password', async (req, res) => {
   console.log(`Password successfully reset for user ${user.id}. Token invalidated.`);
 
   await sendEmail(user.email, 'Password Reset Successful', 'Your password has been successfully reset.');
+
+  res.json({ ok: true });
+});
+
+app.post('/api/reset-password-secret', async (req, res) => {
+  const { email, secretMessage, newPassword } = req.body;
+  console.log(`Secret message password reset request for email: ${email}`);
+  
+  const user = db.users.find(u => u.email === email);
+  if (!user) {
+    console.log(`User with email ${email} not found.`);
+    return res.status(400).json({ error: 'User not found' });
+  }
+
+  if (!user.secretMessage) {
+    console.log(`User ${user.id} has no secret message set.`);
+    return res.status(400).json({ error: 'No secret message set for this account' });
+  }
+
+  if (user.secretMessage.trim().toLowerCase() !== secretMessage.trim().toLowerCase()) {
+    console.log(`Secret message mismatch for user ${user.id}.`);
+    return res.status(400).json({ error: 'Invalid secret message' });
+  }
+
+  user.passwordHash = bcrypt.hashSync(newPassword, 10);
+  saveDB();
+  console.log(`Password successfully reset for user ${user.id} using secret message.`);
+
+  await sendEmail(user.email, 'Password Reset Successful', 'Your password has been successfully reset using your secret message.');
 
   res.json({ ok: true });
 });

@@ -13,3 +13,22 @@ h2{font-size:2rem; text-align:center}
   flex-wrap: wrap;
   margin-top: 1rem;
 }
+
+.form-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.form-links a {
+  color: var(--primary-color, #3b82f6);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.form-links a:hover {
+  color: var(--primary-hover, #2563eb);
+  text-decoration: underline;
+}

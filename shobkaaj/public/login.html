@@ -19,7 +19,11 @@
         <input class="input" type="password" name="password" required />
         <div class="form-actions">
           <button class="btn" type="submit">লগইন</button>
-          <a href="/register.html">অ্যাকাউন্ট নেই? রেজিস্টার করুন</a>
+          <div class="form-links">
+            <a href="/register.html">অ্যাকাউন্ট নেই? রেজিস্টার করুন</a>
+            <a href="/forgot-password.html">পাসওয়ার্ড ভুলে গেছেন?</a>
+            <a href="/secret-reset-password.html">গোপন বার্তা দিয়ে রিসেট করুন</a>
+          </div>
         </div>
         <div id="err" style="color:#dc2626;margin-top:8px;"></div>
       </form>
@@ -31,6 +35,7 @@
   <script src="/js/main.js"></script>
   <script>
     i18n.apply(document);
+    
     document.getElementById('loginForm').addEventListener('submit', async (e)=>{
       e.preventDefault();
       const email = e.target.email.value.trim();

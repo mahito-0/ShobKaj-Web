@@ -97,6 +97,42 @@ function renderNavbar(user) {
   }
 
   const isHomePage = currentPath === '/index.html' || currentPath === '/';
+  const isLoginPage = currentPath === '/login.html';
+  const isRegisterPage = currentPath === '/register.html';
+
+  // Determine what auth buttons to show
+  let authButtons = '';
+  if (user) {
+    authButtons = `
+      <a href="/profile.html" style="display: flex; align-items: center; gap: 10px;">
+          <img class="avatar" src="${avatar}" onerror="this.src='/img/avater.png'"/>
+      </a>
+      <button class="btn outline" id="logoutBtn" data-i18n="nav.logout">${i18n.t('nav.logout')}</button>
+    `;
+  } else {
+    if (isHomePage) {
+      // Home page: show both Login and Register
+      authButtons = `
+        <a href="/login.html" class="btn outline" data-i18n="nav.login">${i18n.t('nav.login')}</a>
+        <a href="/register.html" class="btn outline" data-i18n="nav.register">${i18n.t('nav.register')}</a>
+      `;
+    } else if (isLoginPage) {
+      // Login page: show only Register
+      authButtons = `
+        <a href="/register.html" class="btn outline" data-i18n="nav.register">${i18n.t('nav.register')}</a>
+      `;
+    } else if (isRegisterPage) {
+      // Register page: show only Login
+      authButtons = `
+        <a href="/login.html" class="btn outline" data-i18n="nav.login">${i18n.t('nav.login')}</a>
+      `;
+    } else {
+      // Other pages: show Register (default)
+      authButtons = `
+        <a href="/register.html" class="btn outline" data-i18n="nav.register">${i18n.t('nav.register')}</a>
+      `;
+    }
+  }
 
   navbarEl.innerHTML = `
     <div class="inner">
@@ -112,14 +148,7 @@ function renderNavbar(user) {
           if (item.role && item.role !== user?.role) return '';
           return `<a href="${item.href}" class="nav-item${currentPath.endsWith(item.href) ? ' active' : ''}" data-i18n="${item.text}">${item.text}</a>`;
         }).join('')}
-        ${user ? `
-            <a href="/profile.html" style="display: flex; align-items: center; gap: 10px;">
-                <img class="avatar" src="${avatar}" onerror="this.src='/img/avater.png'"/>
-            </a>
-            <button class="btn outline" id="logoutBtn" data-i18n="nav.logout">${i18n.t('nav.logout')}</button>
-        ` : `
-            <a href="/login.html" class="btn outline" data-i18n="nav.login">${i18n.t('nav.login')}</a>
-        `}
+        ${authButtons}
         <select id="langSelect" class="input" style="width:auto;padding:0px 0px; background:transparent; border:none; font-size:inherit; font-family:inherit; cursor:pointer;" aria-label="${i18n.t('nav.language')}">
           <option value="bn">বাংলা</option>
           <option value="en">English</option>

@@ -31,6 +31,12 @@
           <div><label>NID (ঐচ্ছিক)</label><input class="input" name="nid" /></div>
           <div><label>পাসওয়ার্ড</label><input class="input" type="password" name="password" required /></div>
         </div>
+        
+        <label>গোপন বার্তা (পাসওয়ার্ড রিসেটের জন্য)</label>
+        <input class="input" name="secretMessage" placeholder="একটি শব্দ, বাক্য বা সংখ্যা লিখুন" required />
+        <small style="color:#6b7280;font-size:0.875rem;margin-top:0.5rem;display:block;">
+          এটি আপনার পাসওয়ার্ড রিসেটের জন্য ব্যবহার হবে। এটি আপনার প্রোফাইলে দেখানো হবে না।
+        </small>
         <label>স্কিলস (কমা দিয়ে আলাদা করুন)</label>
         <input class="input" name="skills" placeholder="plumbing, tuition, delivery"/>
 
@@ -73,6 +79,7 @@
         role: e.target.role.value,
         phone: e.target.phone.value.trim(),
         nid: e.target.nid.value.trim(),
+        secretMessage: e.target.secretMessage.value.trim(),
         skills: e.target.skills.value.split(',').map(s => s.trim()).filter(Boolean),
         location: locationData
       };

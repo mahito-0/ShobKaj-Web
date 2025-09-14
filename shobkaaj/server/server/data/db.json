@@ -42,7 +42,9 @@
         "lng": 90.4125,
         "address": "Dhaka, Bangladesh"
       },
-      "createdAt": 1757363991081
+      "createdAt": 1757363991081,
+      "resetToken": "6fe3550b-19b4-424e-996f-28087dac1931",
+      "resetTokenExpires": 1757839214262
     },
     {
       "id": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
@@ -67,6 +69,30 @@
         "address": "Dhaka, Bangladesh"
       },
       "createdAt": 1757433827255
+    },
+    {
+      "id": "b8a89031-f225-4fb8-ba7b-a4fc302a9594",
+      "name": "mahmud syed al",
+      "email": "syed@gmail.com",
+      "role": "worker",
+      "phone": "01683886755",
+      "nid": "252456156156",
+      "passwordHash": "$2a$10$kxcQhd6u60wofuX.mdbeQOA0RwXmsXVuAu2GD/12PeytCt19sIcLe",
+      "verified": false,
+      "banned": false,
+      "skills": [
+        "tutoring"
+      ],
+      "bio": "",
+      "avatar": "",
+      "rating": 0,
+      "ratingCount": 0,
+      "location": {
+        "lat": 23.8103,
+        "lng": 90.4125,
+        "address": "Dhaka, Bangladesh"
+      },
+      "createdAt": 1757835982583
     }
   ],
   "jobs": [
