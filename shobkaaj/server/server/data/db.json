@@ -68,7 +68,8 @@
         "lng": 90.4125,
         "address": "Dhaka, Bangladesh"
       },
-      "createdAt": 1757433827255
+      "createdAt": 1757433827255,
+      "totalEarnings": 5000
     },
     {
       "id": "b8a89031-f225-4fb8-ba7b-a4fc302a9594",
@@ -227,6 +228,39 @@
         }
       ],
       "createdAt": 1757586475130
+    },
+    {
+      "id": "fee8620a-7214-4812-8f85-06b0549bc379",
+      "title": "car paint",
+      "description": "i want make my car look fully white",
+      "budget": 5000,
+      "deadline": "2025-09-16",
+      "location": {
+        "lat": 23.8233264,
+        "lng": 90.4236392,
+        "address": "Client location"
+      },
+      "createdBy": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "assignedTo": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "status": "completed",
+      "applications": [
+        {
+          "workerId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+          "note": "",
+          "status": "accepted",
+          "createdAt": 1757863684917
+        }
+      ],
+      "reviews": [
+        {
+          "by": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+          "target": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+          "rating": 5,
+          "comment": "",
+          "createdAt": 1757863708531
+        }
+      ],
+      "createdAt": 1757863668471
     }
   ],
   "conversations": [
@@ -444,6 +478,46 @@
       "url": "/my-jobs.html",
       "read": false,
       "createdAt": 1757586597418
+    },
+    {
+      "id": "625f9da8-b7a9-48e7-9ca9-6b90a6d915a8",
+      "userId": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "type": "application",
+      "title": "New application",
+      "body": "Mahmud applied to \"car paint\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757863684918
+    },
+    {
+      "id": "77578f32-1f6a-4db4-a721-b9ef8ca5e819",
+      "userId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "type": "assigned",
+      "title": "Job assigned",
+      "body": "\"car paint\" assigned to you",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757863701365
+    },
+    {
+      "id": "b74d5af6-def7-43d8-902b-374a1505a8cd",
+      "userId": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "type": "assigned",
+      "title": "Worker assigned",
+      "body": "Assigned Mahmud to \"car paint\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757863701366
+    },
+    {
+      "id": "bb071ea2-9900-40b5-80c6-c79b946140ed",
+      "userId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "type": "completed",
+      "title": "Job completed",
+      "body": "\"car paint\" completed. You received 5★",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1757863708532
     }
   ]
 }

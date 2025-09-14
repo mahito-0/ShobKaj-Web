@@ -57,7 +57,7 @@
   --lh-relaxed: 1.75;
 
   /* Spacing */
-  --section-padding: clamp(4rem, 10vw, 8rem);
+  --section-padding: clamp(1rem, 10vw, 5rem);
   --container-padding: clamp(1.5rem, 5vw, 4rem);
   --card-padding: clamp(1.5rem, 3vw, 2.5rem);
   --space-0-5: 0.125rem;
@@ -199,7 +199,7 @@ h2 {
 }
 
 /* Shared sections */
-.section { padding: 24px 0; }
+.section { padding: 20px 0;max-width: 1900px; width: 98%; margin: 0 auto;margin: 0 auto}
 .section-header { margin: 0 0 24px; text-align: center; }
 .grid.cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
 .chips {
@@ -1191,7 +1191,7 @@ h2 {
   max-width: 350px;
   margin: 0;
   font-size: 0.97em;
-  background: var(--surface, white);
+  background: transparent;
   scroll-snap-align: start;
 }
 

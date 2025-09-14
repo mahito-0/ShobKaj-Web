@@ -334,8 +334,8 @@ a:focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--r
   border-radius: var(--radius); cursor: pointer; font-size: var(--fs-sm); font-weight: var(--fw-medium);
   line-height: 1; transition: all var(--duration-fast) var(--ease-out); box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
 }
-.btn::before{ content:''; position:absolute; inset:0; color: white; background: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, transparent 100%); opacity:0; transition: opacity var(--duration-fast) var(--ease-out); }
-.btn:hover{ background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-active) 100%); transform: translateY(-1px); box-shadow: var(--shadow-md);color: #fff; }
+.btn::before{ content:''; position:absolute; inset:0; color: white; background: transparent; opacity:0; transition: opacity var(--duration-fast) var(--ease-out); }
+.btn:hover{ background: var(--primary) ; transform: translateY(-1px); box-shadow: var(--shadow-md);color: #ffffff; font-weight: bolder; }
 .btn:hover::before{ opacity:1; }
 .btn:active{ transform: translateY(0); box-shadow: var(--shadow-sm); }
 .btn:focus-visible{ outline:none; box-shadow: var(--ring), var(--shadow-md); }
@@ -370,7 +370,7 @@ select:focus { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http:/
 
 /* 9) BUILDING BLOCKS */
 .card {
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  background: transparent; border: 1px solid var(--line); border-radius: var(--radius-lg);
   padding: var(--space-6); box-shadow: var(--shadow-xs); transition: all var(--duration-fast) var(--ease-out); position:relative; overflow:hidden;
 }
 .card::before{ content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, var(--primary), var(--primary-muted)); opacity:0; transition: opacity var(--duration-normal) var(--ease-out); }
