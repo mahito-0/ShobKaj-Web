@@ -1,5 +1,5 @@
-import { loadDB, saveDB, userSafe } from './_storage';
-import crypto from 'crypto';
+const { loadDB, saveDB, userSafe } = require('./_storage');
+const crypto = require('crypto');
 
 function hashPassword(password) {
   // Lightweight PBKDF2 (since bcrypt isn't available in edge env)
@@ -9,7 +9,7 @@ function hashPassword(password) {
 }
 
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }

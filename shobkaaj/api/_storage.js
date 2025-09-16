@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+const fs = require('fs');
+const path = require('path');
 
 const DB_PATH = path.resolve(process.cwd(), 'db.json');
 
@@ -42,7 +42,7 @@ function fileSave(db) {
   fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
 }
 
-export async function loadDB() {
+async function loadDB() {
   if (hasKV) {
     try {
       const raw = await kvGet(KV_KEY);
@@ -57,7 +57,7 @@ export async function loadDB() {
   return fileLoad();
 }
 
-export async function saveDB(db) {
+async function saveDB(db) {
   if (hasKV) {
     try {
       await kvSet(KV_KEY, JSON.stringify(db));
@@ -69,10 +69,12 @@ export async function saveDB(db) {
   fileSave(db);
 }
 
-export function userSafe(user) {
+function userSafe(user) {
   if (!user) return null;
   const { passwordHash, ...safe } = user;
   return safe;
 }
+
+module.exports = { loadDB, saveDB, userSafe };
 
 

@@ -1,5 +1,5 @@
-import { loadDB, userSafe } from './_storage';
-import crypto from 'crypto';
+const { loadDB, userSafe } = require('./_storage');
+const crypto = require('crypto');
 
 function verifyPassword(password, passwordHash) {
   if (!passwordHash || typeof passwordHash !== 'string') return false;
@@ -19,7 +19,7 @@ function userSafe(user) {
   return safe;
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }

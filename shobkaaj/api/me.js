@@ -1,7 +1,7 @@
 
-import { loadDB, userSafe } from './_storage';
+const { loadDB, userSafe } = require('./_storage');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // IMPORTANT: This is a temporary and insecure way to identify the user.
   // We will replace this with a proper authentication system.
   const userId = req.headers['x-user-id'];
