@@ -1,19 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import { loadDB, saveDB, userSafe } from './_storage';
 import crypto from 'crypto';
-
-const DB_PATH = path.resolve(process.cwd(), 'db.json');
-
-function loadDB() {
-  if (!fs.existsSync(DB_PATH)) {
-    return { users: [], jobs: [], conversations: [], messages: [], pushSubs: [] };
-  }
-  return JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
-}
-
-function saveDB(db) {
-  fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
-}
 
 function hashPassword(password) {
   // Lightweight PBKDF2 (since bcrypt isn't available in edge env)
@@ -22,13 +8,8 @@ function hashPassword(password) {
   return `pbkdf2$${salt}$${hash}`;
 }
 
-function userSafe(user) {
-  if (!user) return null;
-  const { passwordHash, ...safe } = user;
-  return safe;
-}
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
@@ -39,7 +20,7 @@ export default function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  const db = loadDB();
+  const db = await loadDB();
   const existing = db.users.find(u => (u.email || '').toLowerCase() === String(email).toLowerCase());
   if (existing) {
     return res.status(409).json({ error: 'Email already registered' });
@@ -67,7 +48,7 @@ export default function handler(req, res) {
   };
 
   db.users.push(user);
-  saveDB(db);
+  await saveDB(db);
 
   res.status(200).json({ user: userSafe(user) });
 }

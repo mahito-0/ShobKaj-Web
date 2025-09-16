@@ -1,15 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import { loadDB, userSafe } from './_storage';
 import crypto from 'crypto';
-
-const DB_PATH = path.resolve(process.cwd(), 'db.json');
-
-function loadDB() {
-  if (!fs.existsSync(DB_PATH)) {
-    return { users: [] };
-  }
-  return JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
-}
 
 function verifyPassword(password, passwordHash) {
   if (!passwordHash || typeof passwordHash !== 'string') return false;
@@ -29,7 +19,7 @@ function userSafe(user) {
   return safe;
 }
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
@@ -38,7 +28,7 @@ export default function handler(req, res) {
     return res.status(400).json({ error: 'Email and password are required' });
   }
 
-  const db = loadDB();
+  const db = await loadDB();
   const user = db.users.find(u => (u.email || '').toLowerCase() === String(email).toLowerCase());
   if (!user) return res.status(401).json({ error: 'Invalid credentials' });
 
