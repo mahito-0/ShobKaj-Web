@@ -1,4 +1,12 @@
-async function getMe() { const { user } = await $api('/api/me'); return user; }
+async function getMe() {
+  try {
+    const { user } = await $api('/api/me');
+    return user;
+  } catch (e) {
+    // If unauthorized or API not reachable, treat as logged-out
+    return null;
+  }
+}
 async function requireAuth(roles = null) {
   const me = await getMe();
   if (!me) { window.location.href = '/login.html'; return null; }
