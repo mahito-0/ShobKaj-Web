@@ -32,4 +32,11 @@
 
 #jobChart {
   aspect-ratio: 2 / 1; /* Maintain a 2:1 aspect ratio */
+  color: var(--line);
+}
+
+#jobChart .apexcharts-tooltip {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--text);
 }
