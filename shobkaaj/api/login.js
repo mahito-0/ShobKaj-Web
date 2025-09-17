@@ -1,16 +1,8 @@
 const { loadDB, userSafe } = require('./_storage');
-const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 
 function verifyPassword(password, passwordHash) {
-  if (!passwordHash || typeof passwordHash !== 'string') return false;
-  // Support pbkdf2$<salt>$<hash> produced in register.js
-  if (passwordHash.startsWith('pbkdf2$')) {
-    const [, salt, stored] = passwordHash.split('$');
-    const computed = crypto.pbkdf2Sync(password, salt, 100000, 64, 'sha512').toString('hex');
-    return crypto.timingSafeEqual(Buffer.from(stored, 'hex'), Buffer.from(computed, 'hex'));
-  }
-  // Fallback: attempt bcrypt-style hashes if present (not available without dependency)
-  return false;
+  return bcrypt.compareSync(password, passwordHash);
 }
 
 function userSafe(user) {

@@ -96,6 +96,79 @@ function initMonitor() {
   socket.on('presence', ({ userId, count })=>{ pres.set(userId, count); renderPresence(); });
 }
 
+function getChartOptions() {
+  const style = getComputedStyle(document.body);
+  const textColor = style.getPropertyValue('--text');
+  const gridColor = style.getPropertyValue('--line');
+  const primaryColor = style.getPropertyValue('--primary');
+
+  return {
+    scales: {
+      y: {
+        ticks: { color: textColor },
+        grid: { color: gridColor },
+      },
+      x: {
+        ticks: { color: textColor },
+        grid: { color: gridColor },
+      },
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: textColor,
+        },
+      },
+    },
+    borderColor: primaryColor,
+  };
+}
+
+async function loadStats() {
+  const { users } = await $api('/api/users');
+  const { jobs } = await $api('/api/admin/jobs');
+
+  // User stats
+  const userStats = document.getElementById('userStats');
+  const usersByRole = users.reduce((acc, u) => { acc[u.role] = (acc[u.role] || 0) + 1; return acc; }, {});
+  const newUsers = users.filter(u => (Date.now() - new Date(u.createdAt).getTime()) < 7 * 24 * 60 * 60 * 1000).length;
+  userStats.innerHTML = `
+    <p>Total Users: <strong>${users.length}</strong></p>
+    <p>Admin: <strong>${usersByRole.admin || 0}</strong> | Client: <strong>${usersByRole.client || 0}</strong> | Worker: <strong>${usersByRole.worker || 0}</strong></p>
+    <p>New Users (last 7 days): <strong>${newUsers}</strong></p>
+  `;
+
+  // Job stats
+  const jobStats = document.getElementById('jobStats');
+  const jobsByStatus = jobs.reduce((acc, j) => { acc[j.status] = (acc[j.status] || 0) + 1; return acc; }, {});
+  jobStats.innerHTML = `
+    <p>Total Jobs: <strong>${jobs.length}</strong></p>
+    <p>Open: <strong>${jobsByStatus.open || 0}</strong> | Assigned: <strong>${jobsByStatus.assigned || 0}</strong> | Completed: <strong>${jobsByStatus.completed || 0}</strong></p>
+  `;
+
+  // Job chart
+  const jobChartCtx = document.getElementById('jobChart').getContext('2d');
+  const jobsByDate = jobs.reduce((acc, j) => {
+    const date = new Date(j.createdAt).toLocaleDateString();
+    acc[date] = (acc[date] || 0) + 1;
+    return acc;
+  }, {});
+  const chartData = {
+    labels: Object.keys(jobsByDate),
+    datasets: [{
+      label: 'Jobs Created',
+      data: Object.values(jobsByDate),
+      borderColor: 'var(--primary)',
+      tension: 0.1
+    }]
+  };
+  new Chart(jobChartCtx, {
+    type: 'line',
+    data: chartData,
+    options: getChartOptions(),
+  });
+}
+
 (async ()=>{
   me = await $auth.requireAuth(['admin']);
   if (!me) return;
@@ -103,5 +176,6 @@ function initMonitor() {
   await loadUsers();
   await loadConvs();
   await loadJobs();
+  await loadStats();
   initMonitor();
 })();

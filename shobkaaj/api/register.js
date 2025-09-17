@@ -1,11 +1,11 @@
 const { loadDB, saveDB, userSafe } = require('./_storage');
 const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 
 function hashPassword(password) {
-  // Lightweight PBKDF2 (since bcrypt isn't available in edge env)
-  const salt = crypto.randomBytes(16).toString('hex');
-  const hash = crypto.pbkdf2Sync(password, salt, 100000, 64, 'sha512').toString('hex');
-  return `pbkdf2$${salt}$${hash}`;
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(password, salt);
+  return hash;
 }
 
 

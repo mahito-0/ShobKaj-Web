@@ -24,3 +24,12 @@ h2{font-size:2rem; text-align:center}
   background: var(--hover);
   color: white;
 }
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+#completedJobsChart {
+  max-width: 100%;
+  height: auto;
+}

@@ -19,7 +19,36 @@
   <script src="/js/i18n.js"></script>
   <script src="/js/auth.js"></script>
   <script src="/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
+    function getChartOptions() {
+      const style = getComputedStyle(document.body);
+      const textColor = style.getPropertyValue('--text');
+      const gridColor = style.getPropertyValue('--line');
+      const primaryColor = style.getPropertyValue('--primary');
+
+      return {
+        scales: {
+          y: {
+            ticks: { color: textColor },
+            grid: { color: gridColor },
+          },
+          x: {
+            ticks: { color: textColor },
+            grid: { color: gridColor },
+          },
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: textColor,
+            },
+          },
+        },
+        backgroundColor: primaryColor,
+      };
+    }
+
     (async ()=>{
       const me = await $auth.requireAuth();
       if (!me) return;
@@ -56,7 +85,28 @@
             <div class="card"><h3>Find Jobs</h3><p>See nearby open jobs.</p><a class="btn" href="/jobs.html">Browse Jobs</a></div>
             <div class="card"><h3>My Jobs</h3><p>Assigned and applied jobs.</p><a class="btn outline" href="/my-jobs.html">Open</a></div>
             <div class="card"><h3>Chat</h3><p>Talk to clients.</p><a class="btn outline" href="/chat.html">Open Chat</a></div>
+            <div class="card full-width"><h3>Completed Jobs Trend</h3><canvas id="completedJobsChart"></canvas></div>
           `;
+
+          const completedJobsChartCtx = document.getElementById('completedJobsChart').getContext('2d');
+          const completedJobsByDate = completed.reduce((acc, j) => {
+            const date = new Date(j.createdAt).toLocaleDateString();
+            acc[date] = (acc[date] || 0) + 1;
+            return acc;
+          }, {});
+          const chartData = {
+            labels: Object.keys(completedJobsByDate),
+            datasets: [{
+              label: 'Completed Jobs',
+              data: Object.values(completedJobsByDate),
+              backgroundColor: 'var(--primary)',
+            }]
+          };
+          new Chart(completedJobsChartCtx, {
+            type: 'bar',
+            data: chartData,
+            options: getChartOptions(),
+          });
         } catch (e) {
           actions.innerHTML = `
             <div class="card"><h3>Find Jobs</h3><p>See nearby open jobs.</p><a class="btn" href="/jobs.html">Browse Jobs</a></div>

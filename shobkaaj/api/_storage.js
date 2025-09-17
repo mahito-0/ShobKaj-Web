@@ -7,6 +7,7 @@ const KV_URL = process.env.KV_REST_API_URL || process.env.VERCEL_KV_REST_API_URL
 const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.VERCEL_KV_REST_API_TOKEN;
 const KV_KEY = process.env.KV_DB_KEY || 'shobkaaj:db';
 
+const isProd = process.env.NODE_ENV === 'production';
 const hasKV = Boolean(KV_URL && KV_TOKEN);
 
 async function kvGet(key) {
@@ -43,28 +44,19 @@ function fileSave(db) {
 }
 
 async function loadDB() {
-  if (hasKV) {
-    try {
-      const raw = await kvGet(KV_KEY);
-      if (!raw) return { users: [], jobs: [], conversations: [], messages: [], pushSubs: [] };
-      if (typeof raw === 'string') return JSON.parse(raw);
-      return raw;
-    } catch {
-      // Fallback to file if KV fails
-      return fileLoad();
-    }
+  if (isProd && hasKV) {
+    const raw = await kvGet(KV_KEY);
+    if (!raw) return { users: [], jobs: [], conversations: [], messages: [], pushSubs: [] };
+    if (typeof raw === 'string') return JSON.parse(raw);
+    return raw;
   }
   return fileLoad();
 }
 
 async function saveDB(db) {
-  if (hasKV) {
-    try {
-      await kvSet(KV_KEY, JSON.stringify(db));
-      return;
-    } catch {
-      // fall through to file
-    }
+  if (isProd && hasKV) {
+    await kvSet(KV_KEY, JSON.stringify(db));
+    return;
   }
   fileSave(db);
 }

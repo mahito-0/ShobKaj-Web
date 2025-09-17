@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "postinstall": "node scripts/migrate-data.js"
   },
     "dependencies": {
     "@vercel/postgres": "^0.8.0",

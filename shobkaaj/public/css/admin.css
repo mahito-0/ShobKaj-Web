@@ -16,3 +16,12 @@
   flex-wrap: wrap;
   margin-top: 1rem;
 }
+
+#userStats p, #jobStats p {
+  margin: 0 0 0.5rem 0;
+}
+
+#jobChart {
+  max-width: 100%;
+  height: auto;
+}
