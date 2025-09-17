@@ -60,7 +60,7 @@
         "tuition"
       ],
       "bio": "",
-      "avatar": "/uploads/a7e7b40b-3467-46ac-99c3-ead5eb741b6d_1757514159144.jpg",
+      "avatar": "/uploads/a7e7b40b-3467-46ac-99c3-ead5eb741b6d_1758105893203.jpg",
       "rating": 5,
       "ratingCount": 4,
       "location": {
@@ -336,7 +336,7 @@
       "title": "Job assigned",
       "body": "\"TFFF\" assigned to you",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757434944251
     },
     {
@@ -356,7 +356,7 @@
       "title": "Job completed",
       "body": "\"TFFF\" completed. You received 5★",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757434955832
     },
     {
@@ -376,7 +376,7 @@
       "title": "Job assigned",
       "body": "\"book write\" assigned to you",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757585834764
     },
     {
@@ -396,7 +396,7 @@
       "title": "Job completed",
       "body": "\"book write\" completed. You received 5★",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757586182049
     },
     {
@@ -416,7 +416,7 @@
       "title": "Job assigned",
       "body": "\"rfsdrf\" assigned to you",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757586357980
     },
     {
@@ -436,7 +436,7 @@
       "title": "Job completed",
       "body": "\"rfsdrf\" completed. You received 5★",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757586362801
     },
     {
@@ -456,7 +456,7 @@
       "title": "Job assigned",
       "body": "\"fasdg\" assigned to you",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757586579172
     },
     {
@@ -476,7 +476,7 @@
       "title": "Job completed",
       "body": "\"fasdg\" completed. You received 5★",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757586597418
     },
     {
@@ -496,7 +496,7 @@
       "title": "Job assigned",
       "body": "\"car paint\" assigned to you",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757863701365
     },
     {
@@ -516,7 +516,7 @@
       "title": "Job completed",
       "body": "\"car paint\" completed. You received 5★",
       "url": "/my-jobs.html",
-      "read": false,
+      "read": true,
       "createdAt": 1757863708532
     }
   ]
