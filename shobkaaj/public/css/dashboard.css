@@ -32,4 +32,5 @@ h2{font-size:2rem; text-align:center}
 #completedJobsChart {
   max-width: 100%;
   height: auto;
+  aspect-ratio: 2 / 1; /* Maintain a 2:1 aspect ratio */
 }

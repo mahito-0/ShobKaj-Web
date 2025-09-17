@@ -25,3 +25,11 @@
   max-width: 100%;
   height: auto;
 }
+
+.card #userStats, .card #jobStats {
+  padding: 16px;
+}
+
+#jobChart {
+  aspect-ratio: 2 / 1; /* Maintain a 2:1 aspect ratio */
+}
