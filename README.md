@@ -101,6 +101,3 @@ Open a Pull Request
 This project is licensed under the MIT License.
 
 ⭐ If you found this project useful, don’t forget to star the repository!
-
-
-## 📂 Project Structure
