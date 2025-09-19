@@ -69,7 +69,7 @@
         "address": "Dhaka, Bangladesh"
       },
       "createdAt": 1757433827255,
-      "totalEarnings": 5000
+      "totalEarnings": 6000
     },
     {
       "id": "b8a89031-f225-4fb8-ba7b-a4fc302a9594",
@@ -261,6 +261,39 @@
         }
       ],
       "createdAt": 1757863668471
+    },
+    {
+      "id": "57a16bd1-1ffc-4207-a83c-e56ec85bde35",
+      "title": "sddfxdcgvbnb",
+      "description": "sdfghj",
+      "budget": 1000,
+      "deadline": "2025-09-25",
+      "location": {
+        "lat": 23.8233497,
+        "lng": 90.4236298,
+        "address": "Client location"
+      },
+      "createdBy": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "assignedTo": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "status": "completed",
+      "applications": [
+        {
+          "workerId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+          "note": "",
+          "status": "accepted",
+          "createdAt": 1758211692280
+        }
+      ],
+      "reviews": [
+        {
+          "by": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+          "target": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+          "rating": 5,
+          "comment": "",
+          "createdAt": 1758211713929
+        }
+      ],
+      "createdAt": 1758211641538
     }
   ],
   "conversations": [
@@ -299,6 +332,15 @@
       ],
       "jobId": "67ed08b2-57c0-4f13-b6ca-a3bdcd8e0ed2",
       "createdAt": 1757586320377
+    },
+    {
+      "id": "e680f432-05e6-4ac0-9c27-f2acdfb29e6e",
+      "participants": [
+        "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+        "b03d84ab-2ce2-4daa-8629-790a22adebe8"
+      ],
+      "jobId": "57a16bd1-1ffc-4207-a83c-e56ec85bde35",
+      "createdAt": 1758211673857
     }
   ],
   "messages": [
@@ -315,6 +357,13 @@
       "from": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
       "text": "hello",
       "createdAt": 1757522600377
+    },
+    {
+      "id": "3194d05b-d918-4a26-ab06-64ab0f0d32cb",
+      "conversationId": "e680f432-05e6-4ac0-9c27-f2acdfb29e6e",
+      "from": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "text": "hi",
+      "createdAt": 1758211679839
     }
   ],
   "pushSubs": [],
@@ -518,6 +567,46 @@
       "url": "/my-jobs.html",
       "read": true,
       "createdAt": 1757863708532
+    },
+    {
+      "id": "b889aca3-1817-4ce4-b7de-fcb928809114",
+      "userId": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "type": "application",
+      "title": "New application",
+      "body": "Mahmud applied to \"sddfxdcgvbnb\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1758211692281
+    },
+    {
+      "id": "dceae5c6-028f-448c-90c9-fe937e88607f",
+      "userId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "type": "assigned",
+      "title": "Job assigned",
+      "body": "\"sddfxdcgvbnb\" assigned to you",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1758211704421
+    },
+    {
+      "id": "504feb48-75f4-4db7-a45c-abbf6a7b7d6a",
+      "userId": "b03d84ab-2ce2-4daa-8629-790a22adebe8",
+      "type": "assigned",
+      "title": "Worker assigned",
+      "body": "Assigned Mahmud to \"sddfxdcgvbnb\"",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1758211704422
+    },
+    {
+      "id": "8c26bc8b-2728-490c-8968-1c8c135f0474",
+      "userId": "a7e7b40b-3467-46ac-99c3-ead5eb741b6d",
+      "type": "completed",
+      "title": "Job completed",
+      "body": "\"sddfxdcgvbnb\" completed. You received 5★",
+      "url": "/my-jobs.html",
+      "read": false,
+      "createdAt": 1758211713930
     }
   ]
 }
